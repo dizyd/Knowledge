@@ -1,0 +1,43 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "#Knowledge"
+  back-to-top-navigation: true
+  
+  navbar:
+    left:
+      - href: index.qmd
+        text: Info
+      - supplement.qmd
+      - href: priors.qmd
+        text: Priors
+    
+    right:
+      - icon: github
+        href: "https://github.com/dizyd/Knowledge"
+        aria-label: GitHub
+      - text: OSF
+        href: "https://osf.io/vztjq/"
+        aria-label: OSF
+      
+          
+  page-footer:
+      left: |
+        Content {{< fa brands creative-commons >}} 2024 by David Izydorczyk<br>
+        All content licensed under a {{< fa brands creative-commons >}}
+        {{< fa brands creative-commons-by >}} {{< fa brands creative-commons-nc >}}
+        [Creative Commons Attribution-NonCommercial 4.0 International license (CC BY-NC 4.0)](https://creativecommons.org/licenses/by-nc/4.0/)
+      right: |
+        Made with {{< fa brands r-project >}} and [Quarto](https://quarto.org/)<br>
+        [View the source at {{< fa brands github >}} GitHub](https://github.com/dizyd/Knowledge)
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+
+editor: visual
+  

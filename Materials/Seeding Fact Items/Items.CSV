@@ -1,0 +1,61 @@
+ID_item;name;category;kg CO2 pro kg;g CO2 pro kg;Kcal pro 100g;translation;seeding_CO2;seeding_Kcal
+1;Zucchinis;fruit & vegetables;0,86;860;19;Zucchini;0;1
+2;Potatoes;fruit & vegetables;0,36;360;71;Kartoffel;1;0
+3;Bell pepper;fruit & vegetables;1,19;1190;38;Paprika;0;0
+4;Carrots;fruit & vegetables;0,31;310;39;Karotte;0;1
+5;Broccoli;fruit & vegetables;1,18;1180;34;Brokkoli;1;0
+6;Lettuce (Iceberg);fruit & vegetables;0,59;590;16;Eisberg-Salat;0;0
+7;Pineapples;fruit & vegetables;0,68;680;57;Ananas;0;0
+8;Apple;fruit & vegetables;0,5;500;54;Apfel;0;0
+9;Banana;fruit & vegetables;0,99;990;93;Banane;0;0
+10;Orange;fruit & vegetables;0,67;670;47;Orange;1;0
+11;Grapes;fruit & vegetables;0,58;580;70;Traube;0;1
+12;Raspberries;fruit & vegetables;0,98;980;43;Himbeere;0;0
+13;Goat;meat & fish;20,96;20960;198;Ziegenfleisch;0;0
+14;Fish fingers (frozen);meat & fish;6,4;6400;188;Fischstäbchen;0;0
+15;Meatballs;meat & fish;5,67;5670;217;Frikadelle;0;1
+16;Salami;meat & fish;5,06;5060;502;Salami;1;0
+17;Beef;meat & fish;26,92;26920;98;Rindfleisch;0;0
+18;Pork;meat & fish;6,62;6620;147;Schweinefleisch;0;0
+19;Chicken;meat & fish;4,64;4640;102;Hähnchenfleisch;0;0
+20;Lamb;meat & fish;23,9;23900;112;Lammfleisch;1;0
+21;Octopus;meat & fish;6,17;6170;73;Oktopus;1;1
+22;Salmon;meat & fish;6,82;6820;180;Lachs;0;1
+23;Shrimp (frozen);meat & fish;12,1;12100;60;Garnele;0;0
+24;Tuna (canned);meat & fish;7,59;7590;110;Thunfisch;0;0
+25;Quark (low-fat);dairy;2,45;2450;70;Quark (fettarm);0;0
+26;Butter;dairy;10,18;10180;741;Butter;1;0
+27;Milk;dairy;1,8;1800;46;Milch;1;0
+28;Cream (30%);dairy;5,01;5010;292;Schlagsahne (30%);0;1
+29;Eggs;dairy;2,54;2540;137;Eier;0;0
+30;Sour Cream;dairy;4,26;4260;147;Schmand / Sauerrahm;0;0
+31;Gouda;dairy;13,09;13090;364;Gouda-Käse;0;0
+32;Mozzarella;dairy;7,66;7660;238;Mozzarella;0;0
+33;Parmesan;dairy;7,41;7410;374;Parmesan;0;1
+34;Feta;dairy;5,56;5560;234;Feta;1;0
+35;Yogurt;dairy;1,65;1650;78;Joghurt;0;1
+36;Fruit Yogurt;dairy;1,56;1560;101;Fruchtjoghurt;0;0
+37;Rye bread;grain products;1,21;1210;212;Roggenbrot;1;1
+38;Wheat bread;grain products;0,72;720;285;Weizenbrot;0;0
+39;Croissant;grain products;3,39;3390;332;Croissant;0;1
+40;Rice (raw);grain products;2,21;2210;361;Reis (ungekocht);1;0
+41;Pizza dough;grain products;0,72;720;235;Pizzateig;0;0
+42;Gnocchi;grain products;0,6;600;150;Gnocchi (ungekocht);0;0
+43;Tortilla bread, wheat;grain products;0,74;740;304;Weizentortilla;0;0
+44;Bulgur (raw);grain products;0,56;560;314;Bulgur (ungekocht);0;0
+45;Corn flakes;grain products;1,51;1510;379;Cornflakes;0;0
+46;Pasta (raw);grain products;1,46;1460;330;Pasta (ungekocht);0;0
+47;Quinoa (raw);grain products;1,3;1300;366;Quinoa (ungekocht);0;0
+48;Oat flakes;grain products;0,67;670;372;Haferflocken;1;1
+49;Chocolate chip cookie;sweets;2,73;2730;434;Schokoladen-Cookie;1;0
+50;Chocolate cake;sweets;2,36;2360;360;Schokoladenkuchen;0;0
+51;Chips;sweets;3,29;3290;503;Chips;0;0
+52;Nutella;sweets;3,97;3970;539;Nutella;0;0
+53;Popcorn;sweets;1,1;1100;403;Popcorn;1;1
+54;Ice cream;sweets;3,31;3310;160;Eis;0;0
+55;Sugar;sweets;1,03;1030;405;Zucker;0;0
+56;Milk Chocolate;sweets;5,62;5620;539;Milchschokolade;1;1
+57;Marzipan;sweets;6,25;6250;512;Marzipan;0;0
+58;Strawberry jam;sweets;1,8;1800;229;Erdbeermarmelade;0;0
+59;Peanuts;sweets;2,15;2150;567;Erdnüsse;0;0
+60;Honey;sweets;1,18;1180;306;Honig;0;1
