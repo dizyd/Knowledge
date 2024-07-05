@@ -50,4 +50,4 @@ rsconnect/
 
 Data/df_analysis.csv
 
-Results/*
+Results/*.rds
