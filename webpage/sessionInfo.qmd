@@ -1,0 +1,47 @@
+---
+title:  "Session Info"
+date: "`r Sys.Date()`"
+format: 
+  html:
+    code-fold: true
+    code-copy: true
+    code-tools: true
+    embed-resources: true
+    df-print: kable
+    toc: true
+    toc-location: right
+    fig-format: svg
+    page-layout: full
+    fig-align: center
+  pdf: default
+execute:
+  warning: false
+  messages: false
+editor_options: 
+  chunk_output_type: console
+---
+
+
+```{r setup}
+#| code-summary: "Load packages used in analysis"
+
+# Packages
+library(tidyverse)   # ggplot, dplyr, and friends
+library(brms)        # Bayesian modeling through Stan
+library(psych)       # For describe()
+library(correlation) # For correlations with nicer output and z_fisher()
+library(patchwork)   # For combining plots
+library(parameters)  # Nicer output of model results
+library(tidybayes)   # Manipulate brms objects in a tidy way
+library(scales)      # For formatting labels in ggplot
+library(extrafont)   # to change ggplot font
+library(kableExtra)  # for Latextables
+library(papaja)      # better printing 
+library(bayestestR)  # for describe posterior
+library(bridgesampling)
+```
+
+```{r}
+sessionInfo() 
+```
+

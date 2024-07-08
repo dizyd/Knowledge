@@ -1,0 +1,285 @@
+---
+title:  "Items"
+subtitle: "used in the experiment reported in the article #Knowledge: Improving food-related knowledge via seeding implemented as a social media intervention"
+date: "`r Sys.Date()`"
+format: 
+  html:
+    code-fold: true
+    code-copy: true
+    code-tools: true
+    embed-resources: true
+    df-print: kable
+    toc: true
+    toc-location: right
+    fig-format: svg
+    page-layout: full
+    fig-height:  12
+    fig-width:   13
+    fig-align: center
+  pdf: default
+execute:
+  warning: false
+  messages: false
+editor_options: 
+  chunk_output_type: console
+---
+
+
+```{r setup}
+#| code-summary: "Load packages"
+
+# Packages
+library(tidyverse) 
+library(patchwork)
+library(latex2exp)
+library(kableExtra)
+library(papaja)
+library(extrafont)
+```
+
+
+```{r ggplot}
+#| code-summary: "Define ggplot theme"
+
+
+# Plot colors
+clrs <- c("#54AA8F","#00335B",
+          "#22A884FF","#414487FF",
+          "#496aa2","#e46c0a","#90b6d4")
+
+
+# ggplot theme
+theme_nice <- function(){
+  theme_minimal(base_family = "Jost") +  
+    theme(plot.title       = element_text(hjust = 0.5,size = 20),
+          panel.grid.minor = element_blank(),
+          text             = element_text(size  = 20),
+          panel.border     = element_rect(colour = "black", linewidth = 0.5, fill = NA),
+          axis.title.x     = element_text(margin = unit(c(3, 0, 0, 0), "mm")),
+          axis.title.y     = element_text(margin = unit(c(3, 3, 0, 0), "mm"), angle = 90),
+          legend.title     = element_text(face = "bold",size=16),
+          strip.text       = element_text(face = "bold"),
+          legend.position  = "bottom"
+    )}
+
+p_size <- 3
+lwd    <- 1.5
+```
+
+
+```{r items}
+#| code-summary: "Read in item data"
+
+# Read in items
+items <- read_csv2("../Materials/Seeding Fact Items/Items.csv")
+```
+
+# Descriptive Summary
+## by Food Category         
+
+```{r}
+items %>% 
+  summarise(M_CO2    = mean(`g CO2 pro kg`),
+            SD_CO2   = sd(`g CO2 pro kg`),
+            Min_CO2  = min(`g CO2 pro kg`),
+            Max_CO2  = max(`g CO2 pro kg`),
+            M_Kcal   = mean(`Kcal pro 100g`),
+            SD_Kcal  = sd(`Kcal pro 100g`),
+            Min_Kcal = min(`Kcal pro 100g`),
+            Max_Kcal = max(`Kcal pro 100g`),
+            .by="category") %>% 
+  mutate_if(is.numeric,printnum) %>% 
+  kbl(col.names = c("Category",rep(c("M","SD","Min","Max"),2))) %>% 
+  kable_paper() %>% 
+  add_header_above(c(" " = 1, "g CO2 pro kg" = 4, "Kcal pro 100g" = 4))
+```
+
+
+## by Seeding Sets          
+
+
+::: {.panel-tabset}
+
+## g CO2 pro kg
+
+```{r}
+items %>%
+  filter(seeding_CO2 == 1) %>% 
+  summarise(M_CO2    = mean(`g CO2 pro kg`),
+            SD_CO2   = sd(`g CO2 pro kg`),
+            Min_CO2  = min(`g CO2 pro kg`),
+            Max_CO2  = max(`g CO2 pro kg`),
+            .by=c("category")) %>% 
+  mutate_if(is.numeric,printnum) %>% 
+  kbl(col.names = c("Category","M","SD","Min","Max"))   %>% 
+  kable_paper()
+```
+
+
+## Kcal pro 100g
+
+```{r}
+items %>%
+  filter(seeding_Kcal == 1) %>% 
+  summarise(M_Kcal   = mean(`Kcal pro 100g`),
+            SD_Kcal  = sd(`Kcal pro 100g`),
+            Min_Kcal = min(`Kcal pro 100g`),
+            Max_Kcal = max(`Kcal pro 100g`),
+            .by=c("category")) %>%
+  mutate_if(is.numeric,printnum) %>% 
+  kbl(col.names = c("Category","M","SD","Min","Max"))   %>% 
+  kable_paper() 
+```
+
+:::
+
+
+
+
+
+
+
+
+
+# Lists
+
+## Target Fact Items        
+
+
+```{r}
+items %>% 
+  select(ID_item,name,category,`g CO2 pro kg`,`Kcal pro 100g`,`Seeditems CO2` = seeding_CO2,`Seeditems Kcal` = seeding_Kcal) %>% 
+  kbl(align = "c") %>% 
+  column_spec(4,color = "white",background = spec_color(items$`g CO2 pro kg`)) %>% 
+  column_spec(5,color = "white",background = spec_color(items$`Kcal pro 100g`,option = "D")) 
+```
+
+## Trivia Items             
+
+15 trivia facts will be shown during the seeding phase (`type = Post`) and 6 will be used in a 2AFC-recognition test in the final questionnaire (`type = Test`).
+
+```{r}
+
+trivia <- c("An average ear of corn has an even number of rows, usually 16",
+  "A watermelon consists of about 95 percent water.",
+  "Every German needs about 2,700 square meters of farmland for food supply.",
+  "Children see junk food advertisements an average of 27 times a day.",
+  "Approximately 500 million snails are eaten in France every year.",
+  "The largest cashew tree in the world covers an area of 8,500 square meters.",
+  "The price of food increased by 9 percent between August 2022 and August 2023.",
+  "Germans eat about 20 kilos of tomatoes per year.",
+  "Caffeine has a half-life of four to six hours.",
+  "Chia seeds contain five times more calcium than milk.",
+  "In Germany, peas were grown on 82,600 hectares of land in 2020.",
+  "In Germany, approximately 36,000 tons of pears were harvested in 2023.",
+  "Rosemary can be harvested after a germination period of about four weeks.",
+  "There are about 30mg of caffeine in a cup of green tea.",
+  "Farmers plant radishes with approximately 200 seeds per square meter.",
+  "The cultivation area of corn in Germany is around 472,200 hectares.",
+  "The German Nutrition Society recommends 400 grams of vegetables per day.",
+  "McDonald's sells 75 hamburgers per second.",
+  "Wheat requires about 500 liters of water per kilogram of dry matter.",
+  "China produced approximately 63 million tons of salt in 2019.",
+  "There are over 40 different types of kiwi.")
+
+
+trivia_df <- data.frame(ID   = 1:length(trivia),
+                        fact = trivia,
+                        type = c(rep("Post",15),rep("Test",6)))
+
+
+trivia_df %>% kbl(align = "c")
+
+```
+
+
+# Plot
+## CO2e per kg              
+
+::: {.panel-tabset}
+
+## Overall 
+
+```{r}
+ggplot(items,aes(x = fct_reorder(name,`g CO2 pro kg`),
+                 y = `g CO2 pro kg`,
+                 color = factor(seeding_CO2))) +
+  geom_point(size=p_size) +
+  geom_linerange(aes(ymax = `g CO2 pro kg`, ymin = 0),linewidth=lwd) +
+  facet_wrap(.~category,scales="free",nrow=2)+
+  labs(title = "",
+       x     = "",
+       y     = "",
+       color = "Seed Item") +
+  theme_nice() +
+  scale_color_manual(values = c("black","#22A884FF")) +
+  theme(axis.text.x = element_text(angle = 45,hjust = 1)) +
+  scale_y_continuous(expand = expansion(mult = c(0, 0.2))) 
+```
+
+## Relative 
+
+```{r}
+ggplot(items,aes(x = fct_reorder(name,`g CO2 pro kg`),
+                 y = `g CO2 pro kg`,
+                 color = factor(seeding_CO2))) +
+  geom_point(size=p_size) +
+  geom_linerange(aes(ymax = `g CO2 pro kg`, ymin = 0),linewidth=lwd) +
+  facet_wrap(.~category,scales="free",nrow=2)+
+  labs(title = "",
+       x     = "",
+       y     = "",
+       color = "Seed Item") +
+  scale_color_manual(values = c("black","#22A884FF")) +
+  theme_nice() +
+  theme(axis.text.x = element_text(angle = 45,hjust = 1)) +
+  scale_y_continuous(expand = c(0, 0), limits = c(0,28500))
+```
+
+:::
+
+## Kcal per 100g            
+
+::: {.panel-tabset}
+
+## Overall
+
+```{r}
+ggplot(items,aes(x = fct_reorder(name,`Kcal pro 100g`),
+                 y = `Kcal pro 100g`,
+                 color = factor(seeding_Kcal))) +
+  geom_point(size=p_size) +
+  geom_linerange(aes(ymax = `Kcal pro 100g`, ymin = 0),linewidth=lwd) +
+  facet_wrap(.~category,scales="free",nrow=2)+
+  labs(title = "",
+       x     = "",
+       y     = "",
+       color = "Seed Item") +
+  scale_color_manual(values = c("black","#22A884FF")) +
+  theme_nice() +
+  theme(axis.text.x = element_text(angle = 45,hjust = 1)) +
+  scale_y_continuous(expansion(mult = c(0, 0.2)))
+```
+
+## Relative
+
+```{r}
+ggplot(items,aes(x = fct_reorder(name,`Kcal pro 100g`),
+                 y = `Kcal pro 100g`,
+                 color = factor(seeding_Kcal))) +
+  geom_point(size=p_size) +
+  geom_linerange(aes(ymax = `Kcal pro 100g`, ymin = 0),linewidth=lwd) +
+  facet_wrap(.~category,scales="free",nrow=2)+
+  labs(title = "",
+       x     = "",
+       y     = "",
+       color = "Seed Item") +
+  scale_color_manual(values = c("black","#22A884FF")) +
+  theme_nice() +
+  theme(axis.text.x = element_text(angle = 45,hjust = 1)) +
+  scale_y_continuous(expand = c(0, 0), limits = c(0,800))
+```
+
+
+:::
+

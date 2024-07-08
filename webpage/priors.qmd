@@ -1,5 +1,6 @@
 ---
 title: "Prior Distributions"
+subtitle: "used in the analysis reported in the article #Knowledge: Improving food-related knowledge via seeding implemented as a social media intervention"
 date: "`r Sys.Date()`"
 format: 
   html:

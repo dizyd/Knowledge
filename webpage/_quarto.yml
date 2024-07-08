@@ -13,6 +13,10 @@ website:
       - supplement.qmd
       - href: priors.qmd
         text: Priors
+      - href: items.qmd
+      - href: sessionInfo.qmd
+        text: Session Info
+
     
     right:
       - icon: github

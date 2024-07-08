@@ -15,11 +15,11 @@ Main results:
 ![](images/main_res_obs.svg)
 :::
 
-This page contains the supplementary material for the article *#Knowledge: Improving food-related knowledge via seeding implemented as a social media intervention* by David Izydorczyk, Barbara Kreis, Michael Kilb & Arndt Bröder. 
+This page contains the supplementary material and additional information for the article *#Knowledge: Improving food-related knowledge via seeding implemented as a social media intervention* by David Izydorczyk, Barbara Kreis, Michael Kilb & Arndt Bröder. 
 
-**The data** corresponding to this project can be found on the respective [OSF](https://osf.io/vztjq/). 
+**The data** and **`brms`-model files** corresponding to this project can be found on the respective [OSF](https://osf.io/vztjq/). 
 
-**The scripts** to reproduce the analysis reported in the main manuscript, the **resulting `brms`-models**, and **the stimuli used in the experiment** can be found on [Github](https://github.com/dizyd/Knowledge). 
+**The scripts** to reproduce the analysis reported in the main manuscript and **the stimuli used in the experiment** can be found on [Github](https://github.com/dizyd/Knowledge). 
 
 This page was built with Quarto and thus contains also the code used to produce the analysis reported in the supplement.
 
