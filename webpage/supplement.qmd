@@ -7,7 +7,6 @@ format:
     code-fold: true
     code-copy: true
     code-tools: true
-    embed-resources: true
     df-print: kable
     toc: true
     toc-location: right
@@ -73,7 +72,7 @@ theme_nice <- function(){
 #| code-summary: "helper functions"
 
 
-brms_plot <- function(mod){
+brms_plot <- function(mod,lim=c(0,5)){
   
 
   trace <-   mcmc_plot(temp, type = "trace", variable = "^b_", regex = TRUE) +
@@ -81,7 +80,7 @@ brms_plot <- function(mod){
               labs(title = "Traceplot")
 
   pp    <-  pp_check(temp,ndraws = 20) + 
-              theme_nice() + xlim(0,10) +
+              theme_nice() + xlim(lim[1],lim[2]) +
               labs(title = "Posterior Predictive Check", color = "") +
               scale_color_manual(values = clrs[c(2,7)], labels = c("Observed", "Predicted"))
 
@@ -167,11 +166,12 @@ temp %>%
 
 Here we provide for all models reported in the main manuscript more detailed modeling results, including a table with the mean, standard deviation, 95\%-HDI, effective sample size (ESS) and $\hat{R}$ for each estimated parameter (random and fixed), as well as figures showing the MCMC-traces for the main fixed effects parameters (intercept and effect parameter) and posterior predictive distributions of the complete model.
 
-## Hypothesis 1a (OME)
+## Hypothesis 1a (OME)    
 
-### M0
 
-```{r h1aM0}
+### CO~2~ M0
+
+```{r h1aM0CO2}
 #| fig-height: 5
 #| fig-width:  14
 
@@ -186,13 +186,14 @@ model_parameters(temp, centrality = "mean", dispersion = TRUE,
                  ci_method = "hdi", effects = "all") %>% 
   kable(digits=2) %>% kable_paper()
 
+
 # Make trace and pp-check plot
 brms_plot(temp)
 ```
 
-### M1
+### CO~2~ M1
 
-```{r h1aM1}
+```{r h1aM1CO2}
 #| fig-height: 5
 #| fig-width:  14
 
@@ -211,9 +212,520 @@ model_parameters(temp, centrality = "mean", dispersion = TRUE,
 brms_plot(temp)  + plot_layout(widths = c(2, 1))
 ```
 
+### kcal M0
+
+```{r h1aM0kcal}
+#| fig-height: 5
+#| fig-width:  14
+
+# Load model 
+temp <- brm(file="../Results/fit_H1a_kcal_M0.rds")
+
+# Print Formular
+temp$formula
+
+# Make model parameter table
+model_parameters(temp, centrality = "mean", dispersion = TRUE, 
+                 ci_method = "hdi", effects = "all") %>% 
+  kable(digits=2) %>% kable_paper()
+
+
+# Make trace and pp-check plot
+brms_plot(temp)
+```
+
+### kcal M1
+
+```{r h1aM1kcal}
+#| fig-height: 5
+#| fig-width:  14
+
+# Load model 
+temp <- brm(file="../Results/fit_H1a_kcal_M1.rds")
+
+# Print Formular
+temp$formula
+
+# Make model parameter table
+model_parameters(temp, centrality = "mean", dispersion = TRUE, 
+                 ci_method = "hdi", effects = "all") %>% 
+  kable(digits=2) %>% kable_paper()
+
+# Make trace and pp-check plot
+brms_plot(temp)  + plot_layout(widths = c(2, 1))
+```
+
+
+    
+## Hypothesis 1b ($\rho$) 
+
+### CO~2~ M0
+
+```{r h1bM0CO2}
+#| fig-height: 5
+#| fig-width:  14
+
+# Load model 
+temp <- brm(file="../Results/fit_H1b_CO2_M0.rds")
+
+# Print Formular
+temp$formula
+
+# Make model parameter table
+model_parameters(temp, centrality = "mean", dispersion = TRUE, 
+                 ci_method = "hdi", effects = "all") %>% 
+  kable(digits=2) %>% kable_paper()
+
+
+# Make trace and pp-check plot
+brms_plot(temp,lim=c(-1,3))
+```
+
+### CO~2~ M1
+
+```{r h1bM1CO2}
+#| fig-height: 5
+#| fig-width:  14
+
+# Load model 
+temp <- brm(file="../Results/fit_H1b_CO2_M1.rds")
+
+# Print Formular
+temp$formula
+
+# Make model parameter table
+model_parameters(temp, centrality = "mean", dispersion = TRUE, 
+                 ci_method = "hdi", effects = "all") %>% 
+  kable(digits=2) %>% kable_paper()
+
+# Make trace and pp-check plot
+brms_plot(temp,lim=c(-1,3))  + plot_layout(widths = c(2, 1))
+```
+
+### kcal M0
+
+```{r h1bM0kcal}
+#| fig-height: 5
+#| fig-width:  14
+
+# Load model 
+temp <- brm(file="../Results/fit_H1b_kcal_M0.rds")
+
+# Print Formular
+temp$formula
+
+# Make model parameter table
+model_parameters(temp, centrality = "mean", dispersion = TRUE, 
+                 ci_method = "hdi", effects = "all") %>% 
+  kable(digits=2) %>% kable_paper()
+
+
+# Make trace and pp-check plot
+brms_plot(temp,lim=c(-1,3))
+```
+
+### kcal M1
+
+```{r h1bM1kcal}
+#| fig-height: 5
+#| fig-width:  14
+
+# Load model 
+temp <- brm(file="../Results/fit_H1b_kcal_M1.rds")
+
+# Print Formular
+temp$formula
+
+# Make model parameter table
+model_parameters(temp, centrality = "mean", dispersion = TRUE, 
+                 ci_method = "hdi", effects = "all") %>% 
+  kable(digits=2) %>% kable_paper()
+
+# Make trace and pp-check plot
+brms_plot(temp,lim=c(-1,3))  + plot_layout(widths = c(2, 1))
+```
+
+
+
+
 
 
 
 
 
     
+    
+    
+    
+    
+
+
+
+## Hypothesis 2a (OME)    
+
+
+### CO~2~ M0
+
+```{r h2aM0CO2}
+#| fig-height: 5
+#| fig-width:  14
+
+# Load model 
+temp <- brm(file="../Results/fit_H2a_CO2_M0.rds")
+
+# Print Formular
+temp$formula
+
+# Make model parameter table
+model_parameters(temp, centrality = "mean", dispersion = TRUE, 
+                 ci_method = "hdi", effects = "all") %>% 
+  kable(digits=2) %>% kable_paper()
+
+
+# Make trace and pp-check plot
+brms_plot(temp)
+```
+
+### CO~2~ M1
+
+```{r h2aM1CO2}
+#| fig-height: 5
+#| fig-width:  14
+
+# Load model 
+temp <- brm(file="../Results/fit_H2a_CO2_M1.rds")
+
+# Print Formular
+temp$formula
+
+# Make model parameter table
+model_parameters(temp, centrality = "mean", dispersion = TRUE, 
+                 ci_method = "hdi", effects = "all") %>% 
+  kable(digits=2) %>% kable_paper()
+
+# Make trace and pp-check plot
+brms_plot(temp)  + plot_layout(widths = c(2, 1))
+```
+
+### kcal M0
+
+```{r h2aM0kcal}
+#| fig-height: 5
+#| fig-width:  14
+
+# Load model 
+temp <- brm(file="../Results/fit_H2a_kcal_M0.rds")
+
+# Print Formular
+temp$formula
+
+# Make model parameter table
+model_parameters(temp, centrality = "mean", dispersion = TRUE, 
+                 ci_method = "hdi", effects = "all") %>% 
+  kable(digits=2) %>% kable_paper()
+
+
+# Make trace and pp-check plot
+brms_plot(temp)
+```
+
+### kcal M1
+
+```{r h2aM1kcal}
+#| fig-height: 5
+#| fig-width:  14
+
+# Load model 
+temp <- brm(file="../Results/fit_H2a_kcal_M1.rds")
+
+# Print Formular
+temp$formula
+
+# Make model parameter table
+model_parameters(temp, centrality = "mean", dispersion = TRUE, 
+                 ci_method = "hdi", effects = "all") %>% 
+  kable(digits=2) %>% kable_paper()
+
+# Make trace and pp-check plot
+brms_plot(temp)  + plot_layout(widths = c(2, 1))
+```
+
+
+
+    
+## Hypothesis 2b ($\rho$) 
+
+### CO~2~ M0
+
+```{r h2bM0CO2}
+#| fig-height: 5
+#| fig-width:  14
+
+# Load model 
+temp <- brm(file="../Results/fit_H2b_CO2_M0.rds")
+
+# Print Formular
+temp$formula
+
+# Make model parameter table
+model_parameters(temp, centrality = "mean", dispersion = TRUE, 
+                 ci_method = "hdi", effects = "all") %>% 
+  kable(digits=2) %>% kable_paper()
+
+
+# Make trace and pp-check plot
+brms_plot(temp,lim=c(-1,3))
+```
+
+### CO~2~ M1
+
+```{r h2bM1CO2}
+#| fig-height: 5
+#| fig-width:  14
+
+# Load model 
+temp <- brm(file="../Results/fit_H2b_CO2_M1.rds")
+
+# Print Formular
+temp$formula
+
+# Make model parameter table
+model_parameters(temp, centrality = "mean", dispersion = TRUE, 
+                 ci_method = "hdi", effects = "all") %>% 
+  kable(digits=2) %>% kable_paper()
+
+# Make trace and pp-check plot
+brms_plot(temp,lim=c(-1,3))  + plot_layout(widths = c(2, 1))
+```
+
+### kcal M0
+
+```{r h2bM0kcal}
+#| fig-height: 5
+#| fig-width:  14
+
+# Load model 
+temp <- brm(file="../Results/fit_H2b_kcal_M0.rds")
+
+# Print Formular
+temp$formula
+
+# Make model parameter table
+model_parameters(temp, centrality = "mean", dispersion = TRUE, 
+                 ci_method = "hdi", effects = "all") %>% 
+  kable(digits=2) %>% kable_paper()
+
+
+# Make trace and pp-check plot
+brms_plot(temp,lim=c(-1,3))
+```
+
+### kcal M1
+
+```{r h2bM1kcal}
+#| fig-height: 5
+#| fig-width:  14
+
+# Load model 
+temp <- brm(file="../Results/fit_H2b_kcal_M1.rds")
+
+# Print Formular
+temp$formula
+
+# Make model parameter table
+model_parameters(temp, centrality = "mean", dispersion = TRUE, 
+                 ci_method = "hdi", effects = "all") %>% 
+  kable(digits=2) %>% kable_paper()
+
+# Make trace and pp-check plot
+brms_plot(temp,lim=c(-1,3))  + plot_layout(widths = c(2, 1))
+```
+
+
+
+
+
+
+
+
+
+    
+    
+    
+    
+    
+
+
+
+
+## Hypothesis 3a (OME)    
+
+### M0
+
+
+```{r h3aM0}
+#| fig-height: 5
+#| fig-width:  14
+
+# Load model 
+temp <- brm(file="../Results/fit_H3a_M0.rds")
+
+# Print Formular
+temp$formula
+
+# Make model parameter table
+model_parameters(temp, centrality = "mean", dispersion = TRUE, 
+                 ci_method = "hdi", effects = "all") %>% 
+  kable(digits=2) %>% kable_paper()
+
+
+# Make trace and pp-check plot
+brms_plot(temp) + plot_layout(widths = c(2, 1))
+```
+
+
+
+### M1
+
+
+```{r h3aM1}
+#| fig-height: 5
+#| fig-width:  14
+
+# Load model 
+temp <- brm(file="../Results/fit_H3a_M1.rds")
+
+# Print Formular
+temp$formula
+
+# Make model parameter table
+model_parameters(temp, centrality = "mean", dispersion = TRUE, 
+                 ci_method = "hdi", effects = "all") %>% 
+  kable(digits=2) %>% kable_paper()
+
+
+# Make trace and pp-check plot
+brms_plot(temp) + plot_layout(widths = c(2, 1))
+```
+
+
+### M2
+
+
+```{r h3aM2}
+#| fig-height: 5
+#| fig-width:  14
+
+# Load model 
+temp <- brm(file="../Results/fit_H3a_M2.rds")
+
+# Print Formular
+temp$formula
+
+# Make model parameter table
+model_parameters(temp, centrality = "mean", dispersion = TRUE, 
+                 ci_method = "hdi", effects = "all") %>% 
+  kable(digits=2) %>% kable_paper()
+
+
+# Make trace and pp-check plot
+brms_plot(temp) + plot_layout(widths = c(2, 1))
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Hypothesis 3b ($\rho$) 
+
+
+### M0
+
+
+```{r h3bM0}
+#| fig-height: 5
+#| fig-width:  14
+
+# Load model 
+temp <- brm(file="../Results/fit_H3b_M0.rds")
+
+# Print Formular
+temp$formula
+
+# Make model parameter table
+model_parameters(temp, centrality = "mean", dispersion = TRUE, 
+                 ci_method = "hdi", effects = "all") %>% 
+  kable(digits=2) %>% kable_paper()
+
+
+# Make trace and pp-check plot
+brms_plot(temp) + plot_layout(widths = c(2, 1))
+```
+
+
+
+### M1
+
+
+```{r h3bM1}
+#| fig-height: 5
+#| fig-width:  14
+
+# Load model 
+temp <- brm(file="../Results/fit_H3b_M1.rds")
+
+# Print Formular
+temp$formula
+
+# Make model parameter table
+model_parameters(temp, centrality = "mean", dispersion = TRUE, 
+                 ci_method = "hdi", effects = "all") %>% 
+  kable(digits=2) %>% kable_paper()
+
+
+# Make trace and pp-check plot
+brms_plot(temp) + plot_layout(widths = c(2, 1))
+```
+
+
+### M2
+
+
+```{r h3bM2}
+#| fig-height: 5
+#| fig-width:  14
+
+# Load model 
+temp <- brm(file="../Results/fit_H3b_M2.rds")
+
+# Print Formular
+temp$formula
+
+# Make model parameter table
+model_parameters(temp, centrality = "mean", dispersion = TRUE, 
+                 ci_method = "hdi", effects = "all") %>% 
+  kable(digits=2) %>% kable_paper()
+
+
+# Make trace and pp-check plot
+brms_plot(temp) + plot_layout(widths = c(2, 1))
+```
+
+
+
+
+
+
+
+
+
+
+
