@@ -15,6 +15,7 @@ format:
     fig-height: 4
     fig-width:  9
     fig-align: center
+    fig-cap-location: top
   pdf: default
 execute:
   warning: false
@@ -69,7 +70,7 @@ theme_nice <- function(){
 ```
 
 ```{r helper-functions}
-#| code-summary: "helper functions"
+#| code-summary: "Helper Functions"
 
 
 brms_plot <- function(mod,lim=c(0,5)){
@@ -160,9 +161,93 @@ temp %>%
     theme(legend.position = "none") 
 ```
 
+# Number of Likes Posts                                      
+
+In the preregistration, we also predicted that a greater  seeding  effect when  participants  saw  more posts as indicated by the number of liked posts. However, as already stated in the main text, almost all participants liked every post, see the table below for the descriptive statistics and the Figure S2 for the distribution of liked posts per participant.
+
+```{r}
+#| code-summary: "Table"
+
+est %>% 
+  select(ID,"Account"=trained_criterion,n_posts_liked) %>% 
+  distinct() %>% 
+  group_by(Account) %>% 
+  summarise(m   = mean(n_posts_liked),
+            sd  = sd(n_posts_liked),
+            min = min(n_posts_liked),
+            max = max(n_posts_liked)) %>% 
+  kbl(col.names = c("Account","M","SD","Min","Max"),digits = 2) %>% 
+  kable_paper()
+
+```
 
 
-# Detailed Modeling Results 
+```{r}
+#| code-summary: "Plot"
+#| fig-cap: "Figure S2. Distribution of number of liked posts per participant."
+#| fig-height: 5
+#| fig-width:  8
+
+
+est %>% 
+  select(ID,trained_criterion,est_criterion,n_posts_liked) %>% 
+  distinct() %>% 
+  mutate(trained_criterion = ifelse(trained_criterion  == "CO2","CO[2]","kcal")) %>% 
+  ggplot(aes(x = n_posts_liked,  fill = trained_criterion)) +
+    geom_histogram(alpha=0.75,position = "identity",bins=25) +
+    scale_fill_manual(values=c(clrs[4],clrs[3]),labels = parse_format()) +
+    theme_nice() +
+    labs(x    = "Liked X out of 30 possible posts (15 seeding + 15 trivia facts)",
+         y    = "Frequency",
+         fill = "Account:")
+
+```
+
+
+In addition, Figure S3 shows the scatter plots with the estimated regression line when using the number of liked posts as an predictor of OME or $\rho$ (all *p*s > 0.05)
+
+
+```{r}
+#| code-summary: "Plot"
+#| fig-cap: "Figure S3. Relationship of number of liked posts and OME/rank correlation (z-transformed) per trained and estimated criterion"
+#| fig-height: 8
+#| fig-width:  10
+
+est %>% 
+ select(ID,trained_criterion,est_criterion,n_posts_liked, OME_corr, rank_z) %>% 
+ group_by(ID,trained_criterion,est_criterion) %>% 
+ summarize(OME    = mean(OME_corr),
+           rank_z = mean(rank_z),
+           n_posts_liked = mean(n_posts_liked),
+           .groups="drop") %>% 
+  mutate(est_criterion = ifelse(est_criterion == "CO2",
+                                "bold(Estimated:~CO[2])",
+                                "bold(Estimated:~kcal)"),
+         trained_criterion = ifelse(trained_criterion == "CO2",
+                                    "CO[2]",
+                                    "kcal")) %>% 
+  rename(`Estimated Criterion` = est_criterion,
+         `Trained Criterion`   = trained_criterion) %>% 
+  pivot_longer(cols = c(OME, rank_z), names_to = "DV", values_to = "val") %>% 
+  ggplot(aes(x = n_posts_liked, y = val,
+             color = `Trained Criterion`, fill = `Trained Criterion`)) +
+    geom_point(shape=21,color="black", alpha=.8, size = 2.5) +
+    geom_smooth(method="lm",fullrange=TRUE,alpha=0.1) +
+    scale_fill_manual(values=c(clrs[4],clrs[3]),labels = parse_format()) +
+    scale_color_manual(values=c(clrs[4],clrs[3]),labels = parse_format()) +
+    facet_grid(DV~`Estimated Criterion`,labeller = label_parsed) +
+    labs(fill  = "Trained Criterion", 
+         y     = "Dependet Variable",
+         x     = "Number of liked posts") +
+    theme_nice()
+    
+
+
+
+```
+
+
+# Detailed Modeling Results                                  
 
 Here we provide for all models reported in the main manuscript more detailed modeling results, including a table with the mean, standard deviation, 95\%-HDI, effective sample size (ESS) and $\hat{R}$ for each estimated parameter (random and fixed), as well as figures showing the MCMC-traces for the main fixed effects parameters (intercept and effect parameter) and posterior predictive distributions of the complete model.
 

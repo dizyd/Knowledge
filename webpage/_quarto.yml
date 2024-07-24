@@ -10,10 +10,14 @@ website:
     left:
       - href: index.qmd
         text: Info
-      - supplement.qmd
+        
+      - href: supplement.qmd
+      
       - href: priors.qmd
         text: Priors
+        
       - href: items.qmd
+      
       - href: sessionInfo.qmd
         text: Session Info
 
