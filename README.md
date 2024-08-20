@@ -37,16 +37,16 @@ This repository contains code to reproduce all analyses and figures in the proje
 
 This work, including all figures, is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.  All code is licensed under the MIT License.
 
-**Contributing Authors**
+## Contributing Authors
 David Izydorczyk, Barbara Kreis, Michael Kilb & Arndt Bröder
 
-**Abstract**
+## Abstract
 Will be added soon.
 
-**Publication**
+## Publication
 (work in progress)
 
-**Funding**
+## Funding
 This research was funded by Grant IZ 96/1-1 provided to David Izydorczyk from the German Research Foundation (DFG) and supported by the University of Mannheim’s Graduate School of Economic and Social Sciences.
 
 
