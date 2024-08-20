@@ -1,6 +1,6 @@
 # \#Knowledge: Improving food-related knowledge via seeding implemented as a social media intervention
 
-
+## About this repository
 This repository contains code to reproduce all analyses and figures in the project *\#Knowledge: Improving food-related knowledge via seeding implemented as a social media intervention*. **The data corresponding to this project can be found on the respective OSF: https://osf.io/vztjq/**. The structure of this repository is as follows:
 
 <br>
