@@ -1,7 +1,7 @@
 # \#Knowledge: Improving food-related knowledge via seeding implemented as a social media intervention
 
 
-This repository contains code to reproduce all analyses and figures in the project *\#Knowledge: Improving food-related knowledge via seeding implemented as a social media intervention* by David Izydorczyk, Barbara Kreis, Michael Kilb & Arndt Bröder. **The data corresponding to this project can be found on the respective OSF: https://osf.io/vztjq/**. The structure of this repository is as follows:
+This repository contains code to reproduce all analyses and figures in the project *\#Knowledge: Improving food-related knowledge via seeding implemented as a social media intervention*. **The data corresponding to this project can be found on the respective OSF: https://osf.io/vztjq/**. The structure of this repository is as follows:
 
 <br>
 
@@ -37,5 +37,16 @@ This repository contains code to reproduce all analyses and figures in the proje
 
 This work, including all figures, is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.  All code is licensed under the MIT License.
 
+**Contributing Authors**
+David Izydorczyk, Barbara Kreis, Michael Kilb & Arndt Bröder
+
+**Abstract**
+Will be added soon.
+
+**Publication**
+(work in progress)
+
+**Funding**
+This research was funded by Grant IZ 96/1-1 provided to David Izydorczyk from the German Research Foundation (DFG) and supported by the University of Mannheim’s Graduate School of Economic and Social Sciences.
 
 
