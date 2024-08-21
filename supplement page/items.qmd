@@ -16,7 +16,15 @@ format:
     fig-height:  12
     fig-width:   13
     fig-align: center
-  pdf: default
+  pdf:       
+    toc: true
+    toc-depth: 2
+    fig-height: 12
+    fig-width:  13
+    fig-align: center
+    df-print: kable
+    execute:
+      echo: false
 execute:
   warning: false
   messages: false
