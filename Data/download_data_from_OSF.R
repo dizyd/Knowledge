@@ -9,5 +9,5 @@ library(osfr)
 osf_download(osf_ls_files(osf_retrieve_node("y2rn8")),path = "Results")
 
 # Download a specific file
-osf_download(osf_retrieve_file("gva9p"),path = "Data") 
+osf_download(osf_retrieve_file("gva9p"),path = "Data") # data_insta_seeding.csv (all data)
 osf_download(osf_retrieve_file("7htym"),path = "Data") # df_analysis.csv (cleaned and filtered df)

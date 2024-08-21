@@ -20,6 +20,8 @@ website:
       
       - href: sessionInfo.qmd
         text: Session Info
+        
+      - href: codebook.qmd
 
     
     right:
