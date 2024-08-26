@@ -12,16 +12,19 @@ website:
         text: Info
         
       - href: supplement.qmd
+        text: Supplement
       
       - href: priors.qmd
         text: Priors
         
       - href: items.qmd
+        text: Items
       
       - href: sessionInfo.qmd
         text: Session Info
         
       - href: codebook.qmd
+        text: Codebook
 
     
     right:
