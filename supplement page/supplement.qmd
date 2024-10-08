@@ -109,6 +109,42 @@ brms_plot <- function(mod,lim=c(0,5)){
 est <- read_csv2("../Data/df_analysis.csv")
 ```
 
+
+# Demographics per Condition
+
+```{r}
+# Make tidy df of needed variables
+demo <- est %>% 
+          select(ID,trained_criterion,est_criterion,age, gender, education_level) %>% 
+          distinct() 
+
+
+
+demo %>% 
+  distinct() %>% 
+  group_by(trained_criterion,est_criterion) %>% 
+  summarise(m        = mean(age),
+            sd       = sd(age),
+            p_female = mean(gender=="female")*100,
+            p_male   = mean(gender=="male")*100,
+            p_male   = mean(gender=="male")*100,
+            p_abi    = mean(education_level=="Abitur")*100,
+            p_ba     = mean(education_level=="Bachelor")*100,
+            p_ma     = mean(education_level=="Master")*100,
+            p_other  = 100-(p_abi+p_ba+p_ma)) %>% 
+  mutate_if(is.numeric,printnum,digits=1) %>% 
+  mutate(age    = paste0(m," (",sd,")"),
+         gender = paste0(p_female," / ",p_male," %"),
+         edu    = paste0(p_abi ," / ",p_ba, " / ",p_ma, " / ",p_other," %")) %>% 
+  select(trained_criterion,est_criterion,age:edu) %>% 
+  kbl(col.names = c("Trained","Estimated","Age","Perc. Female/Male","Perc. GUEQ/BA/MA/Other"),digits = 2) %>% 
+  kable_paper() %>% 
+  add_footnote("Note. GUEQ = General University Entrance Qualification , BA = Bachelor's degree, MA = Master's degree", notation="none")
+
+```
+
+
+
 # Reactivity Effects in General Criterion Knowledge Question 
 
 ```{r}

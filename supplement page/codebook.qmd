@@ -37,7 +37,6 @@ editor_options:
 # Packages
 library(tidyverse) 
 library(codebook)
-library(osfr)
 library(papaja)
 library(kableExtra)
 ```
