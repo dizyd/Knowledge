@@ -2,13 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.555">
+<meta name="generator" content="quarto-1.5.57">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2024-08-21">
+<meta name="dcterms.date" content="2024-10-08">
 
-<title>#Knowledge - Supplement</title>
+<title>Supplement – #Knowledge</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -34,7 +34,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -108,7 +108,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <script type="text/javascript">
@@ -153,7 +153,7 @@ window.Quarto = {
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -195,7 +195,7 @@ window.Quarto = {
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
-          <div class="quarto-navbar-tools">
+            <div class="quarto-navbar-tools">
 </div>
       </div> <!-- /container-fluid -->
     </nav>
@@ -274,7 +274,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">August 21, 2024</p>
+      <p class="date">October 8, 2024</p>
     </div>
   </div>
   
@@ -4000,18 +4000,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -4043,7 +4032,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
   const viewSource = window.document.getElementById('quarto-view-source') ||
                      window.document.getElementById('quarto-code-tools-source');
   if (viewSource) {
@@ -4102,7 +4113,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {
@@ -4536,336 +4547,336 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb99-109"><a href="#cb99-109" aria-hidden="true" tabindex="-1"></a><span class="in">est &lt;- read_csv2("../Data/df_analysis.csv")</span></span>
 <span id="cb99-110"><a href="#cb99-110" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb99-111"><a href="#cb99-111" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-112"><a href="#cb99-112" aria-hidden="true" tabindex="-1"></a><span class="fu"># Reactivity Effects in General Criterion Knowledge Question </span></span>
-<span id="cb99-113"><a href="#cb99-113" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-116"><a href="#cb99-116" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb99-117"><a href="#cb99-117" aria-hidden="true" tabindex="-1"></a><span class="co"># Make tidy df of needed variables</span></span>
-<span id="cb99-118"><a href="#cb99-118" aria-hidden="true" tabindex="-1"></a>temp <span class="ot">&lt;-</span> est <span class="sc">%&gt;%</span> </span>
-<span id="cb99-119"><a href="#cb99-119" aria-hidden="true" tabindex="-1"></a>          <span class="fu">select</span>(ID,trained_criterion,est_criterion,Kcal_knowledge,CO2_knowledge) <span class="sc">%&gt;%</span> </span>
-<span id="cb99-120"><a href="#cb99-120" aria-hidden="true" tabindex="-1"></a>          <span class="fu">distinct</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb99-121"><a href="#cb99-121" aria-hidden="true" tabindex="-1"></a>          <span class="fu">mutate</span>(<span class="at">trained_f   =</span> <span class="fu">factor</span>(trained_criterion),</span>
-<span id="cb99-122"><a href="#cb99-122" aria-hidden="true" tabindex="-1"></a>                 <span class="at">estimated_f =</span> <span class="fu">factor</span>(est_criterion)) <span class="sc">%&gt;%</span> </span>
-<span id="cb99-123"><a href="#cb99-123" aria-hidden="true" tabindex="-1"></a>          <span class="fu">as.data.frame</span>()  </span>
-<span id="cb99-124"><a href="#cb99-124" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-125"><a href="#cb99-125" aria-hidden="true" tabindex="-1"></a>bf_Kcal <span class="ot">=</span> <span class="fu">anovaBF</span>(Kcal_knowledge <span class="sc">~</span> trained_f <span class="sc">*</span> estimated_f, <span class="at">data=</span>temp)</span>
-<span id="cb99-126"><a href="#cb99-126" aria-hidden="true" tabindex="-1"></a>bf_CO2  <span class="ot">=</span> <span class="fu">anovaBF</span>(CO2_knowledge <span class="sc">~</span> trained_f <span class="sc">*</span> estimated_f, <span class="at">data=</span>temp)</span>
-<span id="cb99-127"><a href="#cb99-127" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb99-128"><a href="#cb99-128" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-112"><a href="#cb99-112" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-113"><a href="#cb99-113" aria-hidden="true" tabindex="-1"></a><span class="fu"># Reactivity Effects in General Criterion Knowledge Question </span></span>
+<span id="cb99-114"><a href="#cb99-114" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-117"><a href="#cb99-117" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb99-118"><a href="#cb99-118" aria-hidden="true" tabindex="-1"></a><span class="co"># Make tidy df of needed variables</span></span>
+<span id="cb99-119"><a href="#cb99-119" aria-hidden="true" tabindex="-1"></a>temp <span class="ot">&lt;-</span> est <span class="sc">%&gt;%</span> </span>
+<span id="cb99-120"><a href="#cb99-120" aria-hidden="true" tabindex="-1"></a>          <span class="fu">select</span>(ID,trained_criterion,est_criterion,Kcal_knowledge,CO2_knowledge) <span class="sc">%&gt;%</span> </span>
+<span id="cb99-121"><a href="#cb99-121" aria-hidden="true" tabindex="-1"></a>          <span class="fu">distinct</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb99-122"><a href="#cb99-122" aria-hidden="true" tabindex="-1"></a>          <span class="fu">mutate</span>(<span class="at">trained_f   =</span> <span class="fu">factor</span>(trained_criterion),</span>
+<span id="cb99-123"><a href="#cb99-123" aria-hidden="true" tabindex="-1"></a>                 <span class="at">estimated_f =</span> <span class="fu">factor</span>(est_criterion)) <span class="sc">%&gt;%</span> </span>
+<span id="cb99-124"><a href="#cb99-124" aria-hidden="true" tabindex="-1"></a>          <span class="fu">as.data.frame</span>()  </span>
+<span id="cb99-125"><a href="#cb99-125" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-126"><a href="#cb99-126" aria-hidden="true" tabindex="-1"></a>bf_Kcal <span class="ot">=</span> <span class="fu">anovaBF</span>(Kcal_knowledge <span class="sc">~</span> trained_f <span class="sc">*</span> estimated_f, <span class="at">data=</span>temp)</span>
+<span id="cb99-127"><a href="#cb99-127" aria-hidden="true" tabindex="-1"></a>bf_CO2  <span class="ot">=</span> <span class="fu">anovaBF</span>(CO2_knowledge <span class="sc">~</span> trained_f <span class="sc">*</span> estimated_f, <span class="at">data=</span>temp)</span>
+<span id="cb99-128"><a href="#cb99-128" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb99-129"><a href="#cb99-129" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-130"><a href="#cb99-130" aria-hidden="true" tabindex="-1"></a>As stated in the main manuscript, participants reported knowing in general more about the calorie content of food items (*M* = 4.12, *SD* = 1.69) than their CO~2~ footprint (*M* = 2.08, *SD* = 1.32, δ = 2.02 <span class="sc">\[</span>1.67, 2.36<span class="sc">\]</span>, BF~10~ <span class="sc">\&gt;</span> 1000). However, we also found a small reactivity effect, where participants rated their knowledge of a criterion lower when they had to estimate this criterion beforehand. This effect was found when participants had to estimate calories in the main task (BF~10~ = <span class="in">`r printnum(extractBF(bf_Kcal)$bf[2])`</span>) and also (but to smaller degree) when they had to estimate the carbon footprint (BF~10~ = <span class="in">`r printnum(extractBF(bf_CO2)$bf[2])`</span>). See below for descriptive values and the corresponding figure of individual values.</span>
-<span id="cb99-131"><a href="#cb99-131" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-134"><a href="#cb99-134" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb99-135"><a href="#cb99-135" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-summary: "Table"</span></span>
-<span id="cb99-136"><a href="#cb99-136" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-137"><a href="#cb99-137" aria-hidden="true" tabindex="-1"></a>temp <span class="sc">%&gt;%</span> </span>
-<span id="cb99-138"><a href="#cb99-138" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(est_criterion) <span class="sc">%&gt;%</span> </span>
-<span id="cb99-139"><a href="#cb99-139" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">m_kcal  =</span> <span class="fu">mean</span>(Kcal_knowledge),</span>
-<span id="cb99-140"><a href="#cb99-140" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd_kcal =</span> <span class="fu">sd</span>(Kcal_knowledge),</span>
-<span id="cb99-141"><a href="#cb99-141" aria-hidden="true" tabindex="-1"></a>            <span class="at">m_CO2   =</span> <span class="fu">mean</span>(CO2_knowledge),</span>
-<span id="cb99-142"><a href="#cb99-142" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd_CO2  =</span> <span class="fu">sd</span>(CO2_knowledge)) <span class="sc">%&gt;%</span> </span>
-<span id="cb99-143"><a href="#cb99-143" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">"Knowledge: Kcal"</span> <span class="ot">=</span> <span class="fu">paste0</span>(<span class="fu">printnum</span>(m_kcal),<span class="st">" ("</span>,<span class="fu">printnum</span>(sd_kcal),<span class="st">")"</span>),</span>
-<span id="cb99-144"><a href="#cb99-144" aria-hidden="true" tabindex="-1"></a>         <span class="st">"Knowledge: CO2"</span> <span class="ot">=</span> <span class="fu">paste0</span>(<span class="fu">printnum</span>(m_CO2),<span class="st">" ("</span>,<span class="fu">printnum</span>(sd_CO2),<span class="st">")"</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb99-145"><a href="#cb99-145" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="st">"Estimated Criterion"</span> <span class="ot">=</span> est_criterion, <span class="st">`</span><span class="at">Knowledge: Kcal</span><span class="st">`</span>, <span class="st">`</span><span class="at">Knowledge: CO2</span><span class="st">`</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb99-146"><a href="#cb99-146" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kbl</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb99-147"><a href="#cb99-147" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_paper</span>()</span>
-<span id="cb99-148"><a href="#cb99-148" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-149"><a href="#cb99-149" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb99-150"><a href="#cb99-150" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-153"><a href="#cb99-153" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb99-154"><a href="#cb99-154" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-summary: "Plot"</span></span>
-<span id="cb99-155"><a href="#cb99-155" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Figure S1. General knowledge ratings for C0~2~ footprint and calorie content of food items, depending on the estimated criterion in the main task."</span></span>
-<span id="cb99-156"><a href="#cb99-156" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-157"><a href="#cb99-157" aria-hidden="true" tabindex="-1"></a>temp <span class="sc">%&gt;%</span> </span>
-<span id="cb99-158"><a href="#cb99-158" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols      =</span> <span class="fu">c</span>(Kcal_knowledge,CO2_knowledge),</span>
-<span id="cb99-159"><a href="#cb99-159" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to  =</span> <span class="st">"criterion"</span>,</span>
-<span id="cb99-160"><a href="#cb99-160" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">"values"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb99-161"><a href="#cb99-161" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">criterion   =</span> <span class="fu">ifelse</span>(criterion   <span class="sc">==</span> <span class="st">"CO2_knowledge"</span>, <span class="st">"bold(Knowledge:~CO[2])"</span>,<span class="st">"bold(Knowledge:~kcal)"</span>),</span>
-<span id="cb99-162"><a href="#cb99-162" aria-hidden="true" tabindex="-1"></a>         <span class="at">estimated_f =</span> <span class="fu">ifelse</span>(estimated_f <span class="sc">==</span> <span class="st">"CO2"</span>,<span class="st">"CO[2]"</span>,<span class="st">"kcal"</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb99-163"><a href="#cb99-163" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> estimated_f, <span class="at">y =</span> values,  <span class="at">group =</span> criterion)) <span class="sc">+</span></span>
-<span id="cb99-164"><a href="#cb99-164" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_jitter</span>(<span class="at">width=</span><span class="fl">0.1</span>, <span class="at">height =</span> <span class="fl">0.1</span>)<span class="sc">+</span> </span>
-<span id="cb99-165"><a href="#cb99-165" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stat_summary</span>(<span class="at">fun.data =</span> mean_se, <span class="at">geom =</span> <span class="st">"errorbar"</span>,<span class="fu">aes</span>(<span class="at">color=</span>criterion),<span class="at">width=</span><span class="fl">0.1</span>) <span class="sc">+</span></span>
-<span id="cb99-166"><a href="#cb99-166" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stat_summary</span>(<span class="at">fun=</span><span class="st">"mean"</span>,<span class="at">geom=</span><span class="st">"line"</span>,<span class="at">lwd=</span><span class="fl">0.8</span>,<span class="fu">aes</span>(<span class="at">color=</span>criterion)) <span class="sc">+</span></span>
-<span id="cb99-167"><a href="#cb99-167" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stat_summary</span>(<span class="at">fun=</span><span class="st">"mean"</span>,<span class="at">geom=</span><span class="st">"point"</span>,<span class="at">size=</span><span class="dv">4</span>,<span class="fu">aes</span>(<span class="at">fill=</span>criterion),<span class="at">shape=</span><span class="dv">21</span>) <span class="sc">+</span></span>
-<span id="cb99-168"><a href="#cb99-168" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_color_manual</span>(<span class="at">values=</span><span class="fu">c</span>(clrs[<span class="dv">4</span>],clrs[<span class="dv">3</span>])) <span class="sc">+</span></span>
-<span id="cb99-169"><a href="#cb99-169" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_fill_manual</span>(<span class="at">values=</span><span class="fu">c</span>(clrs[<span class="dv">4</span>],clrs[<span class="dv">3</span>])) <span class="sc">+</span></span>
-<span id="cb99-170"><a href="#cb99-170" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(. <span class="sc">~</span> criterion,<span class="at">labeller =</span> label_parsed) <span class="sc">+</span></span>
-<span id="cb99-171"><a href="#cb99-171" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_nice</span>() <span class="sc">+</span></span>
-<span id="cb99-172"><a href="#cb99-172" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_x_discrete</span>(<span class="at">labels =</span> <span class="fu">parse_format</span>()) <span class="sc">+</span></span>
-<span id="cb99-173"><a href="#cb99-173" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>) <span class="sc">+</span></span>
-<span id="cb99-174"><a href="#cb99-174" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Estimated Criterion"</span>,</span>
-<span id="cb99-175"><a href="#cb99-175" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span> <span class="st">"Knowledge Rating"</span>) <span class="sc">+</span></span>
-<span id="cb99-176"><a href="#cb99-176" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>) </span>
-<span id="cb99-177"><a href="#cb99-177" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb99-178"><a href="#cb99-178" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-179"><a href="#cb99-179" aria-hidden="true" tabindex="-1"></a><span class="fu"># Number of Likes Posts                                      </span></span>
-<span id="cb99-180"><a href="#cb99-180" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-181"><a href="#cb99-181" aria-hidden="true" tabindex="-1"></a>In the preregistration, we also predicted that a greater  seeding  effect when  participants  saw  more posts as indicated by the number of liked posts. However, as already stated in the main text, almost all participants liked every post, see the table below for the descriptive statistics and the Figure S2 for the distribution of liked posts per participant.</span>
-<span id="cb99-182"><a href="#cb99-182" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-185"><a href="#cb99-185" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb99-186"><a href="#cb99-186" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-summary: "Table"</span></span>
-<span id="cb99-187"><a href="#cb99-187" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-188"><a href="#cb99-188" aria-hidden="true" tabindex="-1"></a>est <span class="sc">%&gt;%</span> </span>
-<span id="cb99-189"><a href="#cb99-189" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(ID,<span class="st">"Account"</span><span class="ot">=</span>trained_criterion,n_posts_liked) <span class="sc">%&gt;%</span> </span>
-<span id="cb99-190"><a href="#cb99-190" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb99-191"><a href="#cb99-191" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Account) <span class="sc">%&gt;%</span> </span>
-<span id="cb99-192"><a href="#cb99-192" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">m   =</span> <span class="fu">mean</span>(n_posts_liked),</span>
-<span id="cb99-193"><a href="#cb99-193" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd  =</span> <span class="fu">sd</span>(n_posts_liked),</span>
-<span id="cb99-194"><a href="#cb99-194" aria-hidden="true" tabindex="-1"></a>            <span class="at">min =</span> <span class="fu">min</span>(n_posts_liked),</span>
-<span id="cb99-195"><a href="#cb99-195" aria-hidden="true" tabindex="-1"></a>            <span class="at">max =</span> <span class="fu">max</span>(n_posts_liked)) <span class="sc">%&gt;%</span> </span>
-<span id="cb99-196"><a href="#cb99-196" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kbl</span>(<span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">"Account"</span>,<span class="st">"M"</span>,<span class="st">"SD"</span>,<span class="st">"Min"</span>,<span class="st">"Max"</span>),<span class="at">digits =</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb99-197"><a href="#cb99-197" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_paper</span>()</span>
-<span id="cb99-198"><a href="#cb99-198" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-199"><a href="#cb99-199" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb99-200"><a href="#cb99-200" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-130"><a href="#cb99-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-131"><a href="#cb99-131" aria-hidden="true" tabindex="-1"></a>As stated in the main manuscript, participants reported knowing in general more about the calorie content of food items (*M* = 4.12, *SD* = 1.69) than their CO~2~ footprint (*M* = 2.08, *SD* = 1.32, δ = 2.02 <span class="sc">\[</span>1.67, 2.36<span class="sc">\]</span>, BF~10~ <span class="sc">\&gt;</span> 1000). However, we also found a small reactivity effect, where participants rated their knowledge of a criterion lower when they had to estimate this criterion beforehand. This effect was found when participants had to estimate calories in the main task (BF~10~ = <span class="in">`r printnum(extractBF(bf_Kcal)$bf[2])`</span>) and also (but to smaller degree) when they had to estimate the carbon footprint (BF~10~ = <span class="in">`r printnum(extractBF(bf_CO2)$bf[2])`</span>). See below for descriptive values and the corresponding figure of individual values.</span>
+<span id="cb99-132"><a href="#cb99-132" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-135"><a href="#cb99-135" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb99-136"><a href="#cb99-136" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-summary: "Table"</span></span>
+<span id="cb99-137"><a href="#cb99-137" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-138"><a href="#cb99-138" aria-hidden="true" tabindex="-1"></a>temp <span class="sc">%&gt;%</span> </span>
+<span id="cb99-139"><a href="#cb99-139" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(est_criterion) <span class="sc">%&gt;%</span> </span>
+<span id="cb99-140"><a href="#cb99-140" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">m_kcal  =</span> <span class="fu">mean</span>(Kcal_knowledge),</span>
+<span id="cb99-141"><a href="#cb99-141" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd_kcal =</span> <span class="fu">sd</span>(Kcal_knowledge),</span>
+<span id="cb99-142"><a href="#cb99-142" aria-hidden="true" tabindex="-1"></a>            <span class="at">m_CO2   =</span> <span class="fu">mean</span>(CO2_knowledge),</span>
+<span id="cb99-143"><a href="#cb99-143" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd_CO2  =</span> <span class="fu">sd</span>(CO2_knowledge)) <span class="sc">%&gt;%</span> </span>
+<span id="cb99-144"><a href="#cb99-144" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">"Knowledge: Kcal"</span> <span class="ot">=</span> <span class="fu">paste0</span>(<span class="fu">printnum</span>(m_kcal),<span class="st">" ("</span>,<span class="fu">printnum</span>(sd_kcal),<span class="st">")"</span>),</span>
+<span id="cb99-145"><a href="#cb99-145" aria-hidden="true" tabindex="-1"></a>         <span class="st">"Knowledge: CO2"</span> <span class="ot">=</span> <span class="fu">paste0</span>(<span class="fu">printnum</span>(m_CO2),<span class="st">" ("</span>,<span class="fu">printnum</span>(sd_CO2),<span class="st">")"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb99-146"><a href="#cb99-146" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="st">"Estimated Criterion"</span> <span class="ot">=</span> est_criterion, <span class="st">`</span><span class="at">Knowledge: Kcal</span><span class="st">`</span>, <span class="st">`</span><span class="at">Knowledge: CO2</span><span class="st">`</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb99-147"><a href="#cb99-147" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kbl</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb99-148"><a href="#cb99-148" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_paper</span>()</span>
+<span id="cb99-149"><a href="#cb99-149" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-150"><a href="#cb99-150" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb99-151"><a href="#cb99-151" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-154"><a href="#cb99-154" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb99-155"><a href="#cb99-155" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-summary: "Plot"</span></span>
+<span id="cb99-156"><a href="#cb99-156" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Figure S1. General knowledge ratings for C0~2~ footprint and calorie content of food items, depending on the estimated criterion in the main task."</span></span>
+<span id="cb99-157"><a href="#cb99-157" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-158"><a href="#cb99-158" aria-hidden="true" tabindex="-1"></a>temp <span class="sc">%&gt;%</span> </span>
+<span id="cb99-159"><a href="#cb99-159" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols      =</span> <span class="fu">c</span>(Kcal_knowledge,CO2_knowledge),</span>
+<span id="cb99-160"><a href="#cb99-160" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to  =</span> <span class="st">"criterion"</span>,</span>
+<span id="cb99-161"><a href="#cb99-161" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">"values"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb99-162"><a href="#cb99-162" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">criterion   =</span> <span class="fu">ifelse</span>(criterion   <span class="sc">==</span> <span class="st">"CO2_knowledge"</span>, <span class="st">"bold(Knowledge:~CO[2])"</span>,<span class="st">"bold(Knowledge:~kcal)"</span>),</span>
+<span id="cb99-163"><a href="#cb99-163" aria-hidden="true" tabindex="-1"></a>         <span class="at">estimated_f =</span> <span class="fu">ifelse</span>(estimated_f <span class="sc">==</span> <span class="st">"CO2"</span>,<span class="st">"CO[2]"</span>,<span class="st">"kcal"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb99-164"><a href="#cb99-164" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> estimated_f, <span class="at">y =</span> values,  <span class="at">group =</span> criterion)) <span class="sc">+</span></span>
+<span id="cb99-165"><a href="#cb99-165" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_jitter</span>(<span class="at">width=</span><span class="fl">0.1</span>, <span class="at">height =</span> <span class="fl">0.1</span>)<span class="sc">+</span> </span>
+<span id="cb99-166"><a href="#cb99-166" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stat_summary</span>(<span class="at">fun.data =</span> mean_se, <span class="at">geom =</span> <span class="st">"errorbar"</span>,<span class="fu">aes</span>(<span class="at">color=</span>criterion),<span class="at">width=</span><span class="fl">0.1</span>) <span class="sc">+</span></span>
+<span id="cb99-167"><a href="#cb99-167" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stat_summary</span>(<span class="at">fun=</span><span class="st">"mean"</span>,<span class="at">geom=</span><span class="st">"line"</span>,<span class="at">lwd=</span><span class="fl">0.8</span>,<span class="fu">aes</span>(<span class="at">color=</span>criterion)) <span class="sc">+</span></span>
+<span id="cb99-168"><a href="#cb99-168" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stat_summary</span>(<span class="at">fun=</span><span class="st">"mean"</span>,<span class="at">geom=</span><span class="st">"point"</span>,<span class="at">size=</span><span class="dv">4</span>,<span class="fu">aes</span>(<span class="at">fill=</span>criterion),<span class="at">shape=</span><span class="dv">21</span>) <span class="sc">+</span></span>
+<span id="cb99-169"><a href="#cb99-169" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_color_manual</span>(<span class="at">values=</span><span class="fu">c</span>(clrs[<span class="dv">4</span>],clrs[<span class="dv">3</span>])) <span class="sc">+</span></span>
+<span id="cb99-170"><a href="#cb99-170" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_fill_manual</span>(<span class="at">values=</span><span class="fu">c</span>(clrs[<span class="dv">4</span>],clrs[<span class="dv">3</span>])) <span class="sc">+</span></span>
+<span id="cb99-171"><a href="#cb99-171" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(. <span class="sc">~</span> criterion,<span class="at">labeller =</span> label_parsed) <span class="sc">+</span></span>
+<span id="cb99-172"><a href="#cb99-172" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_nice</span>() <span class="sc">+</span></span>
+<span id="cb99-173"><a href="#cb99-173" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_x_discrete</span>(<span class="at">labels =</span> <span class="fu">parse_format</span>()) <span class="sc">+</span></span>
+<span id="cb99-174"><a href="#cb99-174" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>) <span class="sc">+</span></span>
+<span id="cb99-175"><a href="#cb99-175" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Estimated Criterion"</span>,</span>
+<span id="cb99-176"><a href="#cb99-176" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span> <span class="st">"Knowledge Rating"</span>) <span class="sc">+</span></span>
+<span id="cb99-177"><a href="#cb99-177" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>) </span>
+<span id="cb99-178"><a href="#cb99-178" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb99-179"><a href="#cb99-179" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-180"><a href="#cb99-180" aria-hidden="true" tabindex="-1"></a><span class="fu"># Number of Likes Posts                                      </span></span>
+<span id="cb99-181"><a href="#cb99-181" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-182"><a href="#cb99-182" aria-hidden="true" tabindex="-1"></a>In the preregistration, we also predicted that a greater  seeding  effect when  participants  saw  more posts as indicated by the number of liked posts. However, as already stated in the main text, almost all participants liked every post, see the table below for the descriptive statistics and the Figure S2 for the distribution of liked posts per participant.</span>
+<span id="cb99-183"><a href="#cb99-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-186"><a href="#cb99-186" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb99-187"><a href="#cb99-187" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-summary: "Table"</span></span>
+<span id="cb99-188"><a href="#cb99-188" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-189"><a href="#cb99-189" aria-hidden="true" tabindex="-1"></a>est <span class="sc">%&gt;%</span> </span>
+<span id="cb99-190"><a href="#cb99-190" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(ID,<span class="st">"Account"</span><span class="ot">=</span>trained_criterion,n_posts_liked) <span class="sc">%&gt;%</span> </span>
+<span id="cb99-191"><a href="#cb99-191" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb99-192"><a href="#cb99-192" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Account) <span class="sc">%&gt;%</span> </span>
+<span id="cb99-193"><a href="#cb99-193" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">m   =</span> <span class="fu">mean</span>(n_posts_liked),</span>
+<span id="cb99-194"><a href="#cb99-194" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd  =</span> <span class="fu">sd</span>(n_posts_liked),</span>
+<span id="cb99-195"><a href="#cb99-195" aria-hidden="true" tabindex="-1"></a>            <span class="at">min =</span> <span class="fu">min</span>(n_posts_liked),</span>
+<span id="cb99-196"><a href="#cb99-196" aria-hidden="true" tabindex="-1"></a>            <span class="at">max =</span> <span class="fu">max</span>(n_posts_liked)) <span class="sc">%&gt;%</span> </span>
+<span id="cb99-197"><a href="#cb99-197" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kbl</span>(<span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">"Account"</span>,<span class="st">"M"</span>,<span class="st">"SD"</span>,<span class="st">"Min"</span>,<span class="st">"Max"</span>),<span class="at">digits =</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb99-198"><a href="#cb99-198" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_paper</span>()</span>
+<span id="cb99-199"><a href="#cb99-199" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-200"><a href="#cb99-200" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb99-201"><a href="#cb99-201" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-204"><a href="#cb99-204" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb99-205"><a href="#cb99-205" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-summary: "Plot"</span></span>
-<span id="cb99-206"><a href="#cb99-206" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Figure S2. Distribution of number of liked posts per participant."</span></span>
-<span id="cb99-207"><a href="#cb99-207" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 5</span></span>
-<span id="cb99-208"><a href="#cb99-208" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-width:  8</span></span>
-<span id="cb99-209"><a href="#cb99-209" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-202"><a href="#cb99-202" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-205"><a href="#cb99-205" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb99-206"><a href="#cb99-206" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-summary: "Plot"</span></span>
+<span id="cb99-207"><a href="#cb99-207" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Figure S2. Distribution of number of liked posts per participant."</span></span>
+<span id="cb99-208"><a href="#cb99-208" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 5</span></span>
+<span id="cb99-209"><a href="#cb99-209" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-width:  8</span></span>
 <span id="cb99-210"><a href="#cb99-210" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-211"><a href="#cb99-211" aria-hidden="true" tabindex="-1"></a>est <span class="sc">%&gt;%</span> </span>
-<span id="cb99-212"><a href="#cb99-212" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(ID,trained_criterion,est_criterion,n_posts_liked) <span class="sc">%&gt;%</span> </span>
-<span id="cb99-213"><a href="#cb99-213" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb99-214"><a href="#cb99-214" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">trained_criterion =</span> <span class="fu">ifelse</span>(trained_criterion  <span class="sc">==</span> <span class="st">"CO2"</span>,<span class="st">"CO[2]"</span>,<span class="st">"kcal"</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb99-215"><a href="#cb99-215" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> n_posts_liked,  <span class="at">fill =</span> trained_criterion)) <span class="sc">+</span></span>
-<span id="cb99-216"><a href="#cb99-216" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_histogram</span>(<span class="at">alpha=</span><span class="fl">0.75</span>,<span class="at">position =</span> <span class="st">"identity"</span>,<span class="at">bins=</span><span class="dv">25</span>) <span class="sc">+</span></span>
-<span id="cb99-217"><a href="#cb99-217" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_fill_manual</span>(<span class="at">values=</span><span class="fu">c</span>(clrs[<span class="dv">4</span>],clrs[<span class="dv">3</span>]),<span class="at">labels =</span> <span class="fu">parse_format</span>()) <span class="sc">+</span></span>
-<span id="cb99-218"><a href="#cb99-218" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_nice</span>() <span class="sc">+</span></span>
-<span id="cb99-219"><a href="#cb99-219" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x    =</span> <span class="st">"Liked X out of 30 possible posts (15 seeding + 15 trivia facts)"</span>,</span>
-<span id="cb99-220"><a href="#cb99-220" aria-hidden="true" tabindex="-1"></a>         <span class="at">y    =</span> <span class="st">"Frequency"</span>,</span>
-<span id="cb99-221"><a href="#cb99-221" aria-hidden="true" tabindex="-1"></a>         <span class="at">fill =</span> <span class="st">"Account:"</span>)</span>
-<span id="cb99-222"><a href="#cb99-222" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-223"><a href="#cb99-223" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb99-224"><a href="#cb99-224" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-211"><a href="#cb99-211" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-212"><a href="#cb99-212" aria-hidden="true" tabindex="-1"></a>est <span class="sc">%&gt;%</span> </span>
+<span id="cb99-213"><a href="#cb99-213" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(ID,trained_criterion,est_criterion,n_posts_liked) <span class="sc">%&gt;%</span> </span>
+<span id="cb99-214"><a href="#cb99-214" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb99-215"><a href="#cb99-215" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">trained_criterion =</span> <span class="fu">ifelse</span>(trained_criterion  <span class="sc">==</span> <span class="st">"CO2"</span>,<span class="st">"CO[2]"</span>,<span class="st">"kcal"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb99-216"><a href="#cb99-216" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> n_posts_liked,  <span class="at">fill =</span> trained_criterion)) <span class="sc">+</span></span>
+<span id="cb99-217"><a href="#cb99-217" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_histogram</span>(<span class="at">alpha=</span><span class="fl">0.75</span>,<span class="at">position =</span> <span class="st">"identity"</span>,<span class="at">bins=</span><span class="dv">25</span>) <span class="sc">+</span></span>
+<span id="cb99-218"><a href="#cb99-218" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_fill_manual</span>(<span class="at">values=</span><span class="fu">c</span>(clrs[<span class="dv">4</span>],clrs[<span class="dv">3</span>]),<span class="at">labels =</span> <span class="fu">parse_format</span>()) <span class="sc">+</span></span>
+<span id="cb99-219"><a href="#cb99-219" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_nice</span>() <span class="sc">+</span></span>
+<span id="cb99-220"><a href="#cb99-220" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x    =</span> <span class="st">"Liked X out of 30 possible posts (15 seeding + 15 trivia facts)"</span>,</span>
+<span id="cb99-221"><a href="#cb99-221" aria-hidden="true" tabindex="-1"></a>         <span class="at">y    =</span> <span class="st">"Frequency"</span>,</span>
+<span id="cb99-222"><a href="#cb99-222" aria-hidden="true" tabindex="-1"></a>         <span class="at">fill =</span> <span class="st">"Account:"</span>)</span>
+<span id="cb99-223"><a href="#cb99-223" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-224"><a href="#cb99-224" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb99-225"><a href="#cb99-225" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-226"><a href="#cb99-226" aria-hidden="true" tabindex="-1"></a>In addition, Figure S3 shows the scatter plots with the estimated regression line when using the number of liked posts as an predictor of OME or $\rho$ (all *p*s &gt; 0.05)</span>
-<span id="cb99-227"><a href="#cb99-227" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-226"><a href="#cb99-226" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-227"><a href="#cb99-227" aria-hidden="true" tabindex="-1"></a>In addition, Figure S3 shows the scatter plots with the estimated regression line when using the number of liked posts as an predictor of OME or $\rho$ (all *p*s &gt; 0.05)</span>
 <span id="cb99-228"><a href="#cb99-228" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-231"><a href="#cb99-231" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb99-232"><a href="#cb99-232" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-summary: "Plot"</span></span>
-<span id="cb99-233"><a href="#cb99-233" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Figure S3. Relationship of number of liked posts and OME/rank correlation (z-transformed) per trained and estimated criterion"</span></span>
-<span id="cb99-234"><a href="#cb99-234" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 8</span></span>
-<span id="cb99-235"><a href="#cb99-235" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-width:  10</span></span>
-<span id="cb99-236"><a href="#cb99-236" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-237"><a href="#cb99-237" aria-hidden="true" tabindex="-1"></a>est <span class="sc">%&gt;%</span> </span>
-<span id="cb99-238"><a href="#cb99-238" aria-hidden="true" tabindex="-1"></a> <span class="fu">select</span>(ID,trained_criterion,est_criterion,n_posts_liked, OME_corr, rank_z) <span class="sc">%&gt;%</span> </span>
-<span id="cb99-239"><a href="#cb99-239" aria-hidden="true" tabindex="-1"></a> <span class="fu">group_by</span>(ID,trained_criterion,est_criterion) <span class="sc">%&gt;%</span> </span>
-<span id="cb99-240"><a href="#cb99-240" aria-hidden="true" tabindex="-1"></a> <span class="fu">summarize</span>(<span class="at">OME    =</span> <span class="fu">mean</span>(OME_corr),</span>
-<span id="cb99-241"><a href="#cb99-241" aria-hidden="true" tabindex="-1"></a>           <span class="at">rank_z =</span> <span class="fu">mean</span>(rank_z),</span>
-<span id="cb99-242"><a href="#cb99-242" aria-hidden="true" tabindex="-1"></a>           <span class="at">n_posts_liked =</span> <span class="fu">mean</span>(n_posts_liked),</span>
-<span id="cb99-243"><a href="#cb99-243" aria-hidden="true" tabindex="-1"></a>           <span class="at">.groups=</span><span class="st">"drop"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb99-244"><a href="#cb99-244" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">est_criterion =</span> <span class="fu">ifelse</span>(est_criterion <span class="sc">==</span> <span class="st">"CO2"</span>,</span>
-<span id="cb99-245"><a href="#cb99-245" aria-hidden="true" tabindex="-1"></a>                                <span class="st">"bold(Estimated:~CO[2])"</span>,</span>
-<span id="cb99-246"><a href="#cb99-246" aria-hidden="true" tabindex="-1"></a>                                <span class="st">"bold(Estimated:~kcal)"</span>),</span>
-<span id="cb99-247"><a href="#cb99-247" aria-hidden="true" tabindex="-1"></a>         <span class="at">trained_criterion =</span> <span class="fu">ifelse</span>(trained_criterion <span class="sc">==</span> <span class="st">"CO2"</span>,</span>
-<span id="cb99-248"><a href="#cb99-248" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"CO[2]"</span>,</span>
-<span id="cb99-249"><a href="#cb99-249" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"kcal"</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb99-250"><a href="#cb99-250" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="st">`</span><span class="at">Estimated Criterion</span><span class="st">`</span> <span class="ot">=</span> est_criterion,</span>
-<span id="cb99-251"><a href="#cb99-251" aria-hidden="true" tabindex="-1"></a>         <span class="st">`</span><span class="at">Trained Criterion</span><span class="st">`</span>   <span class="ot">=</span> trained_criterion) <span class="sc">%&gt;%</span> </span>
-<span id="cb99-252"><a href="#cb99-252" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(OME, rank_z), <span class="at">names_to =</span> <span class="st">"DV"</span>, <span class="at">values_to =</span> <span class="st">"val"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb99-253"><a href="#cb99-253" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> n_posts_liked, <span class="at">y =</span> val,</span>
-<span id="cb99-254"><a href="#cb99-254" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> <span class="st">`</span><span class="at">Trained Criterion</span><span class="st">`</span>, <span class="at">fill =</span> <span class="st">`</span><span class="at">Trained Criterion</span><span class="st">`</span>)) <span class="sc">+</span></span>
-<span id="cb99-255"><a href="#cb99-255" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">shape=</span><span class="dv">21</span>,<span class="at">color=</span><span class="st">"black"</span>, <span class="at">alpha=</span>.<span class="dv">8</span>, <span class="at">size =</span> <span class="fl">2.5</span>) <span class="sc">+</span></span>
-<span id="cb99-256"><a href="#cb99-256" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">"lm"</span>,<span class="at">fullrange=</span><span class="cn">TRUE</span>,<span class="at">alpha=</span><span class="fl">0.1</span>) <span class="sc">+</span></span>
-<span id="cb99-257"><a href="#cb99-257" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_fill_manual</span>(<span class="at">values=</span><span class="fu">c</span>(clrs[<span class="dv">4</span>],clrs[<span class="dv">3</span>]),<span class="at">labels =</span> <span class="fu">parse_format</span>()) <span class="sc">+</span></span>
-<span id="cb99-258"><a href="#cb99-258" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_color_manual</span>(<span class="at">values=</span><span class="fu">c</span>(clrs[<span class="dv">4</span>],clrs[<span class="dv">3</span>]),<span class="at">labels =</span> <span class="fu">parse_format</span>()) <span class="sc">+</span></span>
-<span id="cb99-259"><a href="#cb99-259" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_grid</span>(DV<span class="sc">~</span><span class="st">`</span><span class="at">Estimated Criterion</span><span class="st">`</span>,<span class="at">labeller =</span> label_parsed) <span class="sc">+</span></span>
-<span id="cb99-260"><a href="#cb99-260" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">fill  =</span> <span class="st">"Trained Criterion"</span>, </span>
-<span id="cb99-261"><a href="#cb99-261" aria-hidden="true" tabindex="-1"></a>         <span class="at">y     =</span> <span class="st">"Dependet Variable"</span>,</span>
-<span id="cb99-262"><a href="#cb99-262" aria-hidden="true" tabindex="-1"></a>         <span class="at">x     =</span> <span class="st">"Number of liked posts"</span>) <span class="sc">+</span></span>
-<span id="cb99-263"><a href="#cb99-263" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_nice</span>()</span>
-<span id="cb99-264"><a href="#cb99-264" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb99-265"><a href="#cb99-265" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-229"><a href="#cb99-229" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-232"><a href="#cb99-232" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb99-233"><a href="#cb99-233" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-summary: "Plot"</span></span>
+<span id="cb99-234"><a href="#cb99-234" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Figure S3. Relationship of number of liked posts and OME/rank correlation (z-transformed) per trained and estimated criterion"</span></span>
+<span id="cb99-235"><a href="#cb99-235" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 8</span></span>
+<span id="cb99-236"><a href="#cb99-236" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-width:  10</span></span>
+<span id="cb99-237"><a href="#cb99-237" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-238"><a href="#cb99-238" aria-hidden="true" tabindex="-1"></a>est <span class="sc">%&gt;%</span> </span>
+<span id="cb99-239"><a href="#cb99-239" aria-hidden="true" tabindex="-1"></a> <span class="fu">select</span>(ID,trained_criterion,est_criterion,n_posts_liked, OME_corr, rank_z) <span class="sc">%&gt;%</span> </span>
+<span id="cb99-240"><a href="#cb99-240" aria-hidden="true" tabindex="-1"></a> <span class="fu">group_by</span>(ID,trained_criterion,est_criterion) <span class="sc">%&gt;%</span> </span>
+<span id="cb99-241"><a href="#cb99-241" aria-hidden="true" tabindex="-1"></a> <span class="fu">summarize</span>(<span class="at">OME    =</span> <span class="fu">mean</span>(OME_corr),</span>
+<span id="cb99-242"><a href="#cb99-242" aria-hidden="true" tabindex="-1"></a>           <span class="at">rank_z =</span> <span class="fu">mean</span>(rank_z),</span>
+<span id="cb99-243"><a href="#cb99-243" aria-hidden="true" tabindex="-1"></a>           <span class="at">n_posts_liked =</span> <span class="fu">mean</span>(n_posts_liked),</span>
+<span id="cb99-244"><a href="#cb99-244" aria-hidden="true" tabindex="-1"></a>           <span class="at">.groups=</span><span class="st">"drop"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb99-245"><a href="#cb99-245" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">est_criterion =</span> <span class="fu">ifelse</span>(est_criterion <span class="sc">==</span> <span class="st">"CO2"</span>,</span>
+<span id="cb99-246"><a href="#cb99-246" aria-hidden="true" tabindex="-1"></a>                                <span class="st">"bold(Estimated:~CO[2])"</span>,</span>
+<span id="cb99-247"><a href="#cb99-247" aria-hidden="true" tabindex="-1"></a>                                <span class="st">"bold(Estimated:~kcal)"</span>),</span>
+<span id="cb99-248"><a href="#cb99-248" aria-hidden="true" tabindex="-1"></a>         <span class="at">trained_criterion =</span> <span class="fu">ifelse</span>(trained_criterion <span class="sc">==</span> <span class="st">"CO2"</span>,</span>
+<span id="cb99-249"><a href="#cb99-249" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"CO[2]"</span>,</span>
+<span id="cb99-250"><a href="#cb99-250" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"kcal"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb99-251"><a href="#cb99-251" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="st">`</span><span class="at">Estimated Criterion</span><span class="st">`</span> <span class="ot">=</span> est_criterion,</span>
+<span id="cb99-252"><a href="#cb99-252" aria-hidden="true" tabindex="-1"></a>         <span class="st">`</span><span class="at">Trained Criterion</span><span class="st">`</span>   <span class="ot">=</span> trained_criterion) <span class="sc">%&gt;%</span> </span>
+<span id="cb99-253"><a href="#cb99-253" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(OME, rank_z), <span class="at">names_to =</span> <span class="st">"DV"</span>, <span class="at">values_to =</span> <span class="st">"val"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb99-254"><a href="#cb99-254" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> n_posts_liked, <span class="at">y =</span> val,</span>
+<span id="cb99-255"><a href="#cb99-255" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> <span class="st">`</span><span class="at">Trained Criterion</span><span class="st">`</span>, <span class="at">fill =</span> <span class="st">`</span><span class="at">Trained Criterion</span><span class="st">`</span>)) <span class="sc">+</span></span>
+<span id="cb99-256"><a href="#cb99-256" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">shape=</span><span class="dv">21</span>,<span class="at">color=</span><span class="st">"black"</span>, <span class="at">alpha=</span>.<span class="dv">8</span>, <span class="at">size =</span> <span class="fl">2.5</span>) <span class="sc">+</span></span>
+<span id="cb99-257"><a href="#cb99-257" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">"lm"</span>,<span class="at">fullrange=</span><span class="cn">TRUE</span>,<span class="at">alpha=</span><span class="fl">0.1</span>) <span class="sc">+</span></span>
+<span id="cb99-258"><a href="#cb99-258" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_fill_manual</span>(<span class="at">values=</span><span class="fu">c</span>(clrs[<span class="dv">4</span>],clrs[<span class="dv">3</span>]),<span class="at">labels =</span> <span class="fu">parse_format</span>()) <span class="sc">+</span></span>
+<span id="cb99-259"><a href="#cb99-259" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_color_manual</span>(<span class="at">values=</span><span class="fu">c</span>(clrs[<span class="dv">4</span>],clrs[<span class="dv">3</span>]),<span class="at">labels =</span> <span class="fu">parse_format</span>()) <span class="sc">+</span></span>
+<span id="cb99-260"><a href="#cb99-260" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_grid</span>(DV<span class="sc">~</span><span class="st">`</span><span class="at">Estimated Criterion</span><span class="st">`</span>,<span class="at">labeller =</span> label_parsed) <span class="sc">+</span></span>
+<span id="cb99-261"><a href="#cb99-261" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">fill  =</span> <span class="st">"Trained Criterion"</span>, </span>
+<span id="cb99-262"><a href="#cb99-262" aria-hidden="true" tabindex="-1"></a>         <span class="at">y     =</span> <span class="st">"Dependet Variable"</span>,</span>
+<span id="cb99-263"><a href="#cb99-263" aria-hidden="true" tabindex="-1"></a>         <span class="at">x     =</span> <span class="st">"Number of liked posts"</span>) <span class="sc">+</span></span>
+<span id="cb99-264"><a href="#cb99-264" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_nice</span>()</span>
+<span id="cb99-265"><a href="#cb99-265" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb99-266"><a href="#cb99-266" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb99-267"><a href="#cb99-267" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-268"><a href="#cb99-268" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb99-269"><a href="#cb99-269" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-268"><a href="#cb99-268" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-269"><a href="#cb99-269" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb99-270"><a href="#cb99-270" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-271"><a href="#cb99-271" aria-hidden="true" tabindex="-1"></a><span class="fu"># Detailed Modeling Results                                  </span></span>
-<span id="cb99-272"><a href="#cb99-272" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-273"><a href="#cb99-273" aria-hidden="true" tabindex="-1"></a>Here we provide for all models reported in the main manuscript more detailed modeling results, including a table with the mean, standard deviation, 95\%-HDI, effective sample size (ESS) and $\hat{R}$ for each estimated parameter (random and fixed), as well as figures showing the MCMC-traces for the main fixed effects parameters (intercept and effect parameter) and posterior predictive distributions of the complete model.</span>
-<span id="cb99-274"><a href="#cb99-274" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-275"><a href="#cb99-275" aria-hidden="true" tabindex="-1"></a><span class="fu">## Hypothesis 1a (OME)    </span></span>
-<span id="cb99-276"><a href="#cb99-276" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-271"><a href="#cb99-271" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-272"><a href="#cb99-272" aria-hidden="true" tabindex="-1"></a><span class="fu"># Detailed Modeling Results                                  </span></span>
+<span id="cb99-273"><a href="#cb99-273" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-274"><a href="#cb99-274" aria-hidden="true" tabindex="-1"></a>Here we provide for all models reported in the main manuscript more detailed modeling results, including a table with the mean, standard deviation, 95\%-HDI, effective sample size (ESS) and $\hat{R}$ for each estimated parameter (random and fixed), as well as figures showing the MCMC-traces for the main fixed effects parameters (intercept and effect parameter) and posterior predictive distributions of the complete model.</span>
+<span id="cb99-275"><a href="#cb99-275" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-276"><a href="#cb99-276" aria-hidden="true" tabindex="-1"></a><span class="fu">## Hypothesis 1a (OME)    </span></span>
 <span id="cb99-277"><a href="#cb99-277" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-278"><a href="#cb99-278" aria-hidden="true" tabindex="-1"></a><span class="fu">### CO~2~ M0</span></span>
-<span id="cb99-279"><a href="#cb99-279" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-280"><a href="#cb99-280" aria-hidden="true" tabindex="-1"></a><span class="in">```{r h1aM0CO2}</span></span>
-<span id="cb99-281"><a href="#cb99-281" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-height: 5</span></span>
-<span id="cb99-282"><a href="#cb99-282" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-width:  14</span></span>
-<span id="cb99-283"><a href="#cb99-283" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-284"><a href="#cb99-284" aria-hidden="true" tabindex="-1"></a><span class="in"># Load model </span></span>
-<span id="cb99-285"><a href="#cb99-285" aria-hidden="true" tabindex="-1"></a><span class="in">temp &lt;- brm(file="../Results/fit_H1a_CO2_M0.rds")</span></span>
-<span id="cb99-286"><a href="#cb99-286" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-287"><a href="#cb99-287" aria-hidden="true" tabindex="-1"></a><span class="in"># Print Formular</span></span>
-<span id="cb99-288"><a href="#cb99-288" aria-hidden="true" tabindex="-1"></a><span class="in">temp$formula</span></span>
-<span id="cb99-289"><a href="#cb99-289" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-290"><a href="#cb99-290" aria-hidden="true" tabindex="-1"></a><span class="in"># Make model parameter table</span></span>
-<span id="cb99-291"><a href="#cb99-291" aria-hidden="true" tabindex="-1"></a><span class="in">model_parameters(temp, centrality = "mean", dispersion = TRUE, </span></span>
-<span id="cb99-292"><a href="#cb99-292" aria-hidden="true" tabindex="-1"></a><span class="in">                 ci_method = "hdi", effects = "all") %&gt;% </span></span>
-<span id="cb99-293"><a href="#cb99-293" aria-hidden="true" tabindex="-1"></a><span class="in">  kable(digits=2) %&gt;% kable_paper()</span></span>
-<span id="cb99-294"><a href="#cb99-294" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-278"><a href="#cb99-278" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-279"><a href="#cb99-279" aria-hidden="true" tabindex="-1"></a><span class="fu">### CO~2~ M0</span></span>
+<span id="cb99-280"><a href="#cb99-280" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-281"><a href="#cb99-281" aria-hidden="true" tabindex="-1"></a><span class="in">```{r h1aM0CO2}</span></span>
+<span id="cb99-282"><a href="#cb99-282" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-height: 5</span></span>
+<span id="cb99-283"><a href="#cb99-283" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-width:  14</span></span>
+<span id="cb99-284"><a href="#cb99-284" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-285"><a href="#cb99-285" aria-hidden="true" tabindex="-1"></a><span class="in"># Load model </span></span>
+<span id="cb99-286"><a href="#cb99-286" aria-hidden="true" tabindex="-1"></a><span class="in">temp &lt;- brm(file="../Results/fit_H1a_CO2_M0.rds")</span></span>
+<span id="cb99-287"><a href="#cb99-287" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-288"><a href="#cb99-288" aria-hidden="true" tabindex="-1"></a><span class="in"># Print Formular</span></span>
+<span id="cb99-289"><a href="#cb99-289" aria-hidden="true" tabindex="-1"></a><span class="in">temp$formula</span></span>
+<span id="cb99-290"><a href="#cb99-290" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-291"><a href="#cb99-291" aria-hidden="true" tabindex="-1"></a><span class="in"># Make model parameter table</span></span>
+<span id="cb99-292"><a href="#cb99-292" aria-hidden="true" tabindex="-1"></a><span class="in">model_parameters(temp, centrality = "mean", dispersion = TRUE, </span></span>
+<span id="cb99-293"><a href="#cb99-293" aria-hidden="true" tabindex="-1"></a><span class="in">                 ci_method = "hdi", effects = "all") %&gt;% </span></span>
+<span id="cb99-294"><a href="#cb99-294" aria-hidden="true" tabindex="-1"></a><span class="in">  kable(digits=2) %&gt;% kable_paper()</span></span>
 <span id="cb99-295"><a href="#cb99-295" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-296"><a href="#cb99-296" aria-hidden="true" tabindex="-1"></a><span class="in"># Make trace and pp-check plot</span></span>
-<span id="cb99-297"><a href="#cb99-297" aria-hidden="true" tabindex="-1"></a><span class="in">brms_plot(temp)</span></span>
-<span id="cb99-298"><a href="#cb99-298" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb99-299"><a href="#cb99-299" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-300"><a href="#cb99-300" aria-hidden="true" tabindex="-1"></a><span class="fu">### CO~2~ M1</span></span>
-<span id="cb99-301"><a href="#cb99-301" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-302"><a href="#cb99-302" aria-hidden="true" tabindex="-1"></a><span class="in">```{r h1aM1CO2}</span></span>
-<span id="cb99-303"><a href="#cb99-303" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-height: 5</span></span>
-<span id="cb99-304"><a href="#cb99-304" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-width:  14</span></span>
-<span id="cb99-305"><a href="#cb99-305" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-306"><a href="#cb99-306" aria-hidden="true" tabindex="-1"></a><span class="in"># Load model </span></span>
-<span id="cb99-307"><a href="#cb99-307" aria-hidden="true" tabindex="-1"></a><span class="in">temp &lt;- brm(file="../Results/fit_H1a_CO2_M1.rds")</span></span>
-<span id="cb99-308"><a href="#cb99-308" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-309"><a href="#cb99-309" aria-hidden="true" tabindex="-1"></a><span class="in"># Print Formular</span></span>
-<span id="cb99-310"><a href="#cb99-310" aria-hidden="true" tabindex="-1"></a><span class="in">temp$formula</span></span>
-<span id="cb99-311"><a href="#cb99-311" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-312"><a href="#cb99-312" aria-hidden="true" tabindex="-1"></a><span class="in"># Make model parameter table</span></span>
-<span id="cb99-313"><a href="#cb99-313" aria-hidden="true" tabindex="-1"></a><span class="in">model_parameters(temp, centrality = "mean", dispersion = TRUE, </span></span>
-<span id="cb99-314"><a href="#cb99-314" aria-hidden="true" tabindex="-1"></a><span class="in">                 ci_method = "hdi", effects = "all") %&gt;% </span></span>
-<span id="cb99-315"><a href="#cb99-315" aria-hidden="true" tabindex="-1"></a><span class="in">  kable(digits=2) %&gt;% kable_paper()</span></span>
-<span id="cb99-316"><a href="#cb99-316" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-317"><a href="#cb99-317" aria-hidden="true" tabindex="-1"></a><span class="in"># Make trace and pp-check plot</span></span>
-<span id="cb99-318"><a href="#cb99-318" aria-hidden="true" tabindex="-1"></a><span class="in">brms_plot(temp)  + plot_layout(widths = c(2, 1))</span></span>
-<span id="cb99-319"><a href="#cb99-319" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb99-320"><a href="#cb99-320" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-321"><a href="#cb99-321" aria-hidden="true" tabindex="-1"></a><span class="fu">### kcal M0</span></span>
-<span id="cb99-322"><a href="#cb99-322" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-323"><a href="#cb99-323" aria-hidden="true" tabindex="-1"></a><span class="in">```{r h1aM0kcal}</span></span>
-<span id="cb99-324"><a href="#cb99-324" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-height: 5</span></span>
-<span id="cb99-325"><a href="#cb99-325" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-width:  14</span></span>
-<span id="cb99-326"><a href="#cb99-326" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-327"><a href="#cb99-327" aria-hidden="true" tabindex="-1"></a><span class="in"># Load model </span></span>
-<span id="cb99-328"><a href="#cb99-328" aria-hidden="true" tabindex="-1"></a><span class="in">temp &lt;- brm(file="../Results/fit_H1a_kcal_M0.rds")</span></span>
-<span id="cb99-329"><a href="#cb99-329" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-330"><a href="#cb99-330" aria-hidden="true" tabindex="-1"></a><span class="in"># Print Formular</span></span>
-<span id="cb99-331"><a href="#cb99-331" aria-hidden="true" tabindex="-1"></a><span class="in">temp$formula</span></span>
-<span id="cb99-332"><a href="#cb99-332" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-333"><a href="#cb99-333" aria-hidden="true" tabindex="-1"></a><span class="in"># Make model parameter table</span></span>
-<span id="cb99-334"><a href="#cb99-334" aria-hidden="true" tabindex="-1"></a><span class="in">model_parameters(temp, centrality = "mean", dispersion = TRUE, </span></span>
-<span id="cb99-335"><a href="#cb99-335" aria-hidden="true" tabindex="-1"></a><span class="in">                 ci_method = "hdi", effects = "all") %&gt;% </span></span>
-<span id="cb99-336"><a href="#cb99-336" aria-hidden="true" tabindex="-1"></a><span class="in">  kable(digits=2) %&gt;% kable_paper()</span></span>
-<span id="cb99-337"><a href="#cb99-337" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-296"><a href="#cb99-296" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-297"><a href="#cb99-297" aria-hidden="true" tabindex="-1"></a><span class="in"># Make trace and pp-check plot</span></span>
+<span id="cb99-298"><a href="#cb99-298" aria-hidden="true" tabindex="-1"></a><span class="in">brms_plot(temp)</span></span>
+<span id="cb99-299"><a href="#cb99-299" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb99-300"><a href="#cb99-300" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-301"><a href="#cb99-301" aria-hidden="true" tabindex="-1"></a><span class="fu">### CO~2~ M1</span></span>
+<span id="cb99-302"><a href="#cb99-302" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-303"><a href="#cb99-303" aria-hidden="true" tabindex="-1"></a><span class="in">```{r h1aM1CO2}</span></span>
+<span id="cb99-304"><a href="#cb99-304" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-height: 5</span></span>
+<span id="cb99-305"><a href="#cb99-305" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-width:  14</span></span>
+<span id="cb99-306"><a href="#cb99-306" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-307"><a href="#cb99-307" aria-hidden="true" tabindex="-1"></a><span class="in"># Load model </span></span>
+<span id="cb99-308"><a href="#cb99-308" aria-hidden="true" tabindex="-1"></a><span class="in">temp &lt;- brm(file="../Results/fit_H1a_CO2_M1.rds")</span></span>
+<span id="cb99-309"><a href="#cb99-309" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-310"><a href="#cb99-310" aria-hidden="true" tabindex="-1"></a><span class="in"># Print Formular</span></span>
+<span id="cb99-311"><a href="#cb99-311" aria-hidden="true" tabindex="-1"></a><span class="in">temp$formula</span></span>
+<span id="cb99-312"><a href="#cb99-312" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-313"><a href="#cb99-313" aria-hidden="true" tabindex="-1"></a><span class="in"># Make model parameter table</span></span>
+<span id="cb99-314"><a href="#cb99-314" aria-hidden="true" tabindex="-1"></a><span class="in">model_parameters(temp, centrality = "mean", dispersion = TRUE, </span></span>
+<span id="cb99-315"><a href="#cb99-315" aria-hidden="true" tabindex="-1"></a><span class="in">                 ci_method = "hdi", effects = "all") %&gt;% </span></span>
+<span id="cb99-316"><a href="#cb99-316" aria-hidden="true" tabindex="-1"></a><span class="in">  kable(digits=2) %&gt;% kable_paper()</span></span>
+<span id="cb99-317"><a href="#cb99-317" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-318"><a href="#cb99-318" aria-hidden="true" tabindex="-1"></a><span class="in"># Make trace and pp-check plot</span></span>
+<span id="cb99-319"><a href="#cb99-319" aria-hidden="true" tabindex="-1"></a><span class="in">brms_plot(temp)  + plot_layout(widths = c(2, 1))</span></span>
+<span id="cb99-320"><a href="#cb99-320" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb99-321"><a href="#cb99-321" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-322"><a href="#cb99-322" aria-hidden="true" tabindex="-1"></a><span class="fu">### kcal M0</span></span>
+<span id="cb99-323"><a href="#cb99-323" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-324"><a href="#cb99-324" aria-hidden="true" tabindex="-1"></a><span class="in">```{r h1aM0kcal}</span></span>
+<span id="cb99-325"><a href="#cb99-325" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-height: 5</span></span>
+<span id="cb99-326"><a href="#cb99-326" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-width:  14</span></span>
+<span id="cb99-327"><a href="#cb99-327" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-328"><a href="#cb99-328" aria-hidden="true" tabindex="-1"></a><span class="in"># Load model </span></span>
+<span id="cb99-329"><a href="#cb99-329" aria-hidden="true" tabindex="-1"></a><span class="in">temp &lt;- brm(file="../Results/fit_H1a_kcal_M0.rds")</span></span>
+<span id="cb99-330"><a href="#cb99-330" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-331"><a href="#cb99-331" aria-hidden="true" tabindex="-1"></a><span class="in"># Print Formular</span></span>
+<span id="cb99-332"><a href="#cb99-332" aria-hidden="true" tabindex="-1"></a><span class="in">temp$formula</span></span>
+<span id="cb99-333"><a href="#cb99-333" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-334"><a href="#cb99-334" aria-hidden="true" tabindex="-1"></a><span class="in"># Make model parameter table</span></span>
+<span id="cb99-335"><a href="#cb99-335" aria-hidden="true" tabindex="-1"></a><span class="in">model_parameters(temp, centrality = "mean", dispersion = TRUE, </span></span>
+<span id="cb99-336"><a href="#cb99-336" aria-hidden="true" tabindex="-1"></a><span class="in">                 ci_method = "hdi", effects = "all") %&gt;% </span></span>
+<span id="cb99-337"><a href="#cb99-337" aria-hidden="true" tabindex="-1"></a><span class="in">  kable(digits=2) %&gt;% kable_paper()</span></span>
 <span id="cb99-338"><a href="#cb99-338" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-339"><a href="#cb99-339" aria-hidden="true" tabindex="-1"></a><span class="in"># Make trace and pp-check plot</span></span>
-<span id="cb99-340"><a href="#cb99-340" aria-hidden="true" tabindex="-1"></a><span class="in">brms_plot(temp)</span></span>
-<span id="cb99-341"><a href="#cb99-341" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb99-342"><a href="#cb99-342" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-343"><a href="#cb99-343" aria-hidden="true" tabindex="-1"></a><span class="fu">### kcal M1</span></span>
-<span id="cb99-344"><a href="#cb99-344" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-345"><a href="#cb99-345" aria-hidden="true" tabindex="-1"></a><span class="in">```{r h1aM1kcal}</span></span>
-<span id="cb99-346"><a href="#cb99-346" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-height: 5</span></span>
-<span id="cb99-347"><a href="#cb99-347" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-width:  14</span></span>
-<span id="cb99-348"><a href="#cb99-348" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-349"><a href="#cb99-349" aria-hidden="true" tabindex="-1"></a><span class="in"># Load model </span></span>
-<span id="cb99-350"><a href="#cb99-350" aria-hidden="true" tabindex="-1"></a><span class="in">temp &lt;- brm(file="../Results/fit_H1a_kcal_M1.rds")</span></span>
-<span id="cb99-351"><a href="#cb99-351" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-352"><a href="#cb99-352" aria-hidden="true" tabindex="-1"></a><span class="in"># Print Formular</span></span>
-<span id="cb99-353"><a href="#cb99-353" aria-hidden="true" tabindex="-1"></a><span class="in">temp$formula</span></span>
-<span id="cb99-354"><a href="#cb99-354" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-355"><a href="#cb99-355" aria-hidden="true" tabindex="-1"></a><span class="in"># Make model parameter table</span></span>
-<span id="cb99-356"><a href="#cb99-356" aria-hidden="true" tabindex="-1"></a><span class="in">model_parameters(temp, centrality = "mean", dispersion = TRUE, </span></span>
-<span id="cb99-357"><a href="#cb99-357" aria-hidden="true" tabindex="-1"></a><span class="in">                 ci_method = "hdi", effects = "all") %&gt;% </span></span>
-<span id="cb99-358"><a href="#cb99-358" aria-hidden="true" tabindex="-1"></a><span class="in">  kable(digits=2) %&gt;% kable_paper()</span></span>
-<span id="cb99-359"><a href="#cb99-359" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-360"><a href="#cb99-360" aria-hidden="true" tabindex="-1"></a><span class="in"># Make trace and pp-check plot</span></span>
-<span id="cb99-361"><a href="#cb99-361" aria-hidden="true" tabindex="-1"></a><span class="in">brms_plot(temp)  + plot_layout(widths = c(2, 1))</span></span>
-<span id="cb99-362"><a href="#cb99-362" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb99-363"><a href="#cb99-363" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-339"><a href="#cb99-339" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-340"><a href="#cb99-340" aria-hidden="true" tabindex="-1"></a><span class="in"># Make trace and pp-check plot</span></span>
+<span id="cb99-341"><a href="#cb99-341" aria-hidden="true" tabindex="-1"></a><span class="in">brms_plot(temp)</span></span>
+<span id="cb99-342"><a href="#cb99-342" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb99-343"><a href="#cb99-343" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-344"><a href="#cb99-344" aria-hidden="true" tabindex="-1"></a><span class="fu">### kcal M1</span></span>
+<span id="cb99-345"><a href="#cb99-345" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-346"><a href="#cb99-346" aria-hidden="true" tabindex="-1"></a><span class="in">```{r h1aM1kcal}</span></span>
+<span id="cb99-347"><a href="#cb99-347" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-height: 5</span></span>
+<span id="cb99-348"><a href="#cb99-348" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-width:  14</span></span>
+<span id="cb99-349"><a href="#cb99-349" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-350"><a href="#cb99-350" aria-hidden="true" tabindex="-1"></a><span class="in"># Load model </span></span>
+<span id="cb99-351"><a href="#cb99-351" aria-hidden="true" tabindex="-1"></a><span class="in">temp &lt;- brm(file="../Results/fit_H1a_kcal_M1.rds")</span></span>
+<span id="cb99-352"><a href="#cb99-352" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-353"><a href="#cb99-353" aria-hidden="true" tabindex="-1"></a><span class="in"># Print Formular</span></span>
+<span id="cb99-354"><a href="#cb99-354" aria-hidden="true" tabindex="-1"></a><span class="in">temp$formula</span></span>
+<span id="cb99-355"><a href="#cb99-355" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-356"><a href="#cb99-356" aria-hidden="true" tabindex="-1"></a><span class="in"># Make model parameter table</span></span>
+<span id="cb99-357"><a href="#cb99-357" aria-hidden="true" tabindex="-1"></a><span class="in">model_parameters(temp, centrality = "mean", dispersion = TRUE, </span></span>
+<span id="cb99-358"><a href="#cb99-358" aria-hidden="true" tabindex="-1"></a><span class="in">                 ci_method = "hdi", effects = "all") %&gt;% </span></span>
+<span id="cb99-359"><a href="#cb99-359" aria-hidden="true" tabindex="-1"></a><span class="in">  kable(digits=2) %&gt;% kable_paper()</span></span>
+<span id="cb99-360"><a href="#cb99-360" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-361"><a href="#cb99-361" aria-hidden="true" tabindex="-1"></a><span class="in"># Make trace and pp-check plot</span></span>
+<span id="cb99-362"><a href="#cb99-362" aria-hidden="true" tabindex="-1"></a><span class="in">brms_plot(temp)  + plot_layout(widths = c(2, 1))</span></span>
+<span id="cb99-363"><a href="#cb99-363" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb99-364"><a href="#cb99-364" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-365"><a href="#cb99-365" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
-<span id="cb99-366"><a href="#cb99-366" aria-hidden="true" tabindex="-1"></a><span class="fu">## Hypothesis 1b ($\rho$) </span></span>
-<span id="cb99-367"><a href="#cb99-367" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-368"><a href="#cb99-368" aria-hidden="true" tabindex="-1"></a><span class="fu">### CO~2~ M0</span></span>
-<span id="cb99-369"><a href="#cb99-369" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-370"><a href="#cb99-370" aria-hidden="true" tabindex="-1"></a><span class="in">```{r h1bM0CO2}</span></span>
-<span id="cb99-371"><a href="#cb99-371" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-height: 5</span></span>
-<span id="cb99-372"><a href="#cb99-372" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-width:  14</span></span>
-<span id="cb99-373"><a href="#cb99-373" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-374"><a href="#cb99-374" aria-hidden="true" tabindex="-1"></a><span class="in"># Load model </span></span>
-<span id="cb99-375"><a href="#cb99-375" aria-hidden="true" tabindex="-1"></a><span class="in">temp &lt;- brm(file="../Results/fit_H1b_CO2_M0.rds")</span></span>
-<span id="cb99-376"><a href="#cb99-376" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-377"><a href="#cb99-377" aria-hidden="true" tabindex="-1"></a><span class="in"># Print Formular</span></span>
-<span id="cb99-378"><a href="#cb99-378" aria-hidden="true" tabindex="-1"></a><span class="in">temp$formula</span></span>
-<span id="cb99-379"><a href="#cb99-379" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-380"><a href="#cb99-380" aria-hidden="true" tabindex="-1"></a><span class="in"># Make model parameter table</span></span>
-<span id="cb99-381"><a href="#cb99-381" aria-hidden="true" tabindex="-1"></a><span class="in">model_parameters(temp, centrality = "mean", dispersion = TRUE, </span></span>
-<span id="cb99-382"><a href="#cb99-382" aria-hidden="true" tabindex="-1"></a><span class="in">                 ci_method = "hdi", effects = "all") %&gt;% </span></span>
-<span id="cb99-383"><a href="#cb99-383" aria-hidden="true" tabindex="-1"></a><span class="in">  kable(digits=2) %&gt;% kable_paper()</span></span>
-<span id="cb99-384"><a href="#cb99-384" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-365"><a href="#cb99-365" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-366"><a href="#cb99-366" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
+<span id="cb99-367"><a href="#cb99-367" aria-hidden="true" tabindex="-1"></a><span class="fu">## Hypothesis 1b ($\rho$) </span></span>
+<span id="cb99-368"><a href="#cb99-368" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-369"><a href="#cb99-369" aria-hidden="true" tabindex="-1"></a><span class="fu">### CO~2~ M0</span></span>
+<span id="cb99-370"><a href="#cb99-370" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-371"><a href="#cb99-371" aria-hidden="true" tabindex="-1"></a><span class="in">```{r h1bM0CO2}</span></span>
+<span id="cb99-372"><a href="#cb99-372" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-height: 5</span></span>
+<span id="cb99-373"><a href="#cb99-373" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-width:  14</span></span>
+<span id="cb99-374"><a href="#cb99-374" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-375"><a href="#cb99-375" aria-hidden="true" tabindex="-1"></a><span class="in"># Load model </span></span>
+<span id="cb99-376"><a href="#cb99-376" aria-hidden="true" tabindex="-1"></a><span class="in">temp &lt;- brm(file="../Results/fit_H1b_CO2_M0.rds")</span></span>
+<span id="cb99-377"><a href="#cb99-377" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-378"><a href="#cb99-378" aria-hidden="true" tabindex="-1"></a><span class="in"># Print Formular</span></span>
+<span id="cb99-379"><a href="#cb99-379" aria-hidden="true" tabindex="-1"></a><span class="in">temp$formula</span></span>
+<span id="cb99-380"><a href="#cb99-380" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-381"><a href="#cb99-381" aria-hidden="true" tabindex="-1"></a><span class="in"># Make model parameter table</span></span>
+<span id="cb99-382"><a href="#cb99-382" aria-hidden="true" tabindex="-1"></a><span class="in">model_parameters(temp, centrality = "mean", dispersion = TRUE, </span></span>
+<span id="cb99-383"><a href="#cb99-383" aria-hidden="true" tabindex="-1"></a><span class="in">                 ci_method = "hdi", effects = "all") %&gt;% </span></span>
+<span id="cb99-384"><a href="#cb99-384" aria-hidden="true" tabindex="-1"></a><span class="in">  kable(digits=2) %&gt;% kable_paper()</span></span>
 <span id="cb99-385"><a href="#cb99-385" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-386"><a href="#cb99-386" aria-hidden="true" tabindex="-1"></a><span class="in"># Make trace and pp-check plot</span></span>
-<span id="cb99-387"><a href="#cb99-387" aria-hidden="true" tabindex="-1"></a><span class="in">brms_plot(temp,lim=c(-1,3))</span></span>
-<span id="cb99-388"><a href="#cb99-388" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb99-389"><a href="#cb99-389" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-390"><a href="#cb99-390" aria-hidden="true" tabindex="-1"></a><span class="fu">### CO~2~ M1</span></span>
-<span id="cb99-391"><a href="#cb99-391" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-392"><a href="#cb99-392" aria-hidden="true" tabindex="-1"></a><span class="in">```{r h1bM1CO2}</span></span>
-<span id="cb99-393"><a href="#cb99-393" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-height: 5</span></span>
-<span id="cb99-394"><a href="#cb99-394" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-width:  14</span></span>
-<span id="cb99-395"><a href="#cb99-395" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-396"><a href="#cb99-396" aria-hidden="true" tabindex="-1"></a><span class="in"># Load model </span></span>
-<span id="cb99-397"><a href="#cb99-397" aria-hidden="true" tabindex="-1"></a><span class="in">temp &lt;- brm(file="../Results/fit_H1b_CO2_M1.rds")</span></span>
-<span id="cb99-398"><a href="#cb99-398" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-399"><a href="#cb99-399" aria-hidden="true" tabindex="-1"></a><span class="in"># Print Formular</span></span>
-<span id="cb99-400"><a href="#cb99-400" aria-hidden="true" tabindex="-1"></a><span class="in">temp$formula</span></span>
-<span id="cb99-401"><a href="#cb99-401" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-402"><a href="#cb99-402" aria-hidden="true" tabindex="-1"></a><span class="in"># Make model parameter table</span></span>
-<span id="cb99-403"><a href="#cb99-403" aria-hidden="true" tabindex="-1"></a><span class="in">model_parameters(temp, centrality = "mean", dispersion = TRUE, </span></span>
-<span id="cb99-404"><a href="#cb99-404" aria-hidden="true" tabindex="-1"></a><span class="in">                 ci_method = "hdi", effects = "all") %&gt;% </span></span>
-<span id="cb99-405"><a href="#cb99-405" aria-hidden="true" tabindex="-1"></a><span class="in">  kable(digits=2) %&gt;% kable_paper()</span></span>
-<span id="cb99-406"><a href="#cb99-406" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-407"><a href="#cb99-407" aria-hidden="true" tabindex="-1"></a><span class="in"># Make trace and pp-check plot</span></span>
-<span id="cb99-408"><a href="#cb99-408" aria-hidden="true" tabindex="-1"></a><span class="in">brms_plot(temp,lim=c(-1,3))  + plot_layout(widths = c(2, 1))</span></span>
-<span id="cb99-409"><a href="#cb99-409" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb99-410"><a href="#cb99-410" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-411"><a href="#cb99-411" aria-hidden="true" tabindex="-1"></a><span class="fu">### kcal M0</span></span>
-<span id="cb99-412"><a href="#cb99-412" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-413"><a href="#cb99-413" aria-hidden="true" tabindex="-1"></a><span class="in">```{r h1bM0kcal}</span></span>
-<span id="cb99-414"><a href="#cb99-414" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-height: 5</span></span>
-<span id="cb99-415"><a href="#cb99-415" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-width:  14</span></span>
-<span id="cb99-416"><a href="#cb99-416" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-417"><a href="#cb99-417" aria-hidden="true" tabindex="-1"></a><span class="in"># Load model </span></span>
-<span id="cb99-418"><a href="#cb99-418" aria-hidden="true" tabindex="-1"></a><span class="in">temp &lt;- brm(file="../Results/fit_H1b_kcal_M0.rds")</span></span>
-<span id="cb99-419"><a href="#cb99-419" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-420"><a href="#cb99-420" aria-hidden="true" tabindex="-1"></a><span class="in"># Print Formular</span></span>
-<span id="cb99-421"><a href="#cb99-421" aria-hidden="true" tabindex="-1"></a><span class="in">temp$formula</span></span>
-<span id="cb99-422"><a href="#cb99-422" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-423"><a href="#cb99-423" aria-hidden="true" tabindex="-1"></a><span class="in"># Make model parameter table</span></span>
-<span id="cb99-424"><a href="#cb99-424" aria-hidden="true" tabindex="-1"></a><span class="in">model_parameters(temp, centrality = "mean", dispersion = TRUE, </span></span>
-<span id="cb99-425"><a href="#cb99-425" aria-hidden="true" tabindex="-1"></a><span class="in">                 ci_method = "hdi", effects = "all") %&gt;% </span></span>
-<span id="cb99-426"><a href="#cb99-426" aria-hidden="true" tabindex="-1"></a><span class="in">  kable(digits=2) %&gt;% kable_paper()</span></span>
-<span id="cb99-427"><a href="#cb99-427" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-386"><a href="#cb99-386" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-387"><a href="#cb99-387" aria-hidden="true" tabindex="-1"></a><span class="in"># Make trace and pp-check plot</span></span>
+<span id="cb99-388"><a href="#cb99-388" aria-hidden="true" tabindex="-1"></a><span class="in">brms_plot(temp,lim=c(-1,3))</span></span>
+<span id="cb99-389"><a href="#cb99-389" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb99-390"><a href="#cb99-390" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-391"><a href="#cb99-391" aria-hidden="true" tabindex="-1"></a><span class="fu">### CO~2~ M1</span></span>
+<span id="cb99-392"><a href="#cb99-392" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-393"><a href="#cb99-393" aria-hidden="true" tabindex="-1"></a><span class="in">```{r h1bM1CO2}</span></span>
+<span id="cb99-394"><a href="#cb99-394" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-height: 5</span></span>
+<span id="cb99-395"><a href="#cb99-395" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-width:  14</span></span>
+<span id="cb99-396"><a href="#cb99-396" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-397"><a href="#cb99-397" aria-hidden="true" tabindex="-1"></a><span class="in"># Load model </span></span>
+<span id="cb99-398"><a href="#cb99-398" aria-hidden="true" tabindex="-1"></a><span class="in">temp &lt;- brm(file="../Results/fit_H1b_CO2_M1.rds")</span></span>
+<span id="cb99-399"><a href="#cb99-399" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-400"><a href="#cb99-400" aria-hidden="true" tabindex="-1"></a><span class="in"># Print Formular</span></span>
+<span id="cb99-401"><a href="#cb99-401" aria-hidden="true" tabindex="-1"></a><span class="in">temp$formula</span></span>
+<span id="cb99-402"><a href="#cb99-402" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-403"><a href="#cb99-403" aria-hidden="true" tabindex="-1"></a><span class="in"># Make model parameter table</span></span>
+<span id="cb99-404"><a href="#cb99-404" aria-hidden="true" tabindex="-1"></a><span class="in">model_parameters(temp, centrality = "mean", dispersion = TRUE, </span></span>
+<span id="cb99-405"><a href="#cb99-405" aria-hidden="true" tabindex="-1"></a><span class="in">                 ci_method = "hdi", effects = "all") %&gt;% </span></span>
+<span id="cb99-406"><a href="#cb99-406" aria-hidden="true" tabindex="-1"></a><span class="in">  kable(digits=2) %&gt;% kable_paper()</span></span>
+<span id="cb99-407"><a href="#cb99-407" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-408"><a href="#cb99-408" aria-hidden="true" tabindex="-1"></a><span class="in"># Make trace and pp-check plot</span></span>
+<span id="cb99-409"><a href="#cb99-409" aria-hidden="true" tabindex="-1"></a><span class="in">brms_plot(temp,lim=c(-1,3))  + plot_layout(widths = c(2, 1))</span></span>
+<span id="cb99-410"><a href="#cb99-410" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb99-411"><a href="#cb99-411" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-412"><a href="#cb99-412" aria-hidden="true" tabindex="-1"></a><span class="fu">### kcal M0</span></span>
+<span id="cb99-413"><a href="#cb99-413" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-414"><a href="#cb99-414" aria-hidden="true" tabindex="-1"></a><span class="in">```{r h1bM0kcal}</span></span>
+<span id="cb99-415"><a href="#cb99-415" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-height: 5</span></span>
+<span id="cb99-416"><a href="#cb99-416" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-width:  14</span></span>
+<span id="cb99-417"><a href="#cb99-417" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-418"><a href="#cb99-418" aria-hidden="true" tabindex="-1"></a><span class="in"># Load model </span></span>
+<span id="cb99-419"><a href="#cb99-419" aria-hidden="true" tabindex="-1"></a><span class="in">temp &lt;- brm(file="../Results/fit_H1b_kcal_M0.rds")</span></span>
+<span id="cb99-420"><a href="#cb99-420" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-421"><a href="#cb99-421" aria-hidden="true" tabindex="-1"></a><span class="in"># Print Formular</span></span>
+<span id="cb99-422"><a href="#cb99-422" aria-hidden="true" tabindex="-1"></a><span class="in">temp$formula</span></span>
+<span id="cb99-423"><a href="#cb99-423" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-424"><a href="#cb99-424" aria-hidden="true" tabindex="-1"></a><span class="in"># Make model parameter table</span></span>
+<span id="cb99-425"><a href="#cb99-425" aria-hidden="true" tabindex="-1"></a><span class="in">model_parameters(temp, centrality = "mean", dispersion = TRUE, </span></span>
+<span id="cb99-426"><a href="#cb99-426" aria-hidden="true" tabindex="-1"></a><span class="in">                 ci_method = "hdi", effects = "all") %&gt;% </span></span>
+<span id="cb99-427"><a href="#cb99-427" aria-hidden="true" tabindex="-1"></a><span class="in">  kable(digits=2) %&gt;% kable_paper()</span></span>
 <span id="cb99-428"><a href="#cb99-428" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-429"><a href="#cb99-429" aria-hidden="true" tabindex="-1"></a><span class="in"># Make trace and pp-check plot</span></span>
-<span id="cb99-430"><a href="#cb99-430" aria-hidden="true" tabindex="-1"></a><span class="in">brms_plot(temp,lim=c(-1,3))</span></span>
-<span id="cb99-431"><a href="#cb99-431" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb99-432"><a href="#cb99-432" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-433"><a href="#cb99-433" aria-hidden="true" tabindex="-1"></a><span class="fu">### kcal M1</span></span>
-<span id="cb99-434"><a href="#cb99-434" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-435"><a href="#cb99-435" aria-hidden="true" tabindex="-1"></a><span class="in">```{r h1bM1kcal}</span></span>
-<span id="cb99-436"><a href="#cb99-436" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-height: 5</span></span>
-<span id="cb99-437"><a href="#cb99-437" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-width:  14</span></span>
-<span id="cb99-438"><a href="#cb99-438" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-439"><a href="#cb99-439" aria-hidden="true" tabindex="-1"></a><span class="in"># Load model </span></span>
-<span id="cb99-440"><a href="#cb99-440" aria-hidden="true" tabindex="-1"></a><span class="in">temp &lt;- brm(file="../Results/fit_H1b_kcal_M1.rds")</span></span>
-<span id="cb99-441"><a href="#cb99-441" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-442"><a href="#cb99-442" aria-hidden="true" tabindex="-1"></a><span class="in"># Print Formular</span></span>
-<span id="cb99-443"><a href="#cb99-443" aria-hidden="true" tabindex="-1"></a><span class="in">temp$formula</span></span>
-<span id="cb99-444"><a href="#cb99-444" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-445"><a href="#cb99-445" aria-hidden="true" tabindex="-1"></a><span class="in"># Make model parameter table</span></span>
-<span id="cb99-446"><a href="#cb99-446" aria-hidden="true" tabindex="-1"></a><span class="in">model_parameters(temp, centrality = "mean", dispersion = TRUE, </span></span>
-<span id="cb99-447"><a href="#cb99-447" aria-hidden="true" tabindex="-1"></a><span class="in">                 ci_method = "hdi", effects = "all") %&gt;% </span></span>
-<span id="cb99-448"><a href="#cb99-448" aria-hidden="true" tabindex="-1"></a><span class="in">  kable(digits=2) %&gt;% kable_paper()</span></span>
-<span id="cb99-449"><a href="#cb99-449" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-450"><a href="#cb99-450" aria-hidden="true" tabindex="-1"></a><span class="in"># Make trace and pp-check plot</span></span>
-<span id="cb99-451"><a href="#cb99-451" aria-hidden="true" tabindex="-1"></a><span class="in">brms_plot(temp,lim=c(-1,3))  + plot_layout(widths = c(2, 1))</span></span>
-<span id="cb99-452"><a href="#cb99-452" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb99-453"><a href="#cb99-453" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-429"><a href="#cb99-429" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-430"><a href="#cb99-430" aria-hidden="true" tabindex="-1"></a><span class="in"># Make trace and pp-check plot</span></span>
+<span id="cb99-431"><a href="#cb99-431" aria-hidden="true" tabindex="-1"></a><span class="in">brms_plot(temp,lim=c(-1,3))</span></span>
+<span id="cb99-432"><a href="#cb99-432" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb99-433"><a href="#cb99-433" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-434"><a href="#cb99-434" aria-hidden="true" tabindex="-1"></a><span class="fu">### kcal M1</span></span>
+<span id="cb99-435"><a href="#cb99-435" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-436"><a href="#cb99-436" aria-hidden="true" tabindex="-1"></a><span class="in">```{r h1bM1kcal}</span></span>
+<span id="cb99-437"><a href="#cb99-437" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-height: 5</span></span>
+<span id="cb99-438"><a href="#cb99-438" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-width:  14</span></span>
+<span id="cb99-439"><a href="#cb99-439" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-440"><a href="#cb99-440" aria-hidden="true" tabindex="-1"></a><span class="in"># Load model </span></span>
+<span id="cb99-441"><a href="#cb99-441" aria-hidden="true" tabindex="-1"></a><span class="in">temp &lt;- brm(file="../Results/fit_H1b_kcal_M1.rds")</span></span>
+<span id="cb99-442"><a href="#cb99-442" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-443"><a href="#cb99-443" aria-hidden="true" tabindex="-1"></a><span class="in"># Print Formular</span></span>
+<span id="cb99-444"><a href="#cb99-444" aria-hidden="true" tabindex="-1"></a><span class="in">temp$formula</span></span>
+<span id="cb99-445"><a href="#cb99-445" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-446"><a href="#cb99-446" aria-hidden="true" tabindex="-1"></a><span class="in"># Make model parameter table</span></span>
+<span id="cb99-447"><a href="#cb99-447" aria-hidden="true" tabindex="-1"></a><span class="in">model_parameters(temp, centrality = "mean", dispersion = TRUE, </span></span>
+<span id="cb99-448"><a href="#cb99-448" aria-hidden="true" tabindex="-1"></a><span class="in">                 ci_method = "hdi", effects = "all") %&gt;% </span></span>
+<span id="cb99-449"><a href="#cb99-449" aria-hidden="true" tabindex="-1"></a><span class="in">  kable(digits=2) %&gt;% kable_paper()</span></span>
+<span id="cb99-450"><a href="#cb99-450" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-451"><a href="#cb99-451" aria-hidden="true" tabindex="-1"></a><span class="in"># Make trace and pp-check plot</span></span>
+<span id="cb99-452"><a href="#cb99-452" aria-hidden="true" tabindex="-1"></a><span class="in">brms_plot(temp,lim=c(-1,3))  + plot_layout(widths = c(2, 1))</span></span>
+<span id="cb99-453"><a href="#cb99-453" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb99-454"><a href="#cb99-454" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb99-455"><a href="#cb99-455" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb99-456"><a href="#cb99-456" aria-hidden="true" tabindex="-1"></a></span>
@@ -4874,194 +4885,194 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb99-459"><a href="#cb99-459" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb99-460"><a href="#cb99-460" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb99-461"><a href="#cb99-461" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-462"><a href="#cb99-462" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
+<span id="cb99-462"><a href="#cb99-462" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb99-463"><a href="#cb99-463" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
 <span id="cb99-464"><a href="#cb99-464" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
 <span id="cb99-465"><a href="#cb99-465" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
 <span id="cb99-466"><a href="#cb99-466" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
-<span id="cb99-467"><a href="#cb99-467" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-467"><a href="#cb99-467" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
 <span id="cb99-468"><a href="#cb99-468" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb99-469"><a href="#cb99-469" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-470"><a href="#cb99-470" aria-hidden="true" tabindex="-1"></a><span class="fu">## Hypothesis 2a (OME)    </span></span>
-<span id="cb99-471"><a href="#cb99-471" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-470"><a href="#cb99-470" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-471"><a href="#cb99-471" aria-hidden="true" tabindex="-1"></a><span class="fu">## Hypothesis 2a (OME)    </span></span>
 <span id="cb99-472"><a href="#cb99-472" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-473"><a href="#cb99-473" aria-hidden="true" tabindex="-1"></a><span class="fu">### CO~2~ M0</span></span>
-<span id="cb99-474"><a href="#cb99-474" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-475"><a href="#cb99-475" aria-hidden="true" tabindex="-1"></a><span class="in">```{r h2aM0CO2}</span></span>
-<span id="cb99-476"><a href="#cb99-476" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-height: 5</span></span>
-<span id="cb99-477"><a href="#cb99-477" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-width:  14</span></span>
-<span id="cb99-478"><a href="#cb99-478" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-479"><a href="#cb99-479" aria-hidden="true" tabindex="-1"></a><span class="in"># Load model </span></span>
-<span id="cb99-480"><a href="#cb99-480" aria-hidden="true" tabindex="-1"></a><span class="in">temp &lt;- brm(file="../Results/fit_H2a_CO2_M0.rds")</span></span>
-<span id="cb99-481"><a href="#cb99-481" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-482"><a href="#cb99-482" aria-hidden="true" tabindex="-1"></a><span class="in"># Print Formular</span></span>
-<span id="cb99-483"><a href="#cb99-483" aria-hidden="true" tabindex="-1"></a><span class="in">temp$formula</span></span>
-<span id="cb99-484"><a href="#cb99-484" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-485"><a href="#cb99-485" aria-hidden="true" tabindex="-1"></a><span class="in"># Make model parameter table</span></span>
-<span id="cb99-486"><a href="#cb99-486" aria-hidden="true" tabindex="-1"></a><span class="in">model_parameters(temp, centrality = "mean", dispersion = TRUE, </span></span>
-<span id="cb99-487"><a href="#cb99-487" aria-hidden="true" tabindex="-1"></a><span class="in">                 ci_method = "hdi", effects = "all") %&gt;% </span></span>
-<span id="cb99-488"><a href="#cb99-488" aria-hidden="true" tabindex="-1"></a><span class="in">  kable(digits=2) %&gt;% kable_paper()</span></span>
-<span id="cb99-489"><a href="#cb99-489" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-473"><a href="#cb99-473" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-474"><a href="#cb99-474" aria-hidden="true" tabindex="-1"></a><span class="fu">### CO~2~ M0</span></span>
+<span id="cb99-475"><a href="#cb99-475" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-476"><a href="#cb99-476" aria-hidden="true" tabindex="-1"></a><span class="in">```{r h2aM0CO2}</span></span>
+<span id="cb99-477"><a href="#cb99-477" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-height: 5</span></span>
+<span id="cb99-478"><a href="#cb99-478" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-width:  14</span></span>
+<span id="cb99-479"><a href="#cb99-479" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-480"><a href="#cb99-480" aria-hidden="true" tabindex="-1"></a><span class="in"># Load model </span></span>
+<span id="cb99-481"><a href="#cb99-481" aria-hidden="true" tabindex="-1"></a><span class="in">temp &lt;- brm(file="../Results/fit_H2a_CO2_M0.rds")</span></span>
+<span id="cb99-482"><a href="#cb99-482" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-483"><a href="#cb99-483" aria-hidden="true" tabindex="-1"></a><span class="in"># Print Formular</span></span>
+<span id="cb99-484"><a href="#cb99-484" aria-hidden="true" tabindex="-1"></a><span class="in">temp$formula</span></span>
+<span id="cb99-485"><a href="#cb99-485" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-486"><a href="#cb99-486" aria-hidden="true" tabindex="-1"></a><span class="in"># Make model parameter table</span></span>
+<span id="cb99-487"><a href="#cb99-487" aria-hidden="true" tabindex="-1"></a><span class="in">model_parameters(temp, centrality = "mean", dispersion = TRUE, </span></span>
+<span id="cb99-488"><a href="#cb99-488" aria-hidden="true" tabindex="-1"></a><span class="in">                 ci_method = "hdi", effects = "all") %&gt;% </span></span>
+<span id="cb99-489"><a href="#cb99-489" aria-hidden="true" tabindex="-1"></a><span class="in">  kable(digits=2) %&gt;% kable_paper()</span></span>
 <span id="cb99-490"><a href="#cb99-490" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-491"><a href="#cb99-491" aria-hidden="true" tabindex="-1"></a><span class="in"># Make trace and pp-check plot</span></span>
-<span id="cb99-492"><a href="#cb99-492" aria-hidden="true" tabindex="-1"></a><span class="in">brms_plot(temp)</span></span>
-<span id="cb99-493"><a href="#cb99-493" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb99-494"><a href="#cb99-494" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-495"><a href="#cb99-495" aria-hidden="true" tabindex="-1"></a><span class="fu">### CO~2~ M1</span></span>
-<span id="cb99-496"><a href="#cb99-496" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-497"><a href="#cb99-497" aria-hidden="true" tabindex="-1"></a><span class="in">```{r h2aM1CO2}</span></span>
-<span id="cb99-498"><a href="#cb99-498" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-height: 5</span></span>
-<span id="cb99-499"><a href="#cb99-499" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-width:  14</span></span>
-<span id="cb99-500"><a href="#cb99-500" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-501"><a href="#cb99-501" aria-hidden="true" tabindex="-1"></a><span class="in"># Load model </span></span>
-<span id="cb99-502"><a href="#cb99-502" aria-hidden="true" tabindex="-1"></a><span class="in">temp &lt;- brm(file="../Results/fit_H2a_CO2_M1.rds")</span></span>
-<span id="cb99-503"><a href="#cb99-503" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-504"><a href="#cb99-504" aria-hidden="true" tabindex="-1"></a><span class="in"># Print Formular</span></span>
-<span id="cb99-505"><a href="#cb99-505" aria-hidden="true" tabindex="-1"></a><span class="in">temp$formula</span></span>
-<span id="cb99-506"><a href="#cb99-506" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-507"><a href="#cb99-507" aria-hidden="true" tabindex="-1"></a><span class="in"># Make model parameter table</span></span>
-<span id="cb99-508"><a href="#cb99-508" aria-hidden="true" tabindex="-1"></a><span class="in">model_parameters(temp, centrality = "mean", dispersion = TRUE, </span></span>
-<span id="cb99-509"><a href="#cb99-509" aria-hidden="true" tabindex="-1"></a><span class="in">                 ci_method = "hdi", effects = "all") %&gt;% </span></span>
-<span id="cb99-510"><a href="#cb99-510" aria-hidden="true" tabindex="-1"></a><span class="in">  kable(digits=2) %&gt;% kable_paper()</span></span>
-<span id="cb99-511"><a href="#cb99-511" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-512"><a href="#cb99-512" aria-hidden="true" tabindex="-1"></a><span class="in"># Make trace and pp-check plot</span></span>
-<span id="cb99-513"><a href="#cb99-513" aria-hidden="true" tabindex="-1"></a><span class="in">brms_plot(temp)  + plot_layout(widths = c(2, 1))</span></span>
-<span id="cb99-514"><a href="#cb99-514" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb99-515"><a href="#cb99-515" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-516"><a href="#cb99-516" aria-hidden="true" tabindex="-1"></a><span class="fu">### kcal M0</span></span>
-<span id="cb99-517"><a href="#cb99-517" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-518"><a href="#cb99-518" aria-hidden="true" tabindex="-1"></a><span class="in">```{r h2aM0kcal}</span></span>
-<span id="cb99-519"><a href="#cb99-519" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-height: 5</span></span>
-<span id="cb99-520"><a href="#cb99-520" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-width:  14</span></span>
-<span id="cb99-521"><a href="#cb99-521" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-522"><a href="#cb99-522" aria-hidden="true" tabindex="-1"></a><span class="in"># Load model </span></span>
-<span id="cb99-523"><a href="#cb99-523" aria-hidden="true" tabindex="-1"></a><span class="in">temp &lt;- brm(file="../Results/fit_H2a_kcal_M0.rds")</span></span>
-<span id="cb99-524"><a href="#cb99-524" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-525"><a href="#cb99-525" aria-hidden="true" tabindex="-1"></a><span class="in"># Print Formular</span></span>
-<span id="cb99-526"><a href="#cb99-526" aria-hidden="true" tabindex="-1"></a><span class="in">temp$formula</span></span>
-<span id="cb99-527"><a href="#cb99-527" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-528"><a href="#cb99-528" aria-hidden="true" tabindex="-1"></a><span class="in"># Make model parameter table</span></span>
-<span id="cb99-529"><a href="#cb99-529" aria-hidden="true" tabindex="-1"></a><span class="in">model_parameters(temp, centrality = "mean", dispersion = TRUE, </span></span>
-<span id="cb99-530"><a href="#cb99-530" aria-hidden="true" tabindex="-1"></a><span class="in">                 ci_method = "hdi", effects = "all") %&gt;% </span></span>
-<span id="cb99-531"><a href="#cb99-531" aria-hidden="true" tabindex="-1"></a><span class="in">  kable(digits=2) %&gt;% kable_paper()</span></span>
-<span id="cb99-532"><a href="#cb99-532" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-491"><a href="#cb99-491" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-492"><a href="#cb99-492" aria-hidden="true" tabindex="-1"></a><span class="in"># Make trace and pp-check plot</span></span>
+<span id="cb99-493"><a href="#cb99-493" aria-hidden="true" tabindex="-1"></a><span class="in">brms_plot(temp)</span></span>
+<span id="cb99-494"><a href="#cb99-494" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb99-495"><a href="#cb99-495" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-496"><a href="#cb99-496" aria-hidden="true" tabindex="-1"></a><span class="fu">### CO~2~ M1</span></span>
+<span id="cb99-497"><a href="#cb99-497" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-498"><a href="#cb99-498" aria-hidden="true" tabindex="-1"></a><span class="in">```{r h2aM1CO2}</span></span>
+<span id="cb99-499"><a href="#cb99-499" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-height: 5</span></span>
+<span id="cb99-500"><a href="#cb99-500" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-width:  14</span></span>
+<span id="cb99-501"><a href="#cb99-501" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-502"><a href="#cb99-502" aria-hidden="true" tabindex="-1"></a><span class="in"># Load model </span></span>
+<span id="cb99-503"><a href="#cb99-503" aria-hidden="true" tabindex="-1"></a><span class="in">temp &lt;- brm(file="../Results/fit_H2a_CO2_M1.rds")</span></span>
+<span id="cb99-504"><a href="#cb99-504" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-505"><a href="#cb99-505" aria-hidden="true" tabindex="-1"></a><span class="in"># Print Formular</span></span>
+<span id="cb99-506"><a href="#cb99-506" aria-hidden="true" tabindex="-1"></a><span class="in">temp$formula</span></span>
+<span id="cb99-507"><a href="#cb99-507" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-508"><a href="#cb99-508" aria-hidden="true" tabindex="-1"></a><span class="in"># Make model parameter table</span></span>
+<span id="cb99-509"><a href="#cb99-509" aria-hidden="true" tabindex="-1"></a><span class="in">model_parameters(temp, centrality = "mean", dispersion = TRUE, </span></span>
+<span id="cb99-510"><a href="#cb99-510" aria-hidden="true" tabindex="-1"></a><span class="in">                 ci_method = "hdi", effects = "all") %&gt;% </span></span>
+<span id="cb99-511"><a href="#cb99-511" aria-hidden="true" tabindex="-1"></a><span class="in">  kable(digits=2) %&gt;% kable_paper()</span></span>
+<span id="cb99-512"><a href="#cb99-512" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-513"><a href="#cb99-513" aria-hidden="true" tabindex="-1"></a><span class="in"># Make trace and pp-check plot</span></span>
+<span id="cb99-514"><a href="#cb99-514" aria-hidden="true" tabindex="-1"></a><span class="in">brms_plot(temp)  + plot_layout(widths = c(2, 1))</span></span>
+<span id="cb99-515"><a href="#cb99-515" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb99-516"><a href="#cb99-516" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-517"><a href="#cb99-517" aria-hidden="true" tabindex="-1"></a><span class="fu">### kcal M0</span></span>
+<span id="cb99-518"><a href="#cb99-518" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-519"><a href="#cb99-519" aria-hidden="true" tabindex="-1"></a><span class="in">```{r h2aM0kcal}</span></span>
+<span id="cb99-520"><a href="#cb99-520" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-height: 5</span></span>
+<span id="cb99-521"><a href="#cb99-521" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-width:  14</span></span>
+<span id="cb99-522"><a href="#cb99-522" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-523"><a href="#cb99-523" aria-hidden="true" tabindex="-1"></a><span class="in"># Load model </span></span>
+<span id="cb99-524"><a href="#cb99-524" aria-hidden="true" tabindex="-1"></a><span class="in">temp &lt;- brm(file="../Results/fit_H2a_kcal_M0.rds")</span></span>
+<span id="cb99-525"><a href="#cb99-525" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-526"><a href="#cb99-526" aria-hidden="true" tabindex="-1"></a><span class="in"># Print Formular</span></span>
+<span id="cb99-527"><a href="#cb99-527" aria-hidden="true" tabindex="-1"></a><span class="in">temp$formula</span></span>
+<span id="cb99-528"><a href="#cb99-528" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-529"><a href="#cb99-529" aria-hidden="true" tabindex="-1"></a><span class="in"># Make model parameter table</span></span>
+<span id="cb99-530"><a href="#cb99-530" aria-hidden="true" tabindex="-1"></a><span class="in">model_parameters(temp, centrality = "mean", dispersion = TRUE, </span></span>
+<span id="cb99-531"><a href="#cb99-531" aria-hidden="true" tabindex="-1"></a><span class="in">                 ci_method = "hdi", effects = "all") %&gt;% </span></span>
+<span id="cb99-532"><a href="#cb99-532" aria-hidden="true" tabindex="-1"></a><span class="in">  kable(digits=2) %&gt;% kable_paper()</span></span>
 <span id="cb99-533"><a href="#cb99-533" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-534"><a href="#cb99-534" aria-hidden="true" tabindex="-1"></a><span class="in"># Make trace and pp-check plot</span></span>
-<span id="cb99-535"><a href="#cb99-535" aria-hidden="true" tabindex="-1"></a><span class="in">brms_plot(temp)</span></span>
-<span id="cb99-536"><a href="#cb99-536" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb99-537"><a href="#cb99-537" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-538"><a href="#cb99-538" aria-hidden="true" tabindex="-1"></a><span class="fu">### kcal M1</span></span>
-<span id="cb99-539"><a href="#cb99-539" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-540"><a href="#cb99-540" aria-hidden="true" tabindex="-1"></a><span class="in">```{r h2aM1kcal}</span></span>
-<span id="cb99-541"><a href="#cb99-541" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-height: 5</span></span>
-<span id="cb99-542"><a href="#cb99-542" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-width:  14</span></span>
-<span id="cb99-543"><a href="#cb99-543" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-544"><a href="#cb99-544" aria-hidden="true" tabindex="-1"></a><span class="in"># Load model </span></span>
-<span id="cb99-545"><a href="#cb99-545" aria-hidden="true" tabindex="-1"></a><span class="in">temp &lt;- brm(file="../Results/fit_H2a_kcal_M1.rds")</span></span>
-<span id="cb99-546"><a href="#cb99-546" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-547"><a href="#cb99-547" aria-hidden="true" tabindex="-1"></a><span class="in"># Print Formular</span></span>
-<span id="cb99-548"><a href="#cb99-548" aria-hidden="true" tabindex="-1"></a><span class="in">temp$formula</span></span>
-<span id="cb99-549"><a href="#cb99-549" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-550"><a href="#cb99-550" aria-hidden="true" tabindex="-1"></a><span class="in"># Make model parameter table</span></span>
-<span id="cb99-551"><a href="#cb99-551" aria-hidden="true" tabindex="-1"></a><span class="in">model_parameters(temp, centrality = "mean", dispersion = TRUE, </span></span>
-<span id="cb99-552"><a href="#cb99-552" aria-hidden="true" tabindex="-1"></a><span class="in">                 ci_method = "hdi", effects = "all") %&gt;% </span></span>
-<span id="cb99-553"><a href="#cb99-553" aria-hidden="true" tabindex="-1"></a><span class="in">  kable(digits=2) %&gt;% kable_paper()</span></span>
-<span id="cb99-554"><a href="#cb99-554" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-555"><a href="#cb99-555" aria-hidden="true" tabindex="-1"></a><span class="in"># Make trace and pp-check plot</span></span>
-<span id="cb99-556"><a href="#cb99-556" aria-hidden="true" tabindex="-1"></a><span class="in">brms_plot(temp)  + plot_layout(widths = c(2, 1))</span></span>
-<span id="cb99-557"><a href="#cb99-557" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb99-558"><a href="#cb99-558" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-534"><a href="#cb99-534" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-535"><a href="#cb99-535" aria-hidden="true" tabindex="-1"></a><span class="in"># Make trace and pp-check plot</span></span>
+<span id="cb99-536"><a href="#cb99-536" aria-hidden="true" tabindex="-1"></a><span class="in">brms_plot(temp)</span></span>
+<span id="cb99-537"><a href="#cb99-537" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb99-538"><a href="#cb99-538" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-539"><a href="#cb99-539" aria-hidden="true" tabindex="-1"></a><span class="fu">### kcal M1</span></span>
+<span id="cb99-540"><a href="#cb99-540" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-541"><a href="#cb99-541" aria-hidden="true" tabindex="-1"></a><span class="in">```{r h2aM1kcal}</span></span>
+<span id="cb99-542"><a href="#cb99-542" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-height: 5</span></span>
+<span id="cb99-543"><a href="#cb99-543" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-width:  14</span></span>
+<span id="cb99-544"><a href="#cb99-544" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-545"><a href="#cb99-545" aria-hidden="true" tabindex="-1"></a><span class="in"># Load model </span></span>
+<span id="cb99-546"><a href="#cb99-546" aria-hidden="true" tabindex="-1"></a><span class="in">temp &lt;- brm(file="../Results/fit_H2a_kcal_M1.rds")</span></span>
+<span id="cb99-547"><a href="#cb99-547" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-548"><a href="#cb99-548" aria-hidden="true" tabindex="-1"></a><span class="in"># Print Formular</span></span>
+<span id="cb99-549"><a href="#cb99-549" aria-hidden="true" tabindex="-1"></a><span class="in">temp$formula</span></span>
+<span id="cb99-550"><a href="#cb99-550" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-551"><a href="#cb99-551" aria-hidden="true" tabindex="-1"></a><span class="in"># Make model parameter table</span></span>
+<span id="cb99-552"><a href="#cb99-552" aria-hidden="true" tabindex="-1"></a><span class="in">model_parameters(temp, centrality = "mean", dispersion = TRUE, </span></span>
+<span id="cb99-553"><a href="#cb99-553" aria-hidden="true" tabindex="-1"></a><span class="in">                 ci_method = "hdi", effects = "all") %&gt;% </span></span>
+<span id="cb99-554"><a href="#cb99-554" aria-hidden="true" tabindex="-1"></a><span class="in">  kable(digits=2) %&gt;% kable_paper()</span></span>
+<span id="cb99-555"><a href="#cb99-555" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-556"><a href="#cb99-556" aria-hidden="true" tabindex="-1"></a><span class="in"># Make trace and pp-check plot</span></span>
+<span id="cb99-557"><a href="#cb99-557" aria-hidden="true" tabindex="-1"></a><span class="in">brms_plot(temp)  + plot_layout(widths = c(2, 1))</span></span>
+<span id="cb99-558"><a href="#cb99-558" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb99-559"><a href="#cb99-559" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb99-560"><a href="#cb99-560" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-561"><a href="#cb99-561" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
-<span id="cb99-562"><a href="#cb99-562" aria-hidden="true" tabindex="-1"></a><span class="fu">## Hypothesis 2b ($\rho$) </span></span>
-<span id="cb99-563"><a href="#cb99-563" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-564"><a href="#cb99-564" aria-hidden="true" tabindex="-1"></a><span class="fu">### CO~2~ M0</span></span>
-<span id="cb99-565"><a href="#cb99-565" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-566"><a href="#cb99-566" aria-hidden="true" tabindex="-1"></a><span class="in">```{r h2bM0CO2}</span></span>
-<span id="cb99-567"><a href="#cb99-567" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-height: 5</span></span>
-<span id="cb99-568"><a href="#cb99-568" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-width:  14</span></span>
-<span id="cb99-569"><a href="#cb99-569" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-570"><a href="#cb99-570" aria-hidden="true" tabindex="-1"></a><span class="in"># Load model </span></span>
-<span id="cb99-571"><a href="#cb99-571" aria-hidden="true" tabindex="-1"></a><span class="in">temp &lt;- brm(file="../Results/fit_H2b_CO2_M0.rds")</span></span>
-<span id="cb99-572"><a href="#cb99-572" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-573"><a href="#cb99-573" aria-hidden="true" tabindex="-1"></a><span class="in"># Print Formular</span></span>
-<span id="cb99-574"><a href="#cb99-574" aria-hidden="true" tabindex="-1"></a><span class="in">temp$formula</span></span>
-<span id="cb99-575"><a href="#cb99-575" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-576"><a href="#cb99-576" aria-hidden="true" tabindex="-1"></a><span class="in"># Make model parameter table</span></span>
-<span id="cb99-577"><a href="#cb99-577" aria-hidden="true" tabindex="-1"></a><span class="in">model_parameters(temp, centrality = "mean", dispersion = TRUE, </span></span>
-<span id="cb99-578"><a href="#cb99-578" aria-hidden="true" tabindex="-1"></a><span class="in">                 ci_method = "hdi", effects = "all") %&gt;% </span></span>
-<span id="cb99-579"><a href="#cb99-579" aria-hidden="true" tabindex="-1"></a><span class="in">  kable(digits=2) %&gt;% kable_paper()</span></span>
-<span id="cb99-580"><a href="#cb99-580" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-561"><a href="#cb99-561" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-562"><a href="#cb99-562" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
+<span id="cb99-563"><a href="#cb99-563" aria-hidden="true" tabindex="-1"></a><span class="fu">## Hypothesis 2b ($\rho$) </span></span>
+<span id="cb99-564"><a href="#cb99-564" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-565"><a href="#cb99-565" aria-hidden="true" tabindex="-1"></a><span class="fu">### CO~2~ M0</span></span>
+<span id="cb99-566"><a href="#cb99-566" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-567"><a href="#cb99-567" aria-hidden="true" tabindex="-1"></a><span class="in">```{r h2bM0CO2}</span></span>
+<span id="cb99-568"><a href="#cb99-568" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-height: 5</span></span>
+<span id="cb99-569"><a href="#cb99-569" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-width:  14</span></span>
+<span id="cb99-570"><a href="#cb99-570" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-571"><a href="#cb99-571" aria-hidden="true" tabindex="-1"></a><span class="in"># Load model </span></span>
+<span id="cb99-572"><a href="#cb99-572" aria-hidden="true" tabindex="-1"></a><span class="in">temp &lt;- brm(file="../Results/fit_H2b_CO2_M0.rds")</span></span>
+<span id="cb99-573"><a href="#cb99-573" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-574"><a href="#cb99-574" aria-hidden="true" tabindex="-1"></a><span class="in"># Print Formular</span></span>
+<span id="cb99-575"><a href="#cb99-575" aria-hidden="true" tabindex="-1"></a><span class="in">temp$formula</span></span>
+<span id="cb99-576"><a href="#cb99-576" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-577"><a href="#cb99-577" aria-hidden="true" tabindex="-1"></a><span class="in"># Make model parameter table</span></span>
+<span id="cb99-578"><a href="#cb99-578" aria-hidden="true" tabindex="-1"></a><span class="in">model_parameters(temp, centrality = "mean", dispersion = TRUE, </span></span>
+<span id="cb99-579"><a href="#cb99-579" aria-hidden="true" tabindex="-1"></a><span class="in">                 ci_method = "hdi", effects = "all") %&gt;% </span></span>
+<span id="cb99-580"><a href="#cb99-580" aria-hidden="true" tabindex="-1"></a><span class="in">  kable(digits=2) %&gt;% kable_paper()</span></span>
 <span id="cb99-581"><a href="#cb99-581" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-582"><a href="#cb99-582" aria-hidden="true" tabindex="-1"></a><span class="in"># Make trace and pp-check plot</span></span>
-<span id="cb99-583"><a href="#cb99-583" aria-hidden="true" tabindex="-1"></a><span class="in">brms_plot(temp,lim=c(-1,3))</span></span>
-<span id="cb99-584"><a href="#cb99-584" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb99-585"><a href="#cb99-585" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-586"><a href="#cb99-586" aria-hidden="true" tabindex="-1"></a><span class="fu">### CO~2~ M1</span></span>
-<span id="cb99-587"><a href="#cb99-587" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-588"><a href="#cb99-588" aria-hidden="true" tabindex="-1"></a><span class="in">```{r h2bM1CO2}</span></span>
-<span id="cb99-589"><a href="#cb99-589" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-height: 5</span></span>
-<span id="cb99-590"><a href="#cb99-590" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-width:  14</span></span>
-<span id="cb99-591"><a href="#cb99-591" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-592"><a href="#cb99-592" aria-hidden="true" tabindex="-1"></a><span class="in"># Load model </span></span>
-<span id="cb99-593"><a href="#cb99-593" aria-hidden="true" tabindex="-1"></a><span class="in">temp &lt;- brm(file="../Results/fit_H2b_CO2_M1.rds")</span></span>
-<span id="cb99-594"><a href="#cb99-594" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-595"><a href="#cb99-595" aria-hidden="true" tabindex="-1"></a><span class="in"># Print Formular</span></span>
-<span id="cb99-596"><a href="#cb99-596" aria-hidden="true" tabindex="-1"></a><span class="in">temp$formula</span></span>
-<span id="cb99-597"><a href="#cb99-597" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-598"><a href="#cb99-598" aria-hidden="true" tabindex="-1"></a><span class="in"># Make model parameter table</span></span>
-<span id="cb99-599"><a href="#cb99-599" aria-hidden="true" tabindex="-1"></a><span class="in">model_parameters(temp, centrality = "mean", dispersion = TRUE, </span></span>
-<span id="cb99-600"><a href="#cb99-600" aria-hidden="true" tabindex="-1"></a><span class="in">                 ci_method = "hdi", effects = "all") %&gt;% </span></span>
-<span id="cb99-601"><a href="#cb99-601" aria-hidden="true" tabindex="-1"></a><span class="in">  kable(digits=2) %&gt;% kable_paper()</span></span>
-<span id="cb99-602"><a href="#cb99-602" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-603"><a href="#cb99-603" aria-hidden="true" tabindex="-1"></a><span class="in"># Make trace and pp-check plot</span></span>
-<span id="cb99-604"><a href="#cb99-604" aria-hidden="true" tabindex="-1"></a><span class="in">brms_plot(temp,lim=c(-1,3))  + plot_layout(widths = c(2, 1))</span></span>
-<span id="cb99-605"><a href="#cb99-605" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb99-606"><a href="#cb99-606" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-607"><a href="#cb99-607" aria-hidden="true" tabindex="-1"></a><span class="fu">### kcal M0</span></span>
-<span id="cb99-608"><a href="#cb99-608" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-609"><a href="#cb99-609" aria-hidden="true" tabindex="-1"></a><span class="in">```{r h2bM0kcal}</span></span>
-<span id="cb99-610"><a href="#cb99-610" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-height: 5</span></span>
-<span id="cb99-611"><a href="#cb99-611" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-width:  14</span></span>
-<span id="cb99-612"><a href="#cb99-612" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-613"><a href="#cb99-613" aria-hidden="true" tabindex="-1"></a><span class="in"># Load model </span></span>
-<span id="cb99-614"><a href="#cb99-614" aria-hidden="true" tabindex="-1"></a><span class="in">temp &lt;- brm(file="../Results/fit_H2b_kcal_M0.rds")</span></span>
-<span id="cb99-615"><a href="#cb99-615" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-616"><a href="#cb99-616" aria-hidden="true" tabindex="-1"></a><span class="in"># Print Formular</span></span>
-<span id="cb99-617"><a href="#cb99-617" aria-hidden="true" tabindex="-1"></a><span class="in">temp$formula</span></span>
-<span id="cb99-618"><a href="#cb99-618" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-619"><a href="#cb99-619" aria-hidden="true" tabindex="-1"></a><span class="in"># Make model parameter table</span></span>
-<span id="cb99-620"><a href="#cb99-620" aria-hidden="true" tabindex="-1"></a><span class="in">model_parameters(temp, centrality = "mean", dispersion = TRUE, </span></span>
-<span id="cb99-621"><a href="#cb99-621" aria-hidden="true" tabindex="-1"></a><span class="in">                 ci_method = "hdi", effects = "all") %&gt;% </span></span>
-<span id="cb99-622"><a href="#cb99-622" aria-hidden="true" tabindex="-1"></a><span class="in">  kable(digits=2) %&gt;% kable_paper()</span></span>
-<span id="cb99-623"><a href="#cb99-623" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-582"><a href="#cb99-582" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-583"><a href="#cb99-583" aria-hidden="true" tabindex="-1"></a><span class="in"># Make trace and pp-check plot</span></span>
+<span id="cb99-584"><a href="#cb99-584" aria-hidden="true" tabindex="-1"></a><span class="in">brms_plot(temp,lim=c(-1,3))</span></span>
+<span id="cb99-585"><a href="#cb99-585" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb99-586"><a href="#cb99-586" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-587"><a href="#cb99-587" aria-hidden="true" tabindex="-1"></a><span class="fu">### CO~2~ M1</span></span>
+<span id="cb99-588"><a href="#cb99-588" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-589"><a href="#cb99-589" aria-hidden="true" tabindex="-1"></a><span class="in">```{r h2bM1CO2}</span></span>
+<span id="cb99-590"><a href="#cb99-590" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-height: 5</span></span>
+<span id="cb99-591"><a href="#cb99-591" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-width:  14</span></span>
+<span id="cb99-592"><a href="#cb99-592" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-593"><a href="#cb99-593" aria-hidden="true" tabindex="-1"></a><span class="in"># Load model </span></span>
+<span id="cb99-594"><a href="#cb99-594" aria-hidden="true" tabindex="-1"></a><span class="in">temp &lt;- brm(file="../Results/fit_H2b_CO2_M1.rds")</span></span>
+<span id="cb99-595"><a href="#cb99-595" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-596"><a href="#cb99-596" aria-hidden="true" tabindex="-1"></a><span class="in"># Print Formular</span></span>
+<span id="cb99-597"><a href="#cb99-597" aria-hidden="true" tabindex="-1"></a><span class="in">temp$formula</span></span>
+<span id="cb99-598"><a href="#cb99-598" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-599"><a href="#cb99-599" aria-hidden="true" tabindex="-1"></a><span class="in"># Make model parameter table</span></span>
+<span id="cb99-600"><a href="#cb99-600" aria-hidden="true" tabindex="-1"></a><span class="in">model_parameters(temp, centrality = "mean", dispersion = TRUE, </span></span>
+<span id="cb99-601"><a href="#cb99-601" aria-hidden="true" tabindex="-1"></a><span class="in">                 ci_method = "hdi", effects = "all") %&gt;% </span></span>
+<span id="cb99-602"><a href="#cb99-602" aria-hidden="true" tabindex="-1"></a><span class="in">  kable(digits=2) %&gt;% kable_paper()</span></span>
+<span id="cb99-603"><a href="#cb99-603" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-604"><a href="#cb99-604" aria-hidden="true" tabindex="-1"></a><span class="in"># Make trace and pp-check plot</span></span>
+<span id="cb99-605"><a href="#cb99-605" aria-hidden="true" tabindex="-1"></a><span class="in">brms_plot(temp,lim=c(-1,3))  + plot_layout(widths = c(2, 1))</span></span>
+<span id="cb99-606"><a href="#cb99-606" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb99-607"><a href="#cb99-607" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-608"><a href="#cb99-608" aria-hidden="true" tabindex="-1"></a><span class="fu">### kcal M0</span></span>
+<span id="cb99-609"><a href="#cb99-609" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-610"><a href="#cb99-610" aria-hidden="true" tabindex="-1"></a><span class="in">```{r h2bM0kcal}</span></span>
+<span id="cb99-611"><a href="#cb99-611" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-height: 5</span></span>
+<span id="cb99-612"><a href="#cb99-612" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-width:  14</span></span>
+<span id="cb99-613"><a href="#cb99-613" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-614"><a href="#cb99-614" aria-hidden="true" tabindex="-1"></a><span class="in"># Load model </span></span>
+<span id="cb99-615"><a href="#cb99-615" aria-hidden="true" tabindex="-1"></a><span class="in">temp &lt;- brm(file="../Results/fit_H2b_kcal_M0.rds")</span></span>
+<span id="cb99-616"><a href="#cb99-616" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-617"><a href="#cb99-617" aria-hidden="true" tabindex="-1"></a><span class="in"># Print Formular</span></span>
+<span id="cb99-618"><a href="#cb99-618" aria-hidden="true" tabindex="-1"></a><span class="in">temp$formula</span></span>
+<span id="cb99-619"><a href="#cb99-619" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-620"><a href="#cb99-620" aria-hidden="true" tabindex="-1"></a><span class="in"># Make model parameter table</span></span>
+<span id="cb99-621"><a href="#cb99-621" aria-hidden="true" tabindex="-1"></a><span class="in">model_parameters(temp, centrality = "mean", dispersion = TRUE, </span></span>
+<span id="cb99-622"><a href="#cb99-622" aria-hidden="true" tabindex="-1"></a><span class="in">                 ci_method = "hdi", effects = "all") %&gt;% </span></span>
+<span id="cb99-623"><a href="#cb99-623" aria-hidden="true" tabindex="-1"></a><span class="in">  kable(digits=2) %&gt;% kable_paper()</span></span>
 <span id="cb99-624"><a href="#cb99-624" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-625"><a href="#cb99-625" aria-hidden="true" tabindex="-1"></a><span class="in"># Make trace and pp-check plot</span></span>
-<span id="cb99-626"><a href="#cb99-626" aria-hidden="true" tabindex="-1"></a><span class="in">brms_plot(temp,lim=c(-1,3))</span></span>
-<span id="cb99-627"><a href="#cb99-627" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb99-628"><a href="#cb99-628" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-629"><a href="#cb99-629" aria-hidden="true" tabindex="-1"></a><span class="fu">### kcal M1</span></span>
-<span id="cb99-630"><a href="#cb99-630" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-631"><a href="#cb99-631" aria-hidden="true" tabindex="-1"></a><span class="in">```{r h2bM1kcal}</span></span>
-<span id="cb99-632"><a href="#cb99-632" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-height: 5</span></span>
-<span id="cb99-633"><a href="#cb99-633" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-width:  14</span></span>
-<span id="cb99-634"><a href="#cb99-634" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-635"><a href="#cb99-635" aria-hidden="true" tabindex="-1"></a><span class="in"># Load model </span></span>
-<span id="cb99-636"><a href="#cb99-636" aria-hidden="true" tabindex="-1"></a><span class="in">temp &lt;- brm(file="../Results/fit_H2b_kcal_M1.rds")</span></span>
-<span id="cb99-637"><a href="#cb99-637" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-638"><a href="#cb99-638" aria-hidden="true" tabindex="-1"></a><span class="in"># Print Formular</span></span>
-<span id="cb99-639"><a href="#cb99-639" aria-hidden="true" tabindex="-1"></a><span class="in">temp$formula</span></span>
-<span id="cb99-640"><a href="#cb99-640" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-641"><a href="#cb99-641" aria-hidden="true" tabindex="-1"></a><span class="in"># Make model parameter table</span></span>
-<span id="cb99-642"><a href="#cb99-642" aria-hidden="true" tabindex="-1"></a><span class="in">model_parameters(temp, centrality = "mean", dispersion = TRUE, </span></span>
-<span id="cb99-643"><a href="#cb99-643" aria-hidden="true" tabindex="-1"></a><span class="in">                 ci_method = "hdi", effects = "all") %&gt;% </span></span>
-<span id="cb99-644"><a href="#cb99-644" aria-hidden="true" tabindex="-1"></a><span class="in">  kable(digits=2) %&gt;% kable_paper()</span></span>
-<span id="cb99-645"><a href="#cb99-645" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-646"><a href="#cb99-646" aria-hidden="true" tabindex="-1"></a><span class="in"># Make trace and pp-check plot</span></span>
-<span id="cb99-647"><a href="#cb99-647" aria-hidden="true" tabindex="-1"></a><span class="in">brms_plot(temp,lim=c(-1,3))  + plot_layout(widths = c(2, 1))</span></span>
-<span id="cb99-648"><a href="#cb99-648" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb99-649"><a href="#cb99-649" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-625"><a href="#cb99-625" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-626"><a href="#cb99-626" aria-hidden="true" tabindex="-1"></a><span class="in"># Make trace and pp-check plot</span></span>
+<span id="cb99-627"><a href="#cb99-627" aria-hidden="true" tabindex="-1"></a><span class="in">brms_plot(temp,lim=c(-1,3))</span></span>
+<span id="cb99-628"><a href="#cb99-628" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb99-629"><a href="#cb99-629" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-630"><a href="#cb99-630" aria-hidden="true" tabindex="-1"></a><span class="fu">### kcal M1</span></span>
+<span id="cb99-631"><a href="#cb99-631" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-632"><a href="#cb99-632" aria-hidden="true" tabindex="-1"></a><span class="in">```{r h2bM1kcal}</span></span>
+<span id="cb99-633"><a href="#cb99-633" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-height: 5</span></span>
+<span id="cb99-634"><a href="#cb99-634" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-width:  14</span></span>
+<span id="cb99-635"><a href="#cb99-635" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-636"><a href="#cb99-636" aria-hidden="true" tabindex="-1"></a><span class="in"># Load model </span></span>
+<span id="cb99-637"><a href="#cb99-637" aria-hidden="true" tabindex="-1"></a><span class="in">temp &lt;- brm(file="../Results/fit_H2b_kcal_M1.rds")</span></span>
+<span id="cb99-638"><a href="#cb99-638" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-639"><a href="#cb99-639" aria-hidden="true" tabindex="-1"></a><span class="in"># Print Formular</span></span>
+<span id="cb99-640"><a href="#cb99-640" aria-hidden="true" tabindex="-1"></a><span class="in">temp$formula</span></span>
+<span id="cb99-641"><a href="#cb99-641" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-642"><a href="#cb99-642" aria-hidden="true" tabindex="-1"></a><span class="in"># Make model parameter table</span></span>
+<span id="cb99-643"><a href="#cb99-643" aria-hidden="true" tabindex="-1"></a><span class="in">model_parameters(temp, centrality = "mean", dispersion = TRUE, </span></span>
+<span id="cb99-644"><a href="#cb99-644" aria-hidden="true" tabindex="-1"></a><span class="in">                 ci_method = "hdi", effects = "all") %&gt;% </span></span>
+<span id="cb99-645"><a href="#cb99-645" aria-hidden="true" tabindex="-1"></a><span class="in">  kable(digits=2) %&gt;% kable_paper()</span></span>
+<span id="cb99-646"><a href="#cb99-646" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-647"><a href="#cb99-647" aria-hidden="true" tabindex="-1"></a><span class="in"># Make trace and pp-check plot</span></span>
+<span id="cb99-648"><a href="#cb99-648" aria-hidden="true" tabindex="-1"></a><span class="in">brms_plot(temp,lim=c(-1,3))  + plot_layout(widths = c(2, 1))</span></span>
+<span id="cb99-649"><a href="#cb99-649" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb99-650"><a href="#cb99-650" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb99-651"><a href="#cb99-651" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb99-652"><a href="#cb99-652" aria-hidden="true" tabindex="-1"></a></span>
@@ -5070,89 +5081,89 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb99-655"><a href="#cb99-655" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb99-656"><a href="#cb99-656" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb99-657"><a href="#cb99-657" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-658"><a href="#cb99-658" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
+<span id="cb99-658"><a href="#cb99-658" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb99-659"><a href="#cb99-659" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
 <span id="cb99-660"><a href="#cb99-660" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
 <span id="cb99-661"><a href="#cb99-661" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
 <span id="cb99-662"><a href="#cb99-662" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
-<span id="cb99-663"><a href="#cb99-663" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-663"><a href="#cb99-663" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
 <span id="cb99-664"><a href="#cb99-664" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb99-665"><a href="#cb99-665" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb99-666"><a href="#cb99-666" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-667"><a href="#cb99-667" aria-hidden="true" tabindex="-1"></a><span class="fu">## Hypothesis 3a (OME)    </span></span>
-<span id="cb99-668"><a href="#cb99-668" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-669"><a href="#cb99-669" aria-hidden="true" tabindex="-1"></a><span class="fu">### M0</span></span>
-<span id="cb99-670"><a href="#cb99-670" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-667"><a href="#cb99-667" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-668"><a href="#cb99-668" aria-hidden="true" tabindex="-1"></a><span class="fu">## Hypothesis 3a (OME)    </span></span>
+<span id="cb99-669"><a href="#cb99-669" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-670"><a href="#cb99-670" aria-hidden="true" tabindex="-1"></a><span class="fu">### M0</span></span>
 <span id="cb99-671"><a href="#cb99-671" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-672"><a href="#cb99-672" aria-hidden="true" tabindex="-1"></a><span class="in">```{r h3aM0}</span></span>
-<span id="cb99-673"><a href="#cb99-673" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-height: 5</span></span>
-<span id="cb99-674"><a href="#cb99-674" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-width:  14</span></span>
-<span id="cb99-675"><a href="#cb99-675" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-676"><a href="#cb99-676" aria-hidden="true" tabindex="-1"></a><span class="in"># Load model </span></span>
-<span id="cb99-677"><a href="#cb99-677" aria-hidden="true" tabindex="-1"></a><span class="in">temp &lt;- brm(file="../Results/fit_H3a_M0.rds")</span></span>
-<span id="cb99-678"><a href="#cb99-678" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-679"><a href="#cb99-679" aria-hidden="true" tabindex="-1"></a><span class="in"># Print Formular</span></span>
-<span id="cb99-680"><a href="#cb99-680" aria-hidden="true" tabindex="-1"></a><span class="in">temp$formula</span></span>
-<span id="cb99-681"><a href="#cb99-681" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-682"><a href="#cb99-682" aria-hidden="true" tabindex="-1"></a><span class="in"># Make model parameter table</span></span>
-<span id="cb99-683"><a href="#cb99-683" aria-hidden="true" tabindex="-1"></a><span class="in">model_parameters(temp, centrality = "mean", dispersion = TRUE, </span></span>
-<span id="cb99-684"><a href="#cb99-684" aria-hidden="true" tabindex="-1"></a><span class="in">                 ci_method = "hdi", effects = "all") %&gt;% </span></span>
-<span id="cb99-685"><a href="#cb99-685" aria-hidden="true" tabindex="-1"></a><span class="in">  kable(digits=2) %&gt;% kable_paper()</span></span>
-<span id="cb99-686"><a href="#cb99-686" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-672"><a href="#cb99-672" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-673"><a href="#cb99-673" aria-hidden="true" tabindex="-1"></a><span class="in">```{r h3aM0}</span></span>
+<span id="cb99-674"><a href="#cb99-674" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-height: 5</span></span>
+<span id="cb99-675"><a href="#cb99-675" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-width:  14</span></span>
+<span id="cb99-676"><a href="#cb99-676" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-677"><a href="#cb99-677" aria-hidden="true" tabindex="-1"></a><span class="in"># Load model </span></span>
+<span id="cb99-678"><a href="#cb99-678" aria-hidden="true" tabindex="-1"></a><span class="in">temp &lt;- brm(file="../Results/fit_H3a_M0.rds")</span></span>
+<span id="cb99-679"><a href="#cb99-679" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-680"><a href="#cb99-680" aria-hidden="true" tabindex="-1"></a><span class="in"># Print Formular</span></span>
+<span id="cb99-681"><a href="#cb99-681" aria-hidden="true" tabindex="-1"></a><span class="in">temp$formula</span></span>
+<span id="cb99-682"><a href="#cb99-682" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-683"><a href="#cb99-683" aria-hidden="true" tabindex="-1"></a><span class="in"># Make model parameter table</span></span>
+<span id="cb99-684"><a href="#cb99-684" aria-hidden="true" tabindex="-1"></a><span class="in">model_parameters(temp, centrality = "mean", dispersion = TRUE, </span></span>
+<span id="cb99-685"><a href="#cb99-685" aria-hidden="true" tabindex="-1"></a><span class="in">                 ci_method = "hdi", effects = "all") %&gt;% </span></span>
+<span id="cb99-686"><a href="#cb99-686" aria-hidden="true" tabindex="-1"></a><span class="in">  kable(digits=2) %&gt;% kable_paper()</span></span>
 <span id="cb99-687"><a href="#cb99-687" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-688"><a href="#cb99-688" aria-hidden="true" tabindex="-1"></a><span class="in"># Make trace and pp-check plot</span></span>
-<span id="cb99-689"><a href="#cb99-689" aria-hidden="true" tabindex="-1"></a><span class="in">brms_plot(temp) + plot_layout(widths = c(2, 1))</span></span>
-<span id="cb99-690"><a href="#cb99-690" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb99-691"><a href="#cb99-691" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-688"><a href="#cb99-688" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-689"><a href="#cb99-689" aria-hidden="true" tabindex="-1"></a><span class="in"># Make trace and pp-check plot</span></span>
+<span id="cb99-690"><a href="#cb99-690" aria-hidden="true" tabindex="-1"></a><span class="in">brms_plot(temp) + plot_layout(widths = c(2, 1))</span></span>
+<span id="cb99-691"><a href="#cb99-691" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb99-692"><a href="#cb99-692" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb99-693"><a href="#cb99-693" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-694"><a href="#cb99-694" aria-hidden="true" tabindex="-1"></a><span class="fu">### M1</span></span>
-<span id="cb99-695"><a href="#cb99-695" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-694"><a href="#cb99-694" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-695"><a href="#cb99-695" aria-hidden="true" tabindex="-1"></a><span class="fu">### M1</span></span>
 <span id="cb99-696"><a href="#cb99-696" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-697"><a href="#cb99-697" aria-hidden="true" tabindex="-1"></a><span class="in">```{r h3aM1}</span></span>
-<span id="cb99-698"><a href="#cb99-698" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-height: 5</span></span>
-<span id="cb99-699"><a href="#cb99-699" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-width:  14</span></span>
-<span id="cb99-700"><a href="#cb99-700" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-701"><a href="#cb99-701" aria-hidden="true" tabindex="-1"></a><span class="in"># Load model </span></span>
-<span id="cb99-702"><a href="#cb99-702" aria-hidden="true" tabindex="-1"></a><span class="in">temp &lt;- brm(file="../Results/fit_H3a_M1.rds")</span></span>
-<span id="cb99-703"><a href="#cb99-703" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-704"><a href="#cb99-704" aria-hidden="true" tabindex="-1"></a><span class="in"># Print Formular</span></span>
-<span id="cb99-705"><a href="#cb99-705" aria-hidden="true" tabindex="-1"></a><span class="in">temp$formula</span></span>
-<span id="cb99-706"><a href="#cb99-706" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-707"><a href="#cb99-707" aria-hidden="true" tabindex="-1"></a><span class="in"># Make model parameter table</span></span>
-<span id="cb99-708"><a href="#cb99-708" aria-hidden="true" tabindex="-1"></a><span class="in">model_parameters(temp, centrality = "mean", dispersion = TRUE, </span></span>
-<span id="cb99-709"><a href="#cb99-709" aria-hidden="true" tabindex="-1"></a><span class="in">                 ci_method = "hdi", effects = "all") %&gt;% </span></span>
-<span id="cb99-710"><a href="#cb99-710" aria-hidden="true" tabindex="-1"></a><span class="in">  kable(digits=2) %&gt;% kable_paper()</span></span>
-<span id="cb99-711"><a href="#cb99-711" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-697"><a href="#cb99-697" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-698"><a href="#cb99-698" aria-hidden="true" tabindex="-1"></a><span class="in">```{r h3aM1}</span></span>
+<span id="cb99-699"><a href="#cb99-699" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-height: 5</span></span>
+<span id="cb99-700"><a href="#cb99-700" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-width:  14</span></span>
+<span id="cb99-701"><a href="#cb99-701" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-702"><a href="#cb99-702" aria-hidden="true" tabindex="-1"></a><span class="in"># Load model </span></span>
+<span id="cb99-703"><a href="#cb99-703" aria-hidden="true" tabindex="-1"></a><span class="in">temp &lt;- brm(file="../Results/fit_H3a_M1.rds")</span></span>
+<span id="cb99-704"><a href="#cb99-704" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-705"><a href="#cb99-705" aria-hidden="true" tabindex="-1"></a><span class="in"># Print Formular</span></span>
+<span id="cb99-706"><a href="#cb99-706" aria-hidden="true" tabindex="-1"></a><span class="in">temp$formula</span></span>
+<span id="cb99-707"><a href="#cb99-707" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-708"><a href="#cb99-708" aria-hidden="true" tabindex="-1"></a><span class="in"># Make model parameter table</span></span>
+<span id="cb99-709"><a href="#cb99-709" aria-hidden="true" tabindex="-1"></a><span class="in">model_parameters(temp, centrality = "mean", dispersion = TRUE, </span></span>
+<span id="cb99-710"><a href="#cb99-710" aria-hidden="true" tabindex="-1"></a><span class="in">                 ci_method = "hdi", effects = "all") %&gt;% </span></span>
+<span id="cb99-711"><a href="#cb99-711" aria-hidden="true" tabindex="-1"></a><span class="in">  kable(digits=2) %&gt;% kable_paper()</span></span>
 <span id="cb99-712"><a href="#cb99-712" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-713"><a href="#cb99-713" aria-hidden="true" tabindex="-1"></a><span class="in"># Make trace and pp-check plot</span></span>
-<span id="cb99-714"><a href="#cb99-714" aria-hidden="true" tabindex="-1"></a><span class="in">brms_plot(temp) + plot_layout(widths = c(2, 1))</span></span>
-<span id="cb99-715"><a href="#cb99-715" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb99-716"><a href="#cb99-716" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-713"><a href="#cb99-713" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-714"><a href="#cb99-714" aria-hidden="true" tabindex="-1"></a><span class="in"># Make trace and pp-check plot</span></span>
+<span id="cb99-715"><a href="#cb99-715" aria-hidden="true" tabindex="-1"></a><span class="in">brms_plot(temp) + plot_layout(widths = c(2, 1))</span></span>
+<span id="cb99-716"><a href="#cb99-716" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb99-717"><a href="#cb99-717" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-718"><a href="#cb99-718" aria-hidden="true" tabindex="-1"></a><span class="fu">### M2</span></span>
-<span id="cb99-719"><a href="#cb99-719" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-718"><a href="#cb99-718" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-719"><a href="#cb99-719" aria-hidden="true" tabindex="-1"></a><span class="fu">### M2</span></span>
 <span id="cb99-720"><a href="#cb99-720" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-721"><a href="#cb99-721" aria-hidden="true" tabindex="-1"></a><span class="in">```{r h3aM2}</span></span>
-<span id="cb99-722"><a href="#cb99-722" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-height: 5</span></span>
-<span id="cb99-723"><a href="#cb99-723" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-width:  14</span></span>
-<span id="cb99-724"><a href="#cb99-724" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-725"><a href="#cb99-725" aria-hidden="true" tabindex="-1"></a><span class="in"># Load model </span></span>
-<span id="cb99-726"><a href="#cb99-726" aria-hidden="true" tabindex="-1"></a><span class="in">temp &lt;- brm(file="../Results/fit_H3a_M2.rds")</span></span>
-<span id="cb99-727"><a href="#cb99-727" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-728"><a href="#cb99-728" aria-hidden="true" tabindex="-1"></a><span class="in"># Print Formular</span></span>
-<span id="cb99-729"><a href="#cb99-729" aria-hidden="true" tabindex="-1"></a><span class="in">temp$formula</span></span>
-<span id="cb99-730"><a href="#cb99-730" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-731"><a href="#cb99-731" aria-hidden="true" tabindex="-1"></a><span class="in"># Make model parameter table</span></span>
-<span id="cb99-732"><a href="#cb99-732" aria-hidden="true" tabindex="-1"></a><span class="in">model_parameters(temp, centrality = "mean", dispersion = TRUE, </span></span>
-<span id="cb99-733"><a href="#cb99-733" aria-hidden="true" tabindex="-1"></a><span class="in">                 ci_method = "hdi", effects = "all") %&gt;% </span></span>
-<span id="cb99-734"><a href="#cb99-734" aria-hidden="true" tabindex="-1"></a><span class="in">  kable(digits=2) %&gt;% kable_paper()</span></span>
-<span id="cb99-735"><a href="#cb99-735" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-721"><a href="#cb99-721" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-722"><a href="#cb99-722" aria-hidden="true" tabindex="-1"></a><span class="in">```{r h3aM2}</span></span>
+<span id="cb99-723"><a href="#cb99-723" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-height: 5</span></span>
+<span id="cb99-724"><a href="#cb99-724" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-width:  14</span></span>
+<span id="cb99-725"><a href="#cb99-725" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-726"><a href="#cb99-726" aria-hidden="true" tabindex="-1"></a><span class="in"># Load model </span></span>
+<span id="cb99-727"><a href="#cb99-727" aria-hidden="true" tabindex="-1"></a><span class="in">temp &lt;- brm(file="../Results/fit_H3a_M2.rds")</span></span>
+<span id="cb99-728"><a href="#cb99-728" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-729"><a href="#cb99-729" aria-hidden="true" tabindex="-1"></a><span class="in"># Print Formular</span></span>
+<span id="cb99-730"><a href="#cb99-730" aria-hidden="true" tabindex="-1"></a><span class="in">temp$formula</span></span>
+<span id="cb99-731"><a href="#cb99-731" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-732"><a href="#cb99-732" aria-hidden="true" tabindex="-1"></a><span class="in"># Make model parameter table</span></span>
+<span id="cb99-733"><a href="#cb99-733" aria-hidden="true" tabindex="-1"></a><span class="in">model_parameters(temp, centrality = "mean", dispersion = TRUE, </span></span>
+<span id="cb99-734"><a href="#cb99-734" aria-hidden="true" tabindex="-1"></a><span class="in">                 ci_method = "hdi", effects = "all") %&gt;% </span></span>
+<span id="cb99-735"><a href="#cb99-735" aria-hidden="true" tabindex="-1"></a><span class="in">  kable(digits=2) %&gt;% kable_paper()</span></span>
 <span id="cb99-736"><a href="#cb99-736" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-737"><a href="#cb99-737" aria-hidden="true" tabindex="-1"></a><span class="in"># Make trace and pp-check plot</span></span>
-<span id="cb99-738"><a href="#cb99-738" aria-hidden="true" tabindex="-1"></a><span class="in">brms_plot(temp) + plot_layout(widths = c(2, 1))</span></span>
-<span id="cb99-739"><a href="#cb99-739" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb99-740"><a href="#cb99-740" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-737"><a href="#cb99-737" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-738"><a href="#cb99-738" aria-hidden="true" tabindex="-1"></a><span class="in"># Make trace and pp-check plot</span></span>
+<span id="cb99-739"><a href="#cb99-739" aria-hidden="true" tabindex="-1"></a><span class="in">brms_plot(temp) + plot_layout(widths = c(2, 1))</span></span>
+<span id="cb99-740"><a href="#cb99-740" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb99-741"><a href="#cb99-741" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb99-742"><a href="#cb99-742" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb99-743"><a href="#cb99-743" aria-hidden="true" tabindex="-1"></a></span>
@@ -5165,81 +5176,81 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb99-750"><a href="#cb99-750" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb99-751"><a href="#cb99-751" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb99-752"><a href="#cb99-752" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-753"><a href="#cb99-753" aria-hidden="true" tabindex="-1"></a><span class="fu">## Hypothesis 3b ($\rho$) </span></span>
-<span id="cb99-754"><a href="#cb99-754" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-753"><a href="#cb99-753" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-754"><a href="#cb99-754" aria-hidden="true" tabindex="-1"></a><span class="fu">## Hypothesis 3b ($\rho$) </span></span>
 <span id="cb99-755"><a href="#cb99-755" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-756"><a href="#cb99-756" aria-hidden="true" tabindex="-1"></a><span class="fu">### M0</span></span>
-<span id="cb99-757"><a href="#cb99-757" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-756"><a href="#cb99-756" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-757"><a href="#cb99-757" aria-hidden="true" tabindex="-1"></a><span class="fu">### M0</span></span>
 <span id="cb99-758"><a href="#cb99-758" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-759"><a href="#cb99-759" aria-hidden="true" tabindex="-1"></a><span class="in">```{r h3bM0}</span></span>
-<span id="cb99-760"><a href="#cb99-760" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-height: 5</span></span>
-<span id="cb99-761"><a href="#cb99-761" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-width:  14</span></span>
-<span id="cb99-762"><a href="#cb99-762" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-763"><a href="#cb99-763" aria-hidden="true" tabindex="-1"></a><span class="in"># Load model </span></span>
-<span id="cb99-764"><a href="#cb99-764" aria-hidden="true" tabindex="-1"></a><span class="in">temp &lt;- brm(file="../Results/fit_H3b_M0.rds")</span></span>
-<span id="cb99-765"><a href="#cb99-765" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-766"><a href="#cb99-766" aria-hidden="true" tabindex="-1"></a><span class="in"># Print Formular</span></span>
-<span id="cb99-767"><a href="#cb99-767" aria-hidden="true" tabindex="-1"></a><span class="in">temp$formula</span></span>
-<span id="cb99-768"><a href="#cb99-768" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-769"><a href="#cb99-769" aria-hidden="true" tabindex="-1"></a><span class="in"># Make model parameter table</span></span>
-<span id="cb99-770"><a href="#cb99-770" aria-hidden="true" tabindex="-1"></a><span class="in">model_parameters(temp, centrality = "mean", dispersion = TRUE, </span></span>
-<span id="cb99-771"><a href="#cb99-771" aria-hidden="true" tabindex="-1"></a><span class="in">                 ci_method = "hdi", effects = "all") %&gt;% </span></span>
-<span id="cb99-772"><a href="#cb99-772" aria-hidden="true" tabindex="-1"></a><span class="in">  kable(digits=2) %&gt;% kable_paper()</span></span>
-<span id="cb99-773"><a href="#cb99-773" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-759"><a href="#cb99-759" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-760"><a href="#cb99-760" aria-hidden="true" tabindex="-1"></a><span class="in">```{r h3bM0}</span></span>
+<span id="cb99-761"><a href="#cb99-761" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-height: 5</span></span>
+<span id="cb99-762"><a href="#cb99-762" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-width:  14</span></span>
+<span id="cb99-763"><a href="#cb99-763" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-764"><a href="#cb99-764" aria-hidden="true" tabindex="-1"></a><span class="in"># Load model </span></span>
+<span id="cb99-765"><a href="#cb99-765" aria-hidden="true" tabindex="-1"></a><span class="in">temp &lt;- brm(file="../Results/fit_H3b_M0.rds")</span></span>
+<span id="cb99-766"><a href="#cb99-766" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-767"><a href="#cb99-767" aria-hidden="true" tabindex="-1"></a><span class="in"># Print Formular</span></span>
+<span id="cb99-768"><a href="#cb99-768" aria-hidden="true" tabindex="-1"></a><span class="in">temp$formula</span></span>
+<span id="cb99-769"><a href="#cb99-769" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-770"><a href="#cb99-770" aria-hidden="true" tabindex="-1"></a><span class="in"># Make model parameter table</span></span>
+<span id="cb99-771"><a href="#cb99-771" aria-hidden="true" tabindex="-1"></a><span class="in">model_parameters(temp, centrality = "mean", dispersion = TRUE, </span></span>
+<span id="cb99-772"><a href="#cb99-772" aria-hidden="true" tabindex="-1"></a><span class="in">                 ci_method = "hdi", effects = "all") %&gt;% </span></span>
+<span id="cb99-773"><a href="#cb99-773" aria-hidden="true" tabindex="-1"></a><span class="in">  kable(digits=2) %&gt;% kable_paper()</span></span>
 <span id="cb99-774"><a href="#cb99-774" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-775"><a href="#cb99-775" aria-hidden="true" tabindex="-1"></a><span class="in"># Make trace and pp-check plot</span></span>
-<span id="cb99-776"><a href="#cb99-776" aria-hidden="true" tabindex="-1"></a><span class="in">brms_plot(temp) + plot_layout(widths = c(2, 1))</span></span>
-<span id="cb99-777"><a href="#cb99-777" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb99-778"><a href="#cb99-778" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-775"><a href="#cb99-775" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-776"><a href="#cb99-776" aria-hidden="true" tabindex="-1"></a><span class="in"># Make trace and pp-check plot</span></span>
+<span id="cb99-777"><a href="#cb99-777" aria-hidden="true" tabindex="-1"></a><span class="in">brms_plot(temp) + plot_layout(widths = c(2, 1))</span></span>
+<span id="cb99-778"><a href="#cb99-778" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb99-779"><a href="#cb99-779" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb99-780"><a href="#cb99-780" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-781"><a href="#cb99-781" aria-hidden="true" tabindex="-1"></a><span class="fu">### M1</span></span>
-<span id="cb99-782"><a href="#cb99-782" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-781"><a href="#cb99-781" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-782"><a href="#cb99-782" aria-hidden="true" tabindex="-1"></a><span class="fu">### M1</span></span>
 <span id="cb99-783"><a href="#cb99-783" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-784"><a href="#cb99-784" aria-hidden="true" tabindex="-1"></a><span class="in">```{r h3bM1}</span></span>
-<span id="cb99-785"><a href="#cb99-785" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-height: 5</span></span>
-<span id="cb99-786"><a href="#cb99-786" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-width:  14</span></span>
-<span id="cb99-787"><a href="#cb99-787" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-788"><a href="#cb99-788" aria-hidden="true" tabindex="-1"></a><span class="in"># Load model </span></span>
-<span id="cb99-789"><a href="#cb99-789" aria-hidden="true" tabindex="-1"></a><span class="in">temp &lt;- brm(file="../Results/fit_H3b_M1.rds")</span></span>
-<span id="cb99-790"><a href="#cb99-790" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-791"><a href="#cb99-791" aria-hidden="true" tabindex="-1"></a><span class="in"># Print Formular</span></span>
-<span id="cb99-792"><a href="#cb99-792" aria-hidden="true" tabindex="-1"></a><span class="in">temp$formula</span></span>
-<span id="cb99-793"><a href="#cb99-793" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-794"><a href="#cb99-794" aria-hidden="true" tabindex="-1"></a><span class="in"># Make model parameter table</span></span>
-<span id="cb99-795"><a href="#cb99-795" aria-hidden="true" tabindex="-1"></a><span class="in">model_parameters(temp, centrality = "mean", dispersion = TRUE, </span></span>
-<span id="cb99-796"><a href="#cb99-796" aria-hidden="true" tabindex="-1"></a><span class="in">                 ci_method = "hdi", effects = "all") %&gt;% </span></span>
-<span id="cb99-797"><a href="#cb99-797" aria-hidden="true" tabindex="-1"></a><span class="in">  kable(digits=2) %&gt;% kable_paper()</span></span>
-<span id="cb99-798"><a href="#cb99-798" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-784"><a href="#cb99-784" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-785"><a href="#cb99-785" aria-hidden="true" tabindex="-1"></a><span class="in">```{r h3bM1}</span></span>
+<span id="cb99-786"><a href="#cb99-786" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-height: 5</span></span>
+<span id="cb99-787"><a href="#cb99-787" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-width:  14</span></span>
+<span id="cb99-788"><a href="#cb99-788" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-789"><a href="#cb99-789" aria-hidden="true" tabindex="-1"></a><span class="in"># Load model </span></span>
+<span id="cb99-790"><a href="#cb99-790" aria-hidden="true" tabindex="-1"></a><span class="in">temp &lt;- brm(file="../Results/fit_H3b_M1.rds")</span></span>
+<span id="cb99-791"><a href="#cb99-791" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-792"><a href="#cb99-792" aria-hidden="true" tabindex="-1"></a><span class="in"># Print Formular</span></span>
+<span id="cb99-793"><a href="#cb99-793" aria-hidden="true" tabindex="-1"></a><span class="in">temp$formula</span></span>
+<span id="cb99-794"><a href="#cb99-794" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-795"><a href="#cb99-795" aria-hidden="true" tabindex="-1"></a><span class="in"># Make model parameter table</span></span>
+<span id="cb99-796"><a href="#cb99-796" aria-hidden="true" tabindex="-1"></a><span class="in">model_parameters(temp, centrality = "mean", dispersion = TRUE, </span></span>
+<span id="cb99-797"><a href="#cb99-797" aria-hidden="true" tabindex="-1"></a><span class="in">                 ci_method = "hdi", effects = "all") %&gt;% </span></span>
+<span id="cb99-798"><a href="#cb99-798" aria-hidden="true" tabindex="-1"></a><span class="in">  kable(digits=2) %&gt;% kable_paper()</span></span>
 <span id="cb99-799"><a href="#cb99-799" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-800"><a href="#cb99-800" aria-hidden="true" tabindex="-1"></a><span class="in"># Make trace and pp-check plot</span></span>
-<span id="cb99-801"><a href="#cb99-801" aria-hidden="true" tabindex="-1"></a><span class="in">brms_plot(temp) + plot_layout(widths = c(2, 1))</span></span>
-<span id="cb99-802"><a href="#cb99-802" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb99-803"><a href="#cb99-803" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-800"><a href="#cb99-800" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-801"><a href="#cb99-801" aria-hidden="true" tabindex="-1"></a><span class="in"># Make trace and pp-check plot</span></span>
+<span id="cb99-802"><a href="#cb99-802" aria-hidden="true" tabindex="-1"></a><span class="in">brms_plot(temp) + plot_layout(widths = c(2, 1))</span></span>
+<span id="cb99-803"><a href="#cb99-803" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb99-804"><a href="#cb99-804" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-805"><a href="#cb99-805" aria-hidden="true" tabindex="-1"></a><span class="fu">### M2</span></span>
-<span id="cb99-806"><a href="#cb99-806" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-805"><a href="#cb99-805" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-806"><a href="#cb99-806" aria-hidden="true" tabindex="-1"></a><span class="fu">### M2</span></span>
 <span id="cb99-807"><a href="#cb99-807" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-808"><a href="#cb99-808" aria-hidden="true" tabindex="-1"></a><span class="in">```{r h3bM2}</span></span>
-<span id="cb99-809"><a href="#cb99-809" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-height: 5</span></span>
-<span id="cb99-810"><a href="#cb99-810" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-width:  14</span></span>
-<span id="cb99-811"><a href="#cb99-811" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-812"><a href="#cb99-812" aria-hidden="true" tabindex="-1"></a><span class="in"># Load model </span></span>
-<span id="cb99-813"><a href="#cb99-813" aria-hidden="true" tabindex="-1"></a><span class="in">temp &lt;- brm(file="../Results/fit_H3b_M2.rds")</span></span>
-<span id="cb99-814"><a href="#cb99-814" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-815"><a href="#cb99-815" aria-hidden="true" tabindex="-1"></a><span class="in"># Print Formular</span></span>
-<span id="cb99-816"><a href="#cb99-816" aria-hidden="true" tabindex="-1"></a><span class="in">temp$formula</span></span>
-<span id="cb99-817"><a href="#cb99-817" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-818"><a href="#cb99-818" aria-hidden="true" tabindex="-1"></a><span class="in"># Make model parameter table</span></span>
-<span id="cb99-819"><a href="#cb99-819" aria-hidden="true" tabindex="-1"></a><span class="in">model_parameters(temp, centrality = "mean", dispersion = TRUE, </span></span>
-<span id="cb99-820"><a href="#cb99-820" aria-hidden="true" tabindex="-1"></a><span class="in">                 ci_method = "hdi", effects = "all") %&gt;% </span></span>
-<span id="cb99-821"><a href="#cb99-821" aria-hidden="true" tabindex="-1"></a><span class="in">  kable(digits=2) %&gt;% kable_paper()</span></span>
-<span id="cb99-822"><a href="#cb99-822" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-808"><a href="#cb99-808" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-809"><a href="#cb99-809" aria-hidden="true" tabindex="-1"></a><span class="in">```{r h3bM2}</span></span>
+<span id="cb99-810"><a href="#cb99-810" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-height: 5</span></span>
+<span id="cb99-811"><a href="#cb99-811" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-width:  14</span></span>
+<span id="cb99-812"><a href="#cb99-812" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-813"><a href="#cb99-813" aria-hidden="true" tabindex="-1"></a><span class="in"># Load model </span></span>
+<span id="cb99-814"><a href="#cb99-814" aria-hidden="true" tabindex="-1"></a><span class="in">temp &lt;- brm(file="../Results/fit_H3b_M2.rds")</span></span>
+<span id="cb99-815"><a href="#cb99-815" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-816"><a href="#cb99-816" aria-hidden="true" tabindex="-1"></a><span class="in"># Print Formular</span></span>
+<span id="cb99-817"><a href="#cb99-817" aria-hidden="true" tabindex="-1"></a><span class="in">temp$formula</span></span>
+<span id="cb99-818"><a href="#cb99-818" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-819"><a href="#cb99-819" aria-hidden="true" tabindex="-1"></a><span class="in"># Make model parameter table</span></span>
+<span id="cb99-820"><a href="#cb99-820" aria-hidden="true" tabindex="-1"></a><span class="in">model_parameters(temp, centrality = "mean", dispersion = TRUE, </span></span>
+<span id="cb99-821"><a href="#cb99-821" aria-hidden="true" tabindex="-1"></a><span class="in">                 ci_method = "hdi", effects = "all") %&gt;% </span></span>
+<span id="cb99-822"><a href="#cb99-822" aria-hidden="true" tabindex="-1"></a><span class="in">  kable(digits=2) %&gt;% kable_paper()</span></span>
 <span id="cb99-823"><a href="#cb99-823" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-824"><a href="#cb99-824" aria-hidden="true" tabindex="-1"></a><span class="in"># Make trace and pp-check plot</span></span>
-<span id="cb99-825"><a href="#cb99-825" aria-hidden="true" tabindex="-1"></a><span class="in">brms_plot(temp) + plot_layout(widths = c(2, 1))</span></span>
-<span id="cb99-826"><a href="#cb99-826" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb99-827"><a href="#cb99-827" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-824"><a href="#cb99-824" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-825"><a href="#cb99-825" aria-hidden="true" tabindex="-1"></a><span class="in"># Make trace and pp-check plot</span></span>
+<span id="cb99-826"><a href="#cb99-826" aria-hidden="true" tabindex="-1"></a><span class="in">brms_plot(temp) + plot_layout(widths = c(2, 1))</span></span>
+<span id="cb99-827"><a href="#cb99-827" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb99-828"><a href="#cb99-828" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb99-829"><a href="#cb99-829" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb99-830"><a href="#cb99-830" aria-hidden="true" tabindex="-1"></a></span>
@@ -5249,7 +5260,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb99-834"><a href="#cb99-834" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb99-835"><a href="#cb99-835" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb99-836"><a href="#cb99-836" aria-hidden="true" tabindex="-1"></a></span>
-</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb99-837"><a href="#cb99-837" aria-hidden="true" tabindex="-1"></a></span>
+</code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">
