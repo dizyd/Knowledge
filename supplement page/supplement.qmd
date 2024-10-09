@@ -16,6 +16,7 @@ format:
     fig-width:  9
     fig-align: center
     fig-cap-location: top
+    embed-resources: true
   pdf:       
     toc: true
     toc-depth: 2
@@ -139,10 +140,12 @@ demo %>%
   select(trained_criterion,est_criterion,age:edu) %>% 
   kbl(col.names = c("Trained","Estimated","Age","Perc. Female/Male","Perc. GUEQ/BA/MA/Other"),digits = 2) %>% 
   kable_paper() %>% 
-  add_footnote("Note. GUEQ = General University Entrance Qualification , BA = Bachelor's degree, MA = Master's degree", notation="none")
+  column_spec(1, width="6em") %>% 
+  column_spec(2, width="6em") 
 
 ```
 
+*Note.* GUEQ = General University Entrance Qualification , BA = Bachelor's degree, MA = Master's degree
 
 
 # Reactivity Effects in General Criterion Knowledge Question 

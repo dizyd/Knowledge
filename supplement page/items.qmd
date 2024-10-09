@@ -159,7 +159,8 @@ items %>%
   select(ID_item,name,category,`g CO2 pro kg`,`Kcal pro 100g`,`Seeditems CO2` = seeding_CO2,`Seeditems Kcal` = seeding_Kcal) %>% 
   kbl(align = "c") %>% 
   column_spec(4,color = "white",background = spec_color(items$`g CO2 pro kg`)) %>% 
-  column_spec(5,color = "white",background = spec_color(items$`Kcal pro 100g`,option = "D")) 
+  column_spec(5,color = "white",background = spec_color(items$`Kcal pro 100g`,option = "D")) %>%
+  kable_styling(fixed_thead = T)
 ```
 
 ## Trivia Items             
@@ -196,7 +197,9 @@ trivia_df <- data.frame(ID   = 1:length(trivia),
                         type = c(rep("Post",15),rep("Test",6)))
 
 
-trivia_df %>% kbl(align = "c")
+trivia_df %>%
+  kbl(align = "c") %>%
+  kable_styling(fixed_thead = T)  
 
 ```
 
