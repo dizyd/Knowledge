@@ -1,5 +1,5 @@
 
-# Plotting                  ----------------------------------------------------------------
+# Plotting                           ----------------------------------------------------------------
 
 clrs <- c("#54AA8F","#00335B",
           "#22A884FF","#414487FF",
@@ -20,7 +20,7 @@ theme_nice <- function(){
           legend.position  = "bottom"
     )}
 
-# Create anonymize function -----------------------------------------------
+# Create anonymize function          -----------------------------------------------
 
 anonymize <- Vectorize(function(name) {
   
@@ -31,7 +31,7 @@ anonymize <- Vectorize(function(name) {
 }, vectorize.args = "name")
 
 
-# LogNormal Stuff           ---------------------------------------------------------------
+# LogNormal Stuff                    ---------------------------------------------------------------
 
 
 # This function computes the mu and sigma parameters of
@@ -82,7 +82,7 @@ effect_from_lognormal_effect <- function(mu,sigma,effect,digits=2){
 
 #effect_range_from_lognormal_effect(-1.03,0.75,-0.3)
 
-# EZ printing               ---------------------------------------------------------------
+# EZ printing                        ---------------------------------------------------------------
 
 
 ez_tables <- function(var){
@@ -98,3 +98,30 @@ ez_tables <- function(var){
   
 }
 
+# Compute d based on model estimates ---------------------------------------------------------------
+
+d_from_brms <- function(mod,coef){
+  
+  # extract estimates of variance components (random effects + residuals)
+  sds      <- mod  %>%
+                    gather_draws(`sd_.*`, sigma, regex = TRUE) %>%
+                    group_by(.variable) %>% 
+                    summarize(.value = mean(.value))
+  
+  # Compute total variance
+  sd_total <- sqrt(sum(sds$.value^2)) 
+  
+  
+  # allows to give external b
+  if(is.numeric(coef)){
+    # Use given b
+    b <- coef
+  } else {
+    # Extract effect coefficient estimate
+    b  <- mod  %>% gather_draws(!!ensym(coef)) %>%  mean_hdi() %>% pull(.value)
+  }
+  
+  
+  # Compute & return d
+  return(b/sd_total)
+}

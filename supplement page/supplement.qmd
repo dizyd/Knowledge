@@ -296,14 +296,13 @@ est %>%
 
 
 
-# Seeding Effects on Direct Learning                          
+# Seeding Effects on Direct Learning                         
 
 
-In the analysis of the effects of seeding on calories and CO~2~ reported in the main text, we used only the respective 45 transfer items. Here we report the results when using only the seeding items (see file `analysis_Hypothesis1_seedingItems.R` for the underlying analysis code).
+In the analysis of the effects of seeding on calories and CO~2~ reported in the main text, we used only the respective 45 transfer items. Here we report the results when using only the seeding items (see file [`analysis_Hypothesis1_seedingItems.R`](https://github.com/dizyd/Knowledge/blob/main/Scripts/analysis_Hypothesis1_seedingItems.R) for the underlying analysis code).
 
 ```{r}
 #| code-summary: "Load models & compute BF"
-#| cache: true
 
 # Load model files
 res_kcal_OME   <- brm(file="../Results/fit_H1a_Kcal_M1_seedingItemsOnly.rds")
@@ -316,16 +315,20 @@ res_CO2_rank   <- brm(file="../Results/fit_H1b_CO2_M1_seedingItemsOnly.rds")
 res_CO2_rank0  <- brm(file="../Results/fit_H1b_CO2_M0_seedingItemsOnly.rds")
 
 # Compute BFs
-BF_kcal_OME  <- bayes_factor(res_kcal_OME, res_kcal_OME0)
-BF_CO2_OME   <- bayes_factor(res_CO2_OME, res_CO2_OME0)
-BF_kcal_rank <- bayes_factor(res_kcal_rank, res_kcal_rank0)
-BF_CO2_rank  <- bayes_factor(res_CO2_rank, res_CO2_rank0)
+BF_kcal_OME  <- bayes_factor(res_kcal_OME, res_kcal_OME0, silent = T)
+BF_CO2_OME   <- bayes_factor(res_CO2_OME, res_CO2_OME0, silent = T)
+BF_kcal_rank <- bayes_factor(res_kcal_rank, res_kcal_rank0, silent = T)
+BF_CO2_rank  <- bayes_factor(res_CO2_rank, res_CO2_rank0, silent = T)
 
 # remove model objects to save some RAM
 rm(list=ls(pattern="res_"))
 ```
 
-Taken together, there were no effects of seeding when looking only at the seeding items. regardless of criterion and dependent variable (BF~kcal_OME~ = `r printnum(BF_kcal_OME$bf)`, BF~CO2_OME~ = `r printnum(BF_CO2_OME$bf)`, BF~kcal_rank~ = `r printnum(BF_kcal_rank$bf)`, BF~CO2_rank~ = `r printnum(BF_CO2_rank$bf)`).
+
+**Metric Knowledge:** We found strong evidence for a large seeding effect on metric knowledge (reduction in OME) on the seeding items for CO~2~ (BF~10~ = `r printnum(BF_CO2_OME$bf)`, *b* = -0.49 [-0.19, -0.82]) and evidence for a smaller seeding effect for calories (BF~10~ = `r printnum(BF_kcal_OME$bf)`, *b* = -0.10 [-0.21, -0.01]). 
+
+**Mapping Knowledge** In contrast, there was weak evidence for an effect of seeding on the mapping knowledge (increase in $\rho$) for participants who estimated calories (BF~10~ = `r printnum(BF_kcal_rank$bf)`, *b* = .08 [.01, .16]) but not CO~2~ (BF~10~ = `r printnum(BF_CO2_rank$bf)`).
+
 
 # Detailed Modeling Results                                  
 
@@ -897,108 +900,4 @@ brms_plot(temp) + plot_layout(widths = c(2, 1))
 
 
 
-# Frequentist Analysis                                       
-
-Here we provide the corresponding frequentist analysis results for the analysis reported in the main text using the `lme4`package.
-
-
-## Hypothesis 1a (OME)    
-
-```{r}
-#| code-summary: "Prepare data for H1"
-df_H1 <- est %>% 
-          filter(item_type     == "transfer") %>% 
-          mutate(match_domain  = match_domain-0.5)
-```
-
-
-
-### CO~2~ M0
-
-```{r h1aM0CO2}
-#| fig-height: 5
-#| fig-width:  14
-
-# Load model 
-temp <- brm(file="../Results/fit_H1a_CO2_M0.rds")
-
-# Print Formular
-temp$formula
-
-# Make model parameter table
-model_parameters(temp, centrality = "mean", dispersion = TRUE, 
-                 ci_method = "hdi", effects = "all") %>% 
-  kable(digits=2) %>% kable_paper()
-
-
-# Make trace and pp-check plot
-brms_plot(temp)
-```
-
-### CO~2~ M1
-
-```{r h1aM1CO2}
-#| fig-height: 5
-#| fig-width:  14
-
-# Load model 
-temp <- brm(file="../Results/fit_H1a_CO2_M1.rds")
-
-# Print Formular
-temp$formula
-
-# Make model parameter table
-model_parameters(temp, centrality = "mean", dispersion = TRUE, 
-                 ci_method = "hdi", effects = "all") %>% 
-  kable(digits=2) %>% kable_paper()
-
-# Make trace and pp-check plot
-brms_plot(temp)  + plot_layout(widths = c(2, 1))
-```
-
-### kcal M0
-
-```{r h1aM0kcal}
-#| fig-height: 5
-#| fig-width:  14
-
-# Load model 
-temp <- brm(file="../Results/fit_H1a_kcal_M0.rds")
-
-# Print Formular
-temp$formula
-
-# Make model parameter table
-model_parameters(temp, centrality = "mean", dispersion = TRUE, 
-                 ci_method = "hdi", effects = "all") %>% 
-  kable(digits=2) %>% kable_paper()
-
-
-# Make trace and pp-check plot
-brms_plot(temp)
-```
-
-### kcal M1
-
-```{r h1aM1kcal}
-#| fig-height: 5
-#| fig-width:  14
-
-# Load model 
-temp <- brm(file="../Results/fit_H1a_kcal_M1.rds")
-
-# Print Formular
-temp$formula
-
-# Make model parameter table
-model_parameters(temp, centrality = "mean", dispersion = TRUE, 
-                 ci_method = "hdi", effects = "all") %>% 
-  kable(digits=2) %>% kable_paper()
-
-# Make trace and pp-check plot
-brms_plot(temp)  + plot_layout(widths = c(2, 1))
-```
-
-
-    
-
+                                    

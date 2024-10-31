@@ -63,8 +63,7 @@ effect_resp <- function(mod){
 # Load Data             ---------------------------------------------------------------
 
 est <- read_csv2("Data/df_analysis.csv") %>% 
-        filter(item_type         == "seeding",
-               trained_criterion == est_criterion) %>% 
+        filter(item_type     == "seeding") %>% 
         mutate(match_domain  = match_domain-0.5)
 
 # H1a - Kcal            -----------------------------------------------------------
@@ -111,7 +110,7 @@ model_parameters(res_kcal_OME0,effects="all")
 # Calculate Bayes Factor
 set.seed(34876)
 
-bayes_factor(res_kcal_OME, res_kcal_OME0) # 1.01722
+bayes_factor(res_kcal_OME, res_kcal_OME0) # 7.91284
 
 
 # Means and global average marginal effect on response scale
@@ -163,7 +162,7 @@ model_parameters(res_CO2_OME0, effects="all")
 # Calculate Bayes Factor
 set.seed(34876)
 
-bayes_factor(res_CO2_OME, res_CO2_OME0) # 0.96319
+bayes_factor(res_CO2_OME, res_CO2_OME0) # 552.75863
 
 
 # Means and global average marginal effect on response scale
@@ -224,7 +223,7 @@ model_parameters(res_kcal_rank0,effects="all")
 # Calculate Bayes Factor
 set.seed(34876)
 
-bayes_factor(res_kcal_rank, res_kcal_rank0) # 1.00404
+bayes_factor(res_kcal_rank, res_kcal_rank0) # 1.86291
 
 
 # Means and global average marginal effect on response scale
@@ -286,7 +285,7 @@ model_parameters(res_CO2_rank0,effects="all")
 # Calculate Bayes Factor
 set.seed(34876)
 
-bayes_factor(res_CO2_rank, res_CO2_rank0) # 0.98160
+bayes_factor(res_CO2_rank, res_CO2_rank0) # 0.89420
 
 
 # Means and global average marginal effect on response scale
