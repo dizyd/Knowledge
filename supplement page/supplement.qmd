@@ -113,7 +113,7 @@ est <- read_csv2("../Data/df_analysis.csv")
 
 # Demographics per Condition                                 
 
-```{r}
+```{r demo}
 # Make tidy df of needed variables
 demo <- est %>% 
           select(ID,trained_criterion,est_criterion,age, gender, education_level) %>% 
@@ -150,7 +150,7 @@ demo %>%
 
 # Reactivity Effects in General Criterion Knowledge Question 
 
-```{r}
+```{r bf_reactivity}
 # Make tidy df of needed variables
 temp <- est %>% 
           select(ID,trained_criterion,est_criterion,Kcal_knowledge,CO2_knowledge) %>% 
@@ -166,7 +166,7 @@ bf_CO2  = anovaBF(CO2_knowledge ~ trained_f * estimated_f, data=temp)
 
 As stated in the main manuscript, participants reported knowing in general more about the calorie content of food items (*M* = 4.12, *SD* = 1.69) than their CO~2~ footprint (*M* = 2.08, *SD* = 1.32, δ = 2.02 \[1.67, 2.36\], BF~10~ \> 1000). However, we also found a small reactivity effect, where participants rated their knowledge of a criterion lower when they had to estimate this criterion beforehand. This effect was found when participants had to estimate calories in the main task (BF~10~ = `r printnum(extractBF(bf_Kcal)$bf[2])`) and also (but to smaller degree) when they had to estimate the carbon footprint (BF~10~ = `r printnum(extractBF(bf_CO2)$bf[2])`). See below for descriptive values and the corresponding figure of individual values.
 
-```{r}
+```{r table_reactivity}
 #| code-summary: "Table"
 
 temp %>% 
@@ -183,7 +183,7 @@ temp %>%
 
 ```
 
-```{r}
+```{r plots_reactivity}
 #| code-summary: "Plot"
 #| fig-cap: "Figure S1. General knowledge ratings for C0~2~ footprint and calorie content of food items, depending on the estimated criterion in the main task."
 
@@ -213,7 +213,7 @@ temp %>%
 
 In the preregistration, we also predicted that a greater  seeding  effect when  participants  saw  more posts as indicated by the number of liked posts. However, as already stated in the main text, almost all participants liked every post, see the table below for the descriptive statistics and the Figure S2 for the distribution of liked posts per participant.
 
-```{r}
+```{r table_posts}
 #| code-summary: "Table"
 
 est %>% 
@@ -230,7 +230,7 @@ est %>%
 ```
 
 
-```{r}
+```{r plot_dist_posts}
 #| code-summary: "Plot"
 #| fig-cap: "Figure S2. Distribution of number of liked posts per participant."
 #| fig-height: 5
@@ -255,7 +255,7 @@ est %>%
 In addition, Figure S3 shows the scatter plots with the estimated regression line when using the number of liked posts as an predictor of OME or $\rho$ (all *p*s > 0.05)
 
 
-```{r}
+```{r plot_posts}
 #| code-summary: "Plot"
 #| fig-cap: "Figure S3. Relationship of number of liked posts and OME/rank correlation (z-transformed) per trained and estimated criterion"
 #| fig-height: 8
@@ -301,7 +301,7 @@ est %>%
 
 In the analysis of the effects of seeding on calories and CO~2~ reported in the main text, we used only the respective 45 transfer items. Here we report the results when using only the seeding items (see file [`analysis_Hypothesis1_seedingItems.R`](https://github.com/dizyd/Knowledge/blob/main/Scripts/analysis_Hypothesis1_seedingItems.R) for the underlying analysis code).
 
-```{r}
+```{r load_models_seeding}
 #| code-summary: "Load models & compute BF"
 
 # Load model files
@@ -903,5 +903,33 @@ brms_plot(temp) + plot_layout(widths = c(2, 1))
                                     
                                     
                                     
-# Calculation of Standardized Effect Sizes
+# Calculation of Standardized Effect Sizes                   
+
+As suggest by  Westfall et al. ([2014](https://doi.org/10.1037/xge0000014)) and others (e.g., Brysbaert & Stevens, [2018](https://doi.org/10.5334/joc.10)) we calculated standardized effect sizes in terms of Cohens $d$ by dividing the model based effect estimate by the total standard deviation (see file [`analysis_compute_standardized_effect_sizes.R`](https://github.com/dizyd/Knowledge/blob/main/Scripts/analysis_compute_standardized_effect_sizes.R) for the underlying analysis code). However, based on simulations and some checks, we decided against using the model based variance estimate to calculate the total standard deviation and instead directly computed it from the data. The reason for this was that there are some very small OME values as can be seen here when we plot the OME values on a normalized scale which reflects the data used by the log-normal model:
+
+
+```{r logOME_dist_plot}
+#| code-summary: "Plot"
+#| fig-cap: "Figure S4. Distribution of normalized OMEs (i.e., log(OMEs))."
+#| fig-height: 5
+#| fig-width:  8
+
+est %>% 
+  filter(item_type == "transfer", est_criterion == "Kcal") %>% # filter data as in Analysis for Hypothesis 1a
+   ggplot(aes(x = log(OME_corr))) +
+      geom_histogram(alpha=0.75,position = "identity",bins=25) +
+      scale_fill_manual(values=c(clrs[4],clrs[3]),labels = parse_format()) +
+      theme_nice() +
+      labs(x    = "log(OME)",
+           y    = "Frequency")
+
+```
+
+These small values (e.g., OME < 0.02, log(OME) < -3.9) have a large biasing effect on the estimated standard deviation coefficients, especially for the random intercepts of items and the residual standard deviation. This increased estimates would then lead to a biased estimate of the effect size. The standard deviations on the normal scale are not influenced that much from these small values, thus we used the estimated total standard deviation from the corresponding OMEs (`sd(OME)`) and the estimated effects on the untransformed scale as reported in the paper to compute the estimated standardized effects. These effects are also more conservative (i.e., smaller) than computing the effects from aggregated data (i.e. from a *t*-test).
+
+
+
+
+
+
 
