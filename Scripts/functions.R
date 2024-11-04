@@ -98,30 +98,3 @@ ez_tables <- function(var){
   
 }
 
-# Compute d based on model estimates ---------------------------------------------------------------
-
-d_from_brms <- function(mod,coef){
-  
-  # extract estimates of variance components (random effects + residuals)
-  sds      <- mod  %>%
-                    gather_draws(`sd_.*`, sigma, regex = TRUE) %>%
-                    group_by(.variable) %>% 
-                    summarize(.value = mean(.value))
-  
-  # Compute total variance
-  sd_total <- sqrt(sum(sds$.value^2)) 
-  
-  
-  # allows to give external b
-  if(is.numeric(coef)){
-    # Use given b
-    b <- coef
-  } else {
-    # Extract effect coefficient estimate
-    b  <- mod  %>% gather_draws(!!ensym(coef)) %>%  mean_hdi() %>% pull(.value)
-  }
-  
-  
-  # Compute & return d
-  return(b/sd_total)
-}

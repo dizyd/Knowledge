@@ -901,3 +901,7 @@ brms_plot(temp) + plot_layout(widths = c(2, 1))
 
 
                                     
+                                    
+                                    
+# Calculation of Standardized Effect Sizes
+

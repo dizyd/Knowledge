@@ -1,15 +1,6 @@
-# load packages                     --------------------------------------------------------
+# Load packages                     --------------------------------------------------------
 
 library(tidyverse)   # ggplot, dplyr, and friends
-library(brms)        # Bayesian modeling through Stan
-library(parameters)  # Nicer output of model results
-library(tidybayes)   # Manipulate brms objects in a tidy way
-
-# Setup                             --------------------------------------------------------
-
-today <- format(Sys.Date(),format="%d_%m_%Y")
-source("Scripts/functions.R")
-
 
 # Load Data                         ---------------------------------------------------------------
 
@@ -17,122 +8,84 @@ est <- read_csv2("Data/df_analysis.csv")
 
 # Metric Knowledge  (Hypothesis 1a) ---------------------------------------------------------------
 
-res_kcal_OME <-  brm(OME_corr     ~ match_domain + (1|ID) + (match_domain|ID_item),
-                     family       = gaussian(),
-                     data         = est %>% filter(item_type     == "transfer",
-                                                   est_criterion == "Kcal"),  
-                     warmup       = bayes$warmup, 
-                     iter         = bayes$iter, 
-                     chains       = bayes$chains, 
-                     seed         = bayes$bayes_seed,
-                     cores        = bayes$cores,
-                     file         = "Results/Models/fit_H1a_Kcal_M1_normal.rds",
-                     backend      = "rstan",
-                     sample_prior = "yes",
-                     save_pars    = save_pars(all=TRUE))
 
+# Compute SD from data 
+temp_sd <- est %>% 
+            filter(item_type     == "transfer",
+                   est_criterion == "Kcal") %>% 
+            pull(OME_corr) %>% 
+            sd()
 
-d_from_brms(res_kcal_OME,0.06) # 0.253149
+# Effects as reported in manuscript
+round(0.06/temp_sd,2) # 0.26
 
 
 
-res_CO2_OME <-  brm(OME_corr     ~ match_domain + (1|ID) + (match_domain|ID_item),
-                     family       = gaussian(),
-                     data         = est %>% filter(item_type     == "transfer",
-                                                   est_criterion == "CO2"),  
-                     warmup       = bayes$warmup, 
-                     iter         = bayes$iter, 
-                     chains       = bayes$chains, 
-                     seed         = bayes$bayes_seed,
-                     cores        = bayes$cores,
-                     file         = "Results/Models/fit_H1a_CO2_M1_normal.rds",
-                     backend      = "rstan",
-                     sample_prior = "yes",
-                     save_pars    = save_pars(all=TRUE))
 
+# Compute SD from data 
+temp_sd <- est %>% 
+            filter(item_type     == "transfer",
+                   est_criterion == "CO2") %>% 
+            pull(OME_corr) %>% 
+            sd()
 
-d_from_brms(res_CO2_OME,0.51) # 0.7335665
+# Effects as reported in manuscript
+round(0.51/temp_sd,2) # 0.68
+
 
 
 # Metric Knowledge  (Hypothesis 2a) ---------------------------------------------------------------
 
+# Compute SD from data 
+temp_sd <- est %>% 
+            filter(trained_criterion == "Kcal",
+                   est_criterion     == "Kcal") %>% 
+            pull(OME_corr) %>% 
+            sd()
 
-res_kcal_OME <-  brm(OME_corr     ~ item_type + (item_type|ID) + (1|ID_item),
-                     family       = gaussian(),
-                     data         = est %>% filter(trained_criterion == "Kcal",
-                                                   est_criterion     == "Kcal"),  
-                     warmup       = bayes$warmup, 
-                     iter         = bayes$iter, 
-                     chains       = bayes$chains, 
-                     seed         = bayes$bayes_seed,
-                     cores        = bayes$cores,
-                     file         = "Results/Models/fit_H2a_Kcal_M1_normal.rds",
-                     backend      = "rstan",
-                     sample_prior = "yes",
-                     save_pars    = save_pars(all=TRUE))
-
-d_from_brms(res_kcal_OME,0.05) # 0.2275606
+# Effects as reported in manuscript
+round(0.05/temp_sd,2) # 0.23
 
 
 # Mapping Knowledge (Hypothesis 2b) ---------------------------------------------------------------
 
-res_kcal_rank <-  brm(rank_z       ~ item_type + (item_type|ID),
-                      family       = gaussian(),
-                      data         = est %>%
-                                      filter(est_criterion      == "Kcal",
-                                             trained_criterion  == "Kcal") %>% 
-                                      select(ID,item_type,rank_z) %>% 
-                                      distinct(),  
-                      warmup       = bayes$warmup, 
-                      iter         = bayes$iter, 
-                      chains       = bayes$chains, 
-                      seed         = bayes$bayes_seed,
-                      cores        = bayes$cores,
-                      file         = "Results/Models/fit_H2b_kcal_M1_normal.rds",
-                      backend      = "rstan",
-                      sample_prior = "yes",
-                      save_pars    = save_pars(all=TRUE))
 
+# Compute SD from data 
+temp_sd <- est %>% 
+            filter(trained_criterion == "Kcal",
+                   est_criterion     == "Kcal") %>% 
+            select(ID,item_type,rank_z) %>% 
+            distinct() %>% 
+            pull(rank_z) %>% 
+            sd()
 
-d_from_brms(res_kcal_rank,.13) # 0.301334
-
+# Effects as reported in manuscript
+round(0.13/temp_sd,2) # 0.34 
 
 # Metric Knowledge  (Hypothesis 3a) ---------------------------------------------------------------
 
-res_OME_m2 <-  brm(OME_corr     ~ match_domain * est_criterion + (1|ID) + (est_criterion*match_domain|ID_item),
-                   family       = gaussian(),
-                   data         = est %>% filter(item_type     == "transfer"),  
-                   warmup       = bayes$warmup, 
-                   iter         = bayes$iter, 
-                   chains       = bayes$chains, 
-                   seed         = bayes$bayes_seed,
-                   cores        = bayes$cores,
-                   file         = "Results/Models/fit_H3a_M2_normal.rds",
-                   backend      = "rstan",
-                   sample_prior = "yes",
-                   save_pars    = save_pars(all=TRUE))
+# Compute SD from data 
+temp_sd <- est %>% 
+            filter(item_type     == "transfer") %>% 
+            pull(OME_corr) %>% 
+            sd()
 
-d_from_brms(res_OME_m2,0.67) # 1.172509
-d_from_brms(res_OME_m2,0.54) # 0.9450072
+# Effects as reported in manuscript
+round(0.67/temp_sd,2) # 1.06
+round(0.54/temp_sd,2) # 0.86
+
+
 
 
 # Mapping Knowledge (Hypothesis 3b) ---------------------------------------------------------------
 
 
-res_rank_m2  <- brm(rank_z       ~ match_domain*est_criterion + (1|ID),
-                    family       = gaussian(),
-                    data         = est %>%
-                                    filter(item_type == "transfer") %>% 
-                                    select(ID,est_criterion,match_domain,rank_z) %>% 
-                                    distinct(),  
-                    warmup       = bayes$warmup, 
-                    iter         = bayes$iter, 
-                    chains       = bayes$chains, 
-                    seed         = bayes$bayes_seed,
-                    cores        = bayes$cores,
-                    file         = "Results/Models/fit_H3b_M2_normal.rds",
-                    backend      = "rstan",
-                    sample_prior = "yes",
-                    save_pars    = save_pars(all=TRUE))
+temp_sd <- est %>% 
+            filter(item_type == "transfer") %>% 
+            select(ID,est_criterion,match_domain,rank_z) %>%
+            distinct() %>% 
+            pull(rank_z) %>% 
+            sd()
 
-d_from_brms(res_rank_m2,.11) # 0.3806749
+# Effects as reported in manuscript
+round(0.11/temp_sd,2) # 1.06
