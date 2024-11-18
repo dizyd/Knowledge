@@ -111,6 +111,21 @@ est <- read_csv2("../Data/df_analysis.csv")
 ```
 
 
+The following table shows the list of abbreviations commonly used in the supplement:
+
+```{r}
+#| tbl-colwidths: [10,10]
+
+data.frame("Abbreviation" = c("kcal", "CO<sub>2</sub>", "OME", "BF"),
+           "Meaning" = c("Kilocalories", "Carbon dioxide", "Order of Magnitude Error", "Bayes Factor")) %>% 
+  kbl(escape = F) %>% 
+  kable_paper()
+
+
+
+```
+
+
 # Demographics per Condition                                 
 
 ```{r demo}
