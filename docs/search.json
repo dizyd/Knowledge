@@ -109,7 +109,7 @@
     "href": "index.html",
     "title": "# Knowledge",
     "section": "",
-    "text": "Main results:\n\nThis page contains the supplementary material and additional information for the article #Knowledge: Improving food-related knowledge via seeding implemented as a social media intervention by David Izydorczyk, Barbara Kreis, Michael Kilb & Arndt Bröder.\nThe data and brms-model files corresponding to this project can be found on the respective OSF.\nThe scripts to reproduce the analysis reported in the main manuscript and the stimuli used in the experiment can be found on Github.\nThis page was built with Quarto and thus contains also the code used to produce the analysis reported in the supplement.\n\n\n\n Back to top"
+    "text": "Main results:\n\nThis page contains the supplementary material and additional information for the article #Knowledge: Improving food-related knowledge via seeding implemented as a social media intervention by David Izydorczyk, Barbara Kreis, Michael Kilb & Arndt Bröder.\nThe data, materials, and the scripts to reproduce all analyses and figures reported in the main manuscript can be found on Github.\nThe corresponding brms-model files from the analysis and the preregistration can be found on the respective OSF.\nThis page was built with Quarto and thus contains also the code used to produce the analysis reported in the supplement.\n\n\n\n Back to top"
   },
   {
     "objectID": "sessionInfo.html",

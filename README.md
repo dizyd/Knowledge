@@ -1,28 +1,33 @@
 # \#Knowledge: Improving food-related knowledge via seeding implemented as a social media intervention
 
 ## About this repository
-This repository contains code to reproduce all analyses and figures in the project *\#Knowledge: Improving food-related knowledge via seeding implemented as a social media intervention*. **The data corresponding to this project can be found on the respective OSF: https://osf.io/vztjq/**. The structure of this repository is as follows:
+This repository contains the data, materials, and the code to reproduce all analyses and figures in the project *\#Knowledge: Improving food-related knowledge via seeding implemented as a social media intervention*. The preregistration and the `brms` model files from the analysis can be found on the respective OSF: https://osf.io/vztjq/**. The structure of this repository is as follows:
 
 <br>
 
 - **Scripts/** holds code relevant for the paper. Specifically:
-    - `Scripts/functions.R` has code for useful R helper functions for analysis and plotting.
-    - `Scripts/analysis.R` contains code for the initial data preparation step, including filtering participants and trials, calculating descriptive statistics (Table 1 and 2 in manscuript), and making the main results figure.
-    - `Scripts/analysis_Hypothesis1.R` has code run the analysis for Hypothesis 1.
-    - `Scripts/analysis_Hypothesis2.R` has code run the analysis for Hypothesis 2.
-    - `Scripts/analysis_Hypothesis3.R` has code run the analysis for Hypothesis 3.
-    - `Scripts/appendix_A1.R` has code to produce the Table A1.
-    - `Scripts/appendix_A2.R` has code to produce the Figure B1.
+    - `Scripts/functions.R` contains code of useful R helper functions, e.g., for analysis, plotting etc.
+    - `Scripts/analysis.R` contains code for the initial data preparation steps, including filtering of participants and trials, calculating descriptive statistics (Table 1 and 2 in the manscuript), and making the main results figure (Figure 3).
+    - `Scripts/analysis_Hypothesis1.R` contains the code to run the analysis for Hypothesis 1.
+    - `Scripts/analysis_Hypothesis2.R` contains the code to run the analysis for Hypothesis 2.
+    - `Scripts/analysis_Hypothesis3.R` contains the code to run the analysis for Hypothesis 3.
+    - `Scripts/analysis_Hypothesis1_sensitivity.R` contains the code to run the analysis for Hypothesis 1 with more skeptical priors.
+    - `Scripts/analysis_Hypothesis2_sensitivity.R` contains the code to run the analysis for Hypothesis 2 with more skeptical priors.
+    - `Scripts/analysis_Hypothesis3_sensitivity.R` contains the code to run the analysis for Hypothesis 3 with more skeptical priors.
+    - `Scripts/aanalysis_Hypothesis1_seedingItems.R` contains the code to run the analysis for Hypothesis 1 but only for the seeding items as reported in the supplementary materials (see [here](https://dizyd.github.io/Knowledge/supplement.html#seeding-effects-on-direct-learning)).
+    - `Scripts/appendix_A1.R` contains  the code to produce the Table A1.
+    - `Scripts/appendix_A2.R` contains  the code to produce the Figure B1.
+    - `Scripts/analysis_compute_standardized_effect_sizes.R` contains the code to compute the standardizeded effect size reported in the main text (for more information see also the supplementary materials [here](https://dizyd.github.io/Knowledge/supplement.html#calculation-of-standardized-effect-sizes)).
 
 <br>
 
-- **Data/** contains the script `download_data_from_OSF.R` which downloads the data relevant for the paper from the OSF. Specifically:
+- **Data/** contains the data files. Specifically:
     - `Data/data_insta_seeding.csv` which contains the full data.
     - `Data/df_analysis.csv` which contains the filtered and cleaned data used for all analysis.
 
 <br>
     
-- **Results/** contains the script `download_brms_files_from_OSF.R` which downloads all 36 `brms` model files from the OSF.
+- **Results/** contains the script `download_brms_files_from_OSF.R` which downloads all `brms` model files from the OSF (Caution: This might take a few minutes).
 
 <br>
 
