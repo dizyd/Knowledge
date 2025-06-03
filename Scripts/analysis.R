@@ -173,7 +173,7 @@ est   <- insta %>%
             group_by(ID,item_type) %>% 
             mutate(rank      = cor(criterion,judgment,method="spearman"),
                    rank_z    = z_fisher(r = rank)) %>% 
-            select(ID,trained_criterion,est_criterion,match_domain,trial,ID_item:rt_ms,criterion,item_type,OME,OME_corr,sign_OME,rank,rank_z,age:SNS_3) %>% 
+            select(ID,trained_criterion,est_criterion,match_domain,trial,ID_item:rt_ms,criterion,item_type,OME,OME_corr,sign_OME,rank,rank_z,age:SNS_3,n_posts_liked) %>% 
             ungroup()
 
 
@@ -199,23 +199,23 @@ write_csv2(est,"Data/df_analysis.csv")
   summarise(across(OME_corr, list(mean = mean,
                                   sd   = sd),
                    .names = "{.col}.{fn}"),
-            across(sign_OME, list(mean = mean,
-                                  sd   = sd),
-                   .names = "{.col}.{fn}"),
+            # across(sign_OME, list(mean = mean,
+            #                       sd   = sd),
+            #        .names = "{.col}.{fn}"),
             across(rank,  list(mean   = mean,
                                sd     = sd),
                    .names = "{.col}.{fn}"),.groups = "drop") %>% 
   mutate_if(is.numeric,printnum,digits=2) %>% 
   mutate(OME       = paste0(OME_corr.mean," (",OME_corr.sd,")"),
-         sign_OME  = paste0(sign_OME.mean," (",sign_OME.sd,")"),
+        # sign_OME  = paste0(sign_OME.mean," (",sign_OME.sd,")"),
          rank      = paste0(rank.mean," (",rank.sd,")")) %>% 
-  select(est_criterion,trained_criterion,OME,sign_OME,rank))
+  select(est_criterion,trained_criterion,OME,rank)) # ,sign_OME
 
 
 # Latex Table
 T1 %>% 
   kable(format    = "latex",digits=2,booktabs=TRUE,align="c",
-        col.names = c("Estimated","Trained","OME","sign_OME","$\\rho$"),
+        col.names = c("Estimated","Trained","OME","$\\rho$"), # "sign_OME",
         caption   = "Caption",
         escape    = FALSE) %>% 
   footnote(general           = "\\\\footnotesize\\{This is the note\\}",
@@ -235,7 +235,7 @@ est %>%
   filter(trained_criterion == est_criterion) %>% 
   group_by(est_criterion,item_type) %>% 
   summarise(mean = exp(mean(log(OME_corr))),
-            sd   = exp(sd(log(OME_corr)))
+            sd   = exp(sd(log(OME_corr))))
 
 
 (T2 <- est %>% 
@@ -266,10 +266,6 @@ T2 %>%
              general_title     = "\\\\footnotesize\\{Note.\\}",
              title_format      = c("italic")) %>% 
     collapse_rows(columns = c(1,2), latex_hline = "major", valign = "middle")
-
-
-
-
 
 
 
@@ -335,40 +331,42 @@ est %>%
   theme_nice() +
   theme(legend.position = "none") -> p_rank
 
-
-
-
-est %>% 
-  mutate(est_criterion = ifelse(est_criterion == "CO2",
-                                "bold(Estimated:~CO[2])",
-                                "bold(Estimated:~kcal)"),
-         trained_criterion = ifelse(trained_criterion == "CO2",
-                                    "CO[2]",
-                                    "kcal")) %>% 
-  rename(`Estimated Criterion` = est_criterion,
-         `Trained Criterion` = trained_criterion) %>% 
-  ggplot(.,aes(x = sign_OME, fill = `Trained Criterion`)) +
-  geom_histogram(bins=30,position = "identity",alpha=0.75,color="black") +
-  scale_fill_manual(values=c("#414487FF","#22A884FF"),
-                    labels = parse_format()) +
-  geom_vline(xintercept = 0,linewidth=1,lty="dashed")+
-  facet_wrap(.~`Estimated Criterion`,labeller = label_parsed) +
-  labs(fill = "Trained Criterion", 
-       y    = "Frequency",
-       x    = "signed OME") +
-  scale_y_continuous(expand = c(0, 0),limits = c(0,900)) +
-  theme_nice() +
-  theme(legend.position = c(.15,.75)) -> p_signed
-
-
-
-
-(p_signed/ p_OME  / p_rank) +
+(p_OME  / p_rank) +
   plot_annotation(tag_levels="A") +
-  plot_layout(heights = c(5, 5, 5))
+  plot_layout(heights = c(5, 5))
 
-ggsave("Results/Plots/main_res_obs.pdf",
-       width=8,height=13,bg="white",dpi=300,device = cairo_pdf)
+ggsave("Plots/Figure_3_main_results.pdf",
+       width=8,height=9,bg="white",dpi=300,device = cairo_pdf)
+
+
+
+
+# est %>% 
+#   mutate(est_criterion = ifelse(est_criterion == "CO2",
+#                                 "bold(Estimated:~CO[2])",
+#                                 "bold(Estimated:~kcal)"),
+#          trained_criterion = ifelse(trained_criterion == "CO2",
+#                                     "CO[2]",
+#                                     "kcal")) %>% 
+#   rename(`Estimated Criterion` = est_criterion,
+#          `Trained Criterion` = trained_criterion) %>% 
+#   ggplot(.,aes(x = sign_OME, fill = `Trained Criterion`)) +
+#   geom_histogram(bins=30,position = "identity",alpha=0.75,color="black") +
+#   scale_fill_manual(values=c("#414487FF","#22A884FF"),
+#                     labels = parse_format()) +
+#   geom_vline(xintercept = 0,linewidth=1,lty="dashed")+
+#   facet_wrap(.~`Estimated Criterion`,labeller = label_parsed) +
+#   labs(fill = "Trained Criterion", 
+#        y    = "Frequency",
+#        x    = "signed OME") +
+#   scale_y_continuous(expand = c(0, 0),limits = c(0,900)) +
+#   theme_nice() +
+#   theme(legend.position = c(.15,.75)) -> p_signed
+
+# (p_signed/ p_OME  / p_rank) +
+#   plot_annotation(tag_levels="A") +
+#   plot_layout(heights = c(5, 5, 5))
+
 
 
 

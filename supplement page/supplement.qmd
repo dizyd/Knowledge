@@ -309,6 +309,19 @@ est %>%
 
 ```
 
+# Detailed General Analytical Approach                       
+
+Since the estimation trials are nested in a cross-classified manner within participants and items, we used multi-level modeling to analyze our data. Specifically, we used Bayesian (generalized) mixed-effects models (McElreath, 2020) implemented in the R-package `brms` (Bürkner, 2017, 2018). This approach allows us to account for the random effects from both, participants and items, and to model the different distributions of the dependent variables in a principled and relatively straightforward manner (Gelman et al., 2014; McElreath, 2020).
+
+Given the skewed exponential distribution inherent to the OME, we used hierarchical log-normal models to analyze all hypotheses with the OME as the dependent variable and hierarchical Gaussian models when the rank-order correlation was the dependent variable. As the log-normal model cannot handle zero values, we replaced the n = 45 (0.5%) trials with an OME of 0 (i.e., when the estimated value matched the actual value) with 0.0001, which is around one order of magnitude below the smallest observed OME of 0.0008[^1]. Additionally, we excluded n = 2 (0.02%) trials where participants gave an estimate of 0 as this would result in an OME of -$\infty$. We used weakly informative priors (Lee & Vanpaemel, 2018) based on previous studies (e.g., Bröder et al., 2023) for the main predictor variables, and weakly informative priors for the other parameters (e.g., the standard deviation of random effects and the correlation between random effects) to support model convergence and to prevent estimation issues by ensuring priors covered realistic values for the various model parameters. Detailed descriptions of the priors can be found in Appendix B in the main text.
+
+The models were implemented in the `brms`-package (Bürkner, 2017, 2018) using four Hamiltonian Monte Carlo chains with 1,000 warm-up and 10,000 post-warm-up samples. The convergence of the chains was checked by visual inspection and the standard ˆR statistic ($\hat{R}$ < 1.01, Gelman and Rubin, 1992). Hypotheses were tested via model comparison, wherethe full model ($\mathcal{M}_1$) that includes the fixed-effect predictor of interest and all possible random effects was compared to a reference model that only includes the random effects, but not the fixed-effect predictor ($\mathcal{M}_0$, Van Doorn et al., 2023). Thus, although both models assume varying random effects across participants and items, only $\mathcal{M}_1$ assumes an overall $\mathcal{M}_1$ effect of the respective fixed-effects predictor, whereas $\mathcal{M}_0$ assumes that the overall effect is 0 on average (Van Doorn et al., 2023).
+
+We compared the models using Bayes factors (Jeffreys, 1961; Kass & Raftery, 1995; Myung & Pitt, 1997; see Heck et al., 2023 for a review) calculated through bridge sampling (Gronau et al., 2017, 2018). The resulting Bayes factor $BF_{10}$ quantifies the relative evidence for $\mathcal{M}_1$ compared to $\mathcal{M}_0$, indicating how much more probable the data are under $\mathcal{M}_1$ compared to $\mathcal{M}_0$, or framed differently, how much better $\mathcal{M}_1$ is able to predict the observed data than $\mathcal{M}_0$ (Kass & Raftery, 1995; Morey et al., 2016;Vandekerckhove et al., 2015). For example, a Bayes factor of $BF_{10}$ = 5 suggests that the data are five times more likely to occur under M1 than under M0. One convention is that a Bayes factor greater than 3 can be considered as "substantial" evidence and a Bayes factor
+greater than 10 as "strong" evidence against the competing model (Wetzels et al., 2011).
+
+We also report the posterior mean and 95% highest density intervals (HDI) of the fixed-effect parameters of interest when the Bayes Factor indicates evidence in favor of $\mathcal{M}_1$ (i.e., $BF_{10}$ > 1, Ly et al., 2020). For the log-normal model, we report the transformed values on the normal response scale for easier interpretation. 
+
 
 
 # Seeding Effects on Direct Learning                         
@@ -347,7 +360,7 @@ rm(list=ls(pattern="res_"))
 
 # Detailed Modeling Results                                  
 
-Here we provide for all models reported in the main manuscript more detailed modeling results, including a table with the mean, standard deviation, 95\%-HDI, effective sample size (ESS) and $\hat{R}$ for each estimated parameter (random and fixed), as well as figures showing the MCMC-traces for the main fixed effects parameters (intercept and effect parameter) and posterior predictive distributions of the complete model.
+Here we provide more detailed modeling results for all models reported in the main manuscript, including a table with the mean, standard deviation, 95\%-HDI, effective sample size (ESS) and $\hat{R}$ for each estimated parameter (random and fixed), as well as figures showing the MCMC-traces for the main fixed effects parameters (intercept and effect parameter) and posterior predictive distributions of the complete model.
 
 ## Hypothesis 1a (OME)    
 
@@ -918,6 +931,25 @@ brms_plot(temp) + plot_layout(widths = c(2, 1))
                                     
                                     
                                     
+## Results Analysis
+
+Here we provide the results of the sensitivity analysis (i.e., when using more skeptical and conservative priors) for the tests with an $BF_{10}$ > 1 when using the weakly informative priors.
+
+### Hypothesis 1a (OME) 
+
+For the effect found when estimating calories ($BF_{10}$ = 2.01 in the main text), using the less informative and more skeptical priors did not substantially affect the parameter estimates (as to be expected), but it did affect the Bayes Factor which now indicated no evidence for an effect ($BF_{10}$ = 0.36).
+
+### Hypothesis 2a (OME) 
+
+For the effect found when comparing transfer and seeding items in the calorie criterion ($BF_{10}$ = 1.51 in the main text), using the less informative and more skeptical priors did not substantially affect the parameter estimates, but it did affect the Bayes Factor which now indicated no evidence for an effect ($BF_{10}$ = 0.50).
+
+
+### Hypothesis 2b ($\rho$) 
+
+For the effect found when comparing transfer and seeding items in the calorie criterion ($BF_{10}$ = 1.39 in the main text), using the less informative and more skeptical priors did not substantially affect the parameter estimates, but it did affect the Bayes Factor which now indicated no evidence for an effect ($BF_{10}$ = 0.69).
+
+
+
 # Calculation of Standardized Effect Sizes                   
 
 As suggest by  Westfall et al. ([2014](https://doi.org/10.1037/xge0000014)) and others (e.g., Brysbaert & Stevens, [2018](https://doi.org/10.5334/joc.10)) we calculated standardized effect sizes in terms of Cohens $d$ by dividing the model based effect estimate by the total standard deviation (see file [`analysis_compute_standardized_effect_sizes.R`](https://github.com/dizyd/Knowledge/blob/main/Scripts/analysis_compute_standardized_effect_sizes.R) for the underlying analysis code). However, based on simulations and some checks, we decided against using the model based variance estimate to calculate the total standard deviation and instead directly computed it from the data. The reason for this was that there are some very small OME values as can be seen here when we plot the OME values on a normalized scale which reflects the data used by the log-normal model:
@@ -948,3 +980,10 @@ These small values (e.g., OME < 0.02, log(OME) < -3.9) have a large biasing effe
 
 
 
+
+
+
+
+# Footnotes
+
+[^1]  In the preregistration, we originally planned to use hurdle log-normal models to account for these 0 values. Upon further consideration, we decided against this approach, since the hurdle model would model the zeros and other non-zero values separately, although both come from the same process, thus biasing the non-zero estimates.
