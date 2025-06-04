@@ -541,22 +541,6 @@ model_parameters(temp, centrality = "mean", dispersion = TRUE,
 brms_plot(temp,lim=c(-1,3))  + plot_layout(widths = c(2, 1))
 ```
 
-
-
-
-
-
-
-
-
-    
-    
-    
-    
-    
-
-
-
 ## Hypothesis 2a (OME)    
 
 
@@ -931,22 +915,82 @@ brms_plot(temp) + plot_layout(widths = c(2, 1))
                                     
                                     
                                     
-## Results Analysis
+# Results Sensitivity Analysis
 
 Here we provide the results of the sensitivity analysis (i.e., when using more skeptical and conservative priors) for the tests with an $BF_{10}$ > 1 when using the weakly informative priors.
 
-### Hypothesis 1a (OME) 
+## Hypothesis 1a (OME) 
 
 For the effect found when estimating calories ($BF_{10}$ = 2.01 in the main text), using the less informative and more skeptical priors did not substantially affect the parameter estimates (as to be expected), but it did affect the Bayes Factor which now indicated no evidence for an effect ($BF_{10}$ = 0.36).
 
-### Hypothesis 2a (OME) 
+```{r h1aM1kcalSens}
+#| fig-height: 5
+#| fig-width:  14
+
+# Load model 
+temp <- brm(file="../Results/fit_H1a_Kcal_M1_sensitivity.rds")
+
+# Print Formular
+temp$formula
+
+# Make model parameter table
+model_parameters(temp, centrality = "mean", dispersion = TRUE, 
+                 ci_method = "hdi", effects = "all") %>% 
+  kable(digits=2) %>% kable_paper()
+
+# Make trace and pp-check plot
+brms_plot(temp,lim=c(-1,3))  + plot_layout(widths = c(2, 1))
+```
+
+
+## Hypothesis 2a (OME) 
 
 For the effect found when comparing transfer and seeding items in the calorie criterion ($BF_{10}$ = 1.51 in the main text), using the less informative and more skeptical priors did not substantially affect the parameter estimates, but it did affect the Bayes Factor which now indicated no evidence for an effect ($BF_{10}$ = 0.50).
 
+```{r h2aM1kcalSens}
+#| fig-height: 5
+#| fig-width:  14
 
-### Hypothesis 2b ($\rho$) 
+# Load model 
+temp <- brm(file="../Results/fit_H2a_Kcal_M1_sensitivity.rds")
+
+# Print Formular
+temp$formula
+
+# Make model parameter table
+model_parameters(temp, centrality = "mean", dispersion = TRUE, 
+                 ci_method = "hdi", effects = "all") %>% 
+  kable(digits=2) %>% kable_paper()
+
+# Make trace and pp-check plot
+brms_plot(temp,lim=c(-1,3))  + plot_layout(widths = c(2, 1))
+```
+
+
+
+## Hypothesis 2b ($\rho$) 
 
 For the effect found when comparing transfer and seeding items in the calorie criterion ($BF_{10}$ = 1.39 in the main text), using the less informative and more skeptical priors did not substantially affect the parameter estimates, but it did affect the Bayes Factor which now indicated no evidence for an effect ($BF_{10}$ = 0.69).
+
+
+```{r h2bM1kcalSens}
+#| fig-height: 5
+#| fig-width:  14
+
+# Load model 
+temp <- brm(file="../Results/fit_H2b_Kcal_M1_sensitivity.rds")
+
+# Print Formular
+temp$formula
+
+# Make model parameter table
+model_parameters(temp, centrality = "mean", dispersion = TRUE, 
+                 ci_method = "hdi", effects = "all") %>% 
+  kable(digits=2) %>% kable_paper()
+
+# Make trace and pp-check plot
+brms_plot(temp,lim=c(-1,3))  + plot_layout(widths = c(2, 1))
+```
 
 
 
