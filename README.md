@@ -1,7 +1,7 @@
 # \#Knowledge: Improving food-related knowledge via seeding implemented as a social media intervention
 
 ## About this repository
-This repository contains the data, materials, and the code to reproduce all analyses and figures in the project *\#Knowledge: Improving food-related knowledge via seeding implemented as a social media intervention*. The preregistration and the `brms` model files from the analysis can be found on the respective OSF: https://osf.io/vztjq/**. The structure of this repository is as follows:
+This repository contains the data, materials, and the code to reproduce all analyses and figures in the project *\#Knowledge: Improving food-related knowledge via seeding implemented as a social media intervention*. The preregistration and the `brms` model files from the analysis can be found on the respective OSF: https://osf.io/vztjq/. The structure of this repository is as follows:
 
 <br>
 
@@ -46,10 +46,12 @@ This work, including all figures, is licensed under a <a rel="license" href="htt
 David Izydorczyk, Barbara Kreis, Michael Kilb & Arndt Bröder
 
 ## Abstract
-Will be added soon.
+
+Research has shown that a simple procedure called seeding can improve estimation accuracy for real-world quantities. However, this effect has only been demonstrated in controlled experimental studies. This study investigates whether a seeding procedure implemented via Instagram can serve as a large-scale intervention to boost knowledge. Participants were randomly assigned to follow one of two Instagram accounts posting information about either the calorie content or the CO~2~ footprint of 15 selected food items over 15 days. Afterward, participants (*N* = 144) estimated the calorie content or CO2 footprint for 60 foods. Results
+showed that seeding improved participants’ metric knowledge (e.g., mean, range), especially for the CO~2~ footprint, where initial knowledge was lower. However, effects on mapping knowledge (i.e., relative ordering) were limited. These findings suggest that seeding through social media could be a viable large-scale educational tool, complementing other systemic interventions, particularly in areas where initial knowledge is limited. Keywords: real-world estimation, numerical estimation, calorie content, carbon footprints, seeding
 
 ## Publication
-(work in progress)
+Izydorczyk, D., Kreis, B.K, Kilb, M., & Bröder, A. (in press). \#Knowledge: Improving food-related knowledge via seeding implemented as a social media intervention. *Collabra*
 
 ## Funding
 This research was funded by Grant IZ 96/1-1 provided to David Izydorczyk from the German Research Foundation (DFG) and supported by the University of Mannheim’s Graduate School of Economic and Social Sciences.
