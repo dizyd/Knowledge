@@ -52,8 +52,7 @@ Research has shown that a simple procedure called seeding can improve estimation
 *Keywords:* real-world estimation, numerical estimation, calorie content, carbon footprints, seeding
 
 ## Publication
-Izydorczyk, D., Kreis, B.K, Kilb, M., & Bröder, A. (in press). \#Knowledge: Improving food-related knowledge via seeding implemented as a social media intervention. *Collabra*
-
+Izydorczyk, D., Kreis, B.K, Kilb, M., & Bröder, A. (in press). \#Knowledge: Improving food-related knowledge via seeding implemented as a social media intervention. *Collabra*. [https://doi.org/10.1525/collabra.168382](https://doi.org/10.1525/collabra.168382)
 ## Funding
 This research was funded by Grant IZ 96/1-1 provided to David Izydorczyk from the German Research Foundation (DFG) and supported by the University of Mannheim’s Graduate School of Economic and Social Sciences.
 
